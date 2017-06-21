@@ -1,0 +1,58 @@
+qijuan<qijuan@chinasofti.com>
+maggie.peng@chinasofti.com<maggie.peng@chinasofti.com>
+
+标为异常
+
+筛选展开
+
+图片切换数字改变
+
+进度条颜色？？
+
+
+什么组件写成公用样式，什么组件写成独立样式？？？？
+
+2-1添加练习.html h4上面的空白怎么来的
+
+ie8:before怎么透明？
+
+组件：单击自加active
+组件：自动隐藏
+
+
+var gulp = require('gulp'),
+    uglify = require('gulp-uglify'),
+    concat = require('gulp-concat');
+
+gulp.task('concatjs', function () {
+    gulp.src('src/js/*.js')
+        .pipe(concat('app.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('build'));
+});
+
+gulp.task('watch', function () {
+    var watcher = gulp.watch('src/js/*.js', ['concatjs']);
+
+    watcher.on('change', function () {
+        console.log(watcher.files());
+    });
+});
+
+
+width: 120px;
+    height: 120px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(0,0,0,0.3);
+    border-radius: 50%;
+    /* opacity: 0.3; */
+    /* margin: 0 auto; */
+    /* display: inline-block; */
+    padding-top: 73px;
+    text-align: center;
+    color: #3c813e;
+    line-height: 1;
+    font-size: 12px;
+

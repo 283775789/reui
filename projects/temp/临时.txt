@@ -1,0 +1,24 @@
+(class="astable-col" href="05资讯详情.html".*?)>(.*)<
+
+$1 title="$2">$2<
+
+UI组公共任务，版本请选“工时填写 V001R001C01”
+公共任务包括：UI/Html友商分析、组件&规范写作、月度版本总结、兄弟部门工作支撑（如展厅）
+
+
+http://192.168.102.222:9888/pages/viewpage.action?pageId=5768654
+研发全景图，请用jira账号登录
+
+
+http://192.168.111.244/svn/aischool/doc/02.组织文档/06.UI组/09.其它/V6R1C03新增需求及独立系统临时文件夹/7-8-9月项目计划
+
+/* 仿表格 */
+.m-astable { display:table; width:100%; table-layout:fixed; border-collapse:collapse; }
+.m-astable > .astable-row { display:table-row; margin-left:auto; overflow:visible;}
+.m-astable > .astable-col,
+.m-astable .astable-row > .astable-col { display: table-cell; vertical-align: top; }
+
+
+http://host1.teewon.net:8888/browse/LGXM-4010
+
+http://192.168.111.244/svn/aischool/doc/02.组织文档/06.UI组/05.KPI与绩效管理/02.月度总结/2016/2016年11月绩效总结与12月计划

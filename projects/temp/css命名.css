@@ -1,0 +1,39 @@
+﻿.person { }
+.person-hander { }
+
+<div class="person">
+	<div class="person-hander">
+	
+	</div>
+</div>
+
+.person.xfamel { }
+.person .xfamel-hander { }
+
+<div class="person xfamel">
+	<div class="xfamel-hander">
+	
+	</div>
+</div>
+
+
+限制css名称级数
+限制子元素选择层叠级数
+
+
+1.块分为语义块与视觉块。
+
+2.改变样式有两种方法，一种是改变其dom结构上下文，一种是改变其名称。
+
+3.x开头修饰符不能单独使用.
+
+以下用法是正确的：
+.abc.xa { }
+.abc.xa .xa-left {  }
+
+而以下用法是错误的:
+.xa { }
+.xa-left {  }
+
+4.所有个性的东西怎么统一，如文字颜色，字体大小，盒子尺寸。
+

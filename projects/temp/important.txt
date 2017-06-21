@@ -1,0 +1,33 @@
+<div class="outer">
+    <div class="inner"></div>
+</div>
+
+inner { width:100%; }时，它的宽度在各种情况下会不会超出父元素？
+
+语音手机端 2-1添加练习.html h4上面的空白怎么来的 为什么 img加display:block空白就不见了？
+
+ie8下max-width:150px; white-space:nowrap; over-flow:hidden; 会撑大父容器使其等于实际宽度。
+
+为什么下一句不会出现水平滚动条?
+.m-steps.round { display:table; width:120%; margin-left:-10%; table-layout:fixed; counter-reset:round-no; }
+
+为什么以下的h4元素会影响m-tablebox的margin-top值?
+/* 标题 */
+.m-title { position:relative; height:50px; padding:0 20px; border:1px solid #cbd8e4; text-align:right; }
+.m-title:before { content:" "; display:inline-block; width:0; height:100%; vertical-align:middle; }
+.m-title:after { content:" "; display:table; clear:both; }
+.m-title > h4 { float:left; line-height:48px; font-size:14px; }
+.m-title > h4:before { content:" "; position:absolute; top:15px; left:0; display:block; height:20px; width:3px; background:#5fc463; }
+
+.m-title,
+.m-table th { background:#f2f5fb; }
+
+/* 表格 */
+.m-tablebox {  margin-top:-20px; }
+.m-table { width:100%; background:#fff; }
+.m-table th,
+.m-table td { height:36px;  padding:8px 10px; border:1px solid #cbd8e4; vertical-align:middle; }
+.m-table th { font-weight:normal; }
+.m-table td { font-size:12px; }
+
+bootstrap委托到document上的缺点：事件冒泡被阻止时，无法触发。
