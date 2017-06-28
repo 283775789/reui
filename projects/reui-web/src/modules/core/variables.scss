@@ -1,10 +1,9 @@
 // 颜色体系:全局颜色
 $body-bg:#fff;
-$color-level1:#000;
-$color-level2:
+$color-base:#000;
+$color-level1:lighten($color-base,20%); // #333
+$color-level2:lighten($color-base,40%); // #666
+$color-level3:lighten($color-base,60%); // #999
+$color-level4:lighten($color-base,80%); // #ccc
 
-// 颜色体系:文本颜色
-$text-color-default:#333;
-$text-color
 
-3，6，9，c，f
