@@ -2,7 +2,6 @@
  * 版本:1.0
  * 描述:gulp任务
  * ------------------------------------------------------------ */
-
 // 获取项目所在的路径
 // ------------------------------
 var fullPath = process.argv.slice(2)[0].replace(/["\\]/g, '/');
@@ -30,9 +29,14 @@ var del = require('del');
 var paths = {};
 paths.cssSrc = src + 'static/css/';
 paths.icoSrc = src + 'static/icons/';
-paths.html=[src + 'web/**/*.html', '!' + src + 'web/include/*.*'];
-paths.htmlDest = dest + 'web/';
-paths.include = [src + 'web/include/**/_*.html'];
+paths.reui = [src + 'static/reui/'];
+paths.reuiScss = paths.reui + 'stylesheets/reui.scss';
+paths.reuiCssFiles = [paths.reui + '**/*.scss', paths.reui + '**/*.css'];
+paths.reuiScriptFiles = paths.reui + '**/*.js';
+paths.reuiHtmlFiles = paths.reui + '**/*.html';
+paths.html = [src + 'html/**/*.html', '!' + src + 'html/include/*.*'];
+paths.htmlDest = dest + 'html/';
+paths.include = [src + 'html/include/**/_*.html', paths.reuiHtmlFiles];
 paths.mainScss = [paths.cssSrc + 'main.scss'];
 paths.scss = [paths.cssSrc + '**/*.+(css|scss)', '!' + paths.cssSrc + 'import/_sprite.scss'];
 paths.cssDest = dest + 'static/css/';
@@ -44,9 +48,9 @@ paths.lib = [src + 'static/lib/**/**'];
 paths.libDest = dest + 'static/lib/';
 paths.scriptDest = dest + 'static/js/';
 paths.script = [src + 'static/js/'];
-paths.scriptBase = paths.script + 'base/';
-paths.scriptConcat = [paths.scriptBase + 'core.js', paths.scriptBase + 'base.js', paths.scriptBase + 'config.js', paths.scriptBase + 'common.js', paths.script + 'modules/**/*.js', paths.script + '*.js'];
-paths.scriptAll = paths.script + '**/*.js';
+paths.reuiScript = paths.reui + 'script/';
+paths.scriptConcat = [paths.reuiScript + '_core.js', paths.reuiScript + '_base.js', paths.reuiScript + '_config.js', paths.reuiScript + '_common.js', paths.reui + 'modules/**/*.js', paths.script + '*.js'];
+paths.scriptAll = [paths.reuiScriptFiles, paths.script + '**/*.js'];
 
 // 任务对象:保存各种任务调用的函数
 // ------------------------------
@@ -72,6 +76,15 @@ var tasks = {
         };
 
         server.init(opt);
+    },
+    reuiSass: function () {
+        var opt = {
+            outputStyle: 'expanded'
+        };
+
+        console.log(paths.reuiScss);
+        console.log(paths.cssDest);
+        return gulp.src(paths.reuiScss).pipe(sass(opt)).on('error', errorHandler).pipe(gulp.dest(paths.cssDest)).pipe(reload({ stream: true }));
     },
     sass: function () {
         var opt = {
@@ -143,7 +156,13 @@ gulp.task('html', function () {
     return tasks.include();
 });
 
-// 任务:编译_main.scss为main.css
+// 任务:编译_reui.scss
+// ------------------------------
+gulp.task('reuiSass', function () {
+    return tasks.reuiSass();
+});
+
+// 任务:编译_main.scss
 // ------------------------------
 gulp.task('sass', function () {
     return tasks.sass();
@@ -163,7 +182,7 @@ gulp.task('sassAll', ['sprite'], function () {
 
 // 任务:浏览器自动刷新
 // ------------------------------
-gulp.task('server', ['sassAll', 'script', 'copyImgs', 'copyLib', 'html'], function () {
+gulp.task('server', ['reuiSass', 'sassAll', 'script', 'copyImgs', 'copyLib', 'html'], function () {
     tasks.server();
 });
 
@@ -192,14 +211,18 @@ gulp.task('watch', function () {
         if (event.type == 'deleted') {
             tasks.del(event.path);
         } else {
-            callback();
+           return callback();
         }
     };
+
+    // 监控：reui样式文件变化
+    // ------------------------------
+    gulp.watch(paths.reuiCssFiles, ['reuiSass']);
 
     // 监控：html文件的改变
     // ------------------------------
     gulp.watch(paths.html, function (event) {
-        taskHandler(event, tasks.include);
+        return taskHandler(event, tasks.include);
     });
 
     // 监控：include文件改变
@@ -219,13 +242,13 @@ gulp.task('watch', function () {
     // 监控：图片变化
     // ------------------------------
     gulp.watch(paths.img, function (event) {
-        taskHandler(event, tasks.copyImgs);
+        return taskHandler(event, tasks.copyImgs);
     });
 
     // 监控：lib变化
     // ------------------------------
     gulp.watch(paths.lib, function (event) {
-        taskHandler(event, tasks.copyLib);
+        return taskHandler(event, tasks.copyLib);
     });
 
     // 监控：脚本变化
