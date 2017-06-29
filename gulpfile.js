@@ -22,6 +22,7 @@ var sprite = require('gulp.spritesmith');
 var server = require('browser-sync');
 var reload = server.reload;
 var concat = require('gulp-concat');
+var bom = require('gulp-bom');
 var del = require('del');
 
 // globs对象：保存用到的各种路径
@@ -82,8 +83,6 @@ var tasks = {
             outputStyle: 'expanded'
         };
 
-        console.log(paths.reuiScss);
-        console.log(paths.cssDest);
         return gulp.src(paths.reuiScss).pipe(sass(opt)).on('error', errorHandler).pipe(gulp.dest(paths.cssDest)).pipe(reload({ stream: true }));
     },
     sass: function () {
