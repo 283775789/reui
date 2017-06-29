@@ -22,7 +22,6 @@ var sprite = require('gulp.spritesmith');
 var server = require('browser-sync');
 var reload = server.reload;
 var concat = require('gulp-concat');
-var bom = require('gulp-bom');
 var del = require('del');
 
 // globs对象：保存用到的各种路径
