@@ -59,19 +59,17 @@ $weaken-btn-border-color-hover:$minor-color-hover !default;
 $ctr-color:$main-text-color !default;
 $ctr-border:$main-border-color !default;
 
+$content: "First content";
+$content: "Second content?" !default;
+$new_content: "First time reference" !default;
+$new_content:"abc";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$color: white;
+@mixin colors($color: blue) {
+  background-color: $color;
+  @content;
+  border-color: $color;
+}
+.colors {
+  @include colors { color: $color; }
+}
