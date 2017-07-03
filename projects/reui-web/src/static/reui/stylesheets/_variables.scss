@@ -101,11 +101,46 @@ $btn-min-width:90px !default;
 $btn-height-base:$ctr-height-base !default;
 $btn-height-medium:$btn-height-base + 6px !default;
 
-// 表单控件尺寸
+/* ------------------------------ 响应式体系(PC端优先) ------------------------------ */
+// 响应式断点
+$viewport-large:1200px !default;
+$viewport-medium:992px !default;
+$viewport-small:768px !default;
 
-@media (max-width:768px){
-    .grid-item { display:block; width:100% !important; }
-}
+// 内容宽度
+$content-min-width:320px !default;
+$content-max-width:1200px !default;
+
+// 栅格
+$grid-columns:20 !default;
+$grid-gutter-width:$spacing-medium !default;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
