@@ -23,34 +23,62 @@ var server = require('browser-sync');
 var reload = server.reload;
 var concat = require('gulp-concat');
 var del = require('del');
+var postcss = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
 
 // globs对象：保存用到的各种路径
 // ------------------------------
 var paths = {};
 paths.cssSrc = src + 'static/css/';
 paths.icoSrc = src + 'static/icons/';
-paths.reui = [src + 'static/reui/'];
-paths.reuiScss = paths.reui + 'stylesheets/reui.scss';
-paths.reuiCssFiles = [paths.reui + '**/*.scss', paths.reui + '**/*.css'];
-paths.reuiScriptFiles = paths.reui + '**/*.js';
-paths.reuiHtmlFiles = paths.reui + '**/*.html';
+
+// bootstrap相关路径
+paths.bootstrap = src + 'static/lib/bootstrap/';
+paths.bootstrapDest = dest + 'static/lib/bootstrap/';
+paths.bootstrapCssDest = dest + 'static/lib/bootstrap/css/';
+paths.bootstrapScss = paths.bootstrap + 'stylesheets/bootstrap.twui.scss';
+paths.bootstrapScssFiles = [paths.bootstrap + 'stylesheets/**/*.scss'];
+paths.bootstrapScript = paths.bootstrap + 'javascripts/bootstrap.min.js';
+
+// twui相关路径
+paths.twui = [src + 'static/lib/twui/'];
+paths.twuiDest = dest + 'static/lib/twui/';
+paths.twuiScss = paths.twui + 'stylesheets/twui.scss';
+paths.twuiCssFiles = [paths.twui + '**/*.scss', paths.twui + '**/*.css'];
+paths.twuiHtmlFiles = paths.twui + '**/*.html';
+paths.twuiScript = paths.twui + 'script/';
+paths.twuiScriptConcat = [paths.twuiScript + '_core.js', paths.twuiScript + '_base.js', paths.twuiScript + '_config.js', paths.twuiScript + '_common.js', paths.twui + 'modules/**/*.js'];
+paths.twuiScriptFiles = paths.twui + '**/*.js';
+
+// javascript库相关路径
+paths.jsLibFiles = [src + 'static/lib/javascript/**/**'];
+
+// 插件相关路径
+paths.plugs = [src + 'static/plugs/**/**'];
+paths.plugsDest = dest + 'static/plugs/';
+
+// 项目html相关路径
 paths.html = [src + 'html/**/*.html', '!' + src + 'html/include/*.*'];
 paths.htmlDest = dest + 'html/';
-paths.include = [src + 'html/include/**/_*.html', paths.reuiHtmlFiles];
+paths.include = [src + 'html/include/**/_*.html', paths.twuiHtmlFiles];
+
+// 项目scss及css相关路径
 paths.mainScss = [paths.cssSrc + 'main.scss'];
 paths.scss = [paths.cssSrc + '**/*.+(css|scss)', '!' + paths.cssSrc + 'import/_sprite.scss'];
 paths.cssDest = dest + 'static/css/';
-paths.icons = [paths.icoSrc + '*.*', paths.icoSrc + '.*.*'];
 paths.cssImport = paths.cssSrc + 'import/';
+
+// 项目图标、图片相关路径
+paths.icons = [paths.icoSrc + '*.*', paths.icoSrc + '.*.*'];
 paths.img = [src + 'static/images/**/**'];
 paths.imgDest = dest + 'static/images/';
-paths.lib = [src + 'static/lib/**/**'];
-paths.libDest = dest + 'static/lib/';
+
+// 项目脚本相关路径
 paths.scriptDest = dest + 'static/js/';
-paths.script = [src + 'static/js/'];
-paths.reuiScript = paths.reui + 'script/';
-paths.scriptConcat = [paths.reuiScript + '_core.js', paths.reuiScript + '_base.js', paths.reuiScript + '_config.js', paths.reuiScript + '_common.js', paths.reui + 'modules/**/*.js', paths.script + '*.js'];
-paths.scriptAll = [paths.reuiScriptFiles, paths.script + '**/*.js'];
+paths.script = [src + 'static/js/**/**'];
+
+// 所有需要直接复制的文件
+paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script);
 
 // 任务对象:保存各种任务调用的函数
 // ------------------------------
@@ -77,19 +105,12 @@ var tasks = {
 
         server.init(opt);
     },
-    reuiSass: function () {
-        var opt = {
-            outputStyle: 'expanded'
-        };
-
-        return gulp.src(paths.reuiScss).pipe(sass(opt)).on('error', errorHandler).pipe(gulp.dest(paths.cssDest)).pipe(reload({ stream: true }));
-    },
-    sass: function () {
+    sass: function (srcPath,destPath) {
         var opt = {
             outputStyle:'expanded'
         };
 
-        return gulp.src(paths.mainScss).pipe(sass(opt)).on('error',errorHandler).pipe(gulp.dest(paths.cssDest)).pipe(reload({ stream: true }));
+        return gulp.src(srcPath).pipe(sass(opt)).on('error', errorHandler).pipe(postcss([autoprefixer()])).pipe(gulp.dest(destPath)).pipe(reload({ stream: true }));
     },
     sprite: function () {
         var opt = {
@@ -127,14 +148,11 @@ var tasks = {
         var gtReg = /&gt;/g;
         return spriteData.css.pipe(replace(gtReg,'>')).pipe(gulp.dest(paths.cssImport));
     },
-    copyImgs: function () {
-        return gulp.src(paths.img).pipe(plumber()).pipe(changed(paths.imgDest)).pipe(gulp.dest(paths.imgDest)).pipe(reload({ stream: true }));
+    copyFiles: function () {
+        return gulp.src(paths.copyFiles, {base: src }).pipe(plumber()).pipe(changed(dest)).pipe(gulp.dest(dest)).pipe(reload({ stream: true }));
     },
-    copyLib: function () {
-        return gulp.src(paths.lib).pipe(plumber()).pipe(changed(paths.libDest)).pipe(gulp.dest(paths.libDest)).pipe(reload({ stream: true }));
-    },
-    script: function () {
-        return gulp.src(paths.scriptConcat).pipe(concat('reui.js')).pipe(gulp.dest(paths.scriptDest)).pipe(reload({ stream: true }));
+    script: function (srcPath,filename,destPath) {
+        return gulp.src(srcPath).pipe(concat(filename)).pipe(gulp.dest(destPath)).pipe(reload({ stream: true }));
     },
     del: function (delpath) {
         delpath = delpath.replace(/\\/g, '/').replace(src, dest);
@@ -154,16 +172,22 @@ gulp.task('html', function () {
     return tasks.include();
 });
 
-// 任务:编译_reui.scss
+// 任务:编译_bootstrap.twui.scss
 // ------------------------------
-gulp.task('reuiSass', function () {
-    return tasks.reuiSass();
+gulp.task('bootstrapSass', function () {
+    return tasks.sass(paths.bootstrapScss, paths.bootstrapCssDest);
+});
+
+// 任务:编译_twui.scss
+// ------------------------------
+gulp.task('twuiSass', function () {
+    return tasks.sass(paths.twuiScss, paths.twuiDest);
 });
 
 // 任务:编译_main.scss
 // ------------------------------
 gulp.task('sass', function () {
-    return tasks.sass();
+    return tasks.sass(paths.mainScss, paths.cssDest);
 });
 
 // 任务:合并sprite图片
@@ -175,31 +199,25 @@ gulp.task('sprite', function () {
 // 任务:先合并sprite图片，再生成sass
 // ------------------------------------
 gulp.task('sassAll', ['sprite'], function () {
-    return tasks.sass();
+    return tasks.sass(paths.mainScss, paths.cssDest);
+});
+
+// 任务:复制文件
+// ------------------------------
+gulp.task('copyFiles', function () {
+    return tasks.copyFiles();
+});
+
+// 任务:twui脚本处理
+// ------------------------------
+gulp.task('twuiScript', function () {
+    return tasks.script(paths.twuiScriptConcat, 'twui.js', paths.twuiDest);
 });
 
 // 任务:浏览器自动刷新
 // ------------------------------
-gulp.task('server', ['reuiSass', 'sassAll', 'script', 'copyImgs', 'copyLib', 'html'], function () {
+gulp.task('server', ['bootstrapSass', 'twuiSass', 'twuiScript', 'sassAll', 'copyFiles', 'html'], function () {
     tasks.server();
-});
-
-// 任务:复制图片文件
-// ------------------------------
-gulp.task('copyImgs', function () {
-    return tasks.copyImgs();
-});
-
-// 任务:复制Lib库文件
-// ------------------------------
-gulp.task('copyLib', function () {
-    return tasks.copyLib();
-});
-
-// 任务:脚本处理
-// ------------------------------
-gulp.task('script', function () {
-    return tasks.script();
 });
 
 // 任务：监控src目录文件的变动
@@ -213,9 +231,13 @@ gulp.task('watch', function () {
         }
     };
 
-    // 监控：reui样式文件变化
+    // 监控：bootstrap样式文件变化
     // ------------------------------
-    gulp.watch(paths.reuiCssFiles, ['reuiSass']);
+    gulp.watch(paths.bootstrapScssFiles, ['bootstrapSass']);
+
+    // 监控：twui样式文件变化
+    // ------------------------------
+    gulp.watch(paths.twuiCssFiles, ['twuiSass']);
 
     // 监控：html文件的改变
     // ------------------------------
@@ -237,18 +259,12 @@ gulp.task('watch', function () {
     // ------------------------------
     gulp.watch(paths.icons, ['sassAll']);
 
-    // 监控：图片变化
+    // 监控：所有需要直接复制的文件改变
     // ------------------------------
-    gulp.watch(paths.img, function (event) {
-        return taskHandler(event, tasks.copyImgs);
+    gulp.watch(paths.copyFiles, function (event) {
+        return taskHandler(event, tasks.copyFiles);
     });
-
-    // 监控：lib变化
-    // ------------------------------
-    gulp.watch(paths.lib, function (event) {
-        return taskHandler(event, tasks.copyLib);
-    });
-
+    
     // 监控：脚本变化
     // ------------------------------
     gulp.watch(paths.scriptAll, ['script']);

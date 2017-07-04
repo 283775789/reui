@@ -9,6 +9,7 @@
   "author": "chenxiaoqi",
   "license": "rew3c",
   "devDependencies": {
+    "autoprefixer": "^7.1.1",
     "browser-sync": "^2.18.8",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
@@ -16,8 +17,19 @@
     "gulp-concat": "^2.6.1",
     "gulp-file-include": "^1.1.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^7.0.0",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^3.1.0",
     "gulp.spritesmith": "^6.4.0"
-  }
+  },
+  "browserslist": [
+    "Android 2.3",
+    "Android >= 4",
+    "Chrome >= 20",
+    "Firefox >= 24",
+    "Explorer >= 8",
+    "iOS >= 6",
+    "Opera >= 12",
+    "Safari >= 6"  
+  ]
 }

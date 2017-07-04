@@ -1,0 +1,47 @@
+@import "temp";
+// ---------------------------- 栅格(等分3) -------------------------------- //
+// mixin:建立栅格容器
+@mixin make-grid ($gutter: $grid-gutter-width) {
+    margin-left:ceil($gutter / 2);
+    margin-right:ceil($gutter / 2);
+    @include clearfix;
+}
+
+// mixin:生成不同尺寸的栅格
+div {
+    display:flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
