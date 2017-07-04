@@ -3,8 +3,8 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * 附加说明:该文件复制于_bootstrap.scss
- * 天闻前端定制版bootstrap,去除了用不上的字体图标，按钮，打印等相关组件;
- * 移除的组件详细情况见以下注释掉的import引用，如项目有需要，可去除掉注释。
+ * 天闻前端定制版bootstrap,移除字体图标，按钮，打印等相关组件;
+ * 移除的组件详情见以下已注释的import引用，如项目有需要，可去除掉注释。
  */
 
 // Core variables and mixins
@@ -13,13 +13,13 @@
 
 // Reset and dependencies
 @import "bootstrap/normalize";
-@import "bootstrap/print";
-@import "bootstrap/glyphicons";
+// @import "bootstrap/print";
+// @import "bootstrap/glyphicons";
 
 // Core CSS
 @import "bootstrap/scaffolding";
 @import "bootstrap/type";
-@import "bootstrap/code";
+// @import "bootstrap/code";
 @import "bootstrap/grid";
 @import "bootstrap/tables";
 @import "bootstrap/forms";
@@ -32,8 +32,8 @@
 @import "bootstrap/input-groups";
 @import "bootstrap/navs";
 @import "bootstrap/navbar";
-@import "bootstrap/breadcrumbs";
-@import "bootstrap/pagination";
+// @import "bootstrap/breadcrumbs";
+// @import "bootstrap/pagination";
 @import "bootstrap/pager";
 @import "bootstrap/labels";
 @import "bootstrap/badges";

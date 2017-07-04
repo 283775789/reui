@@ -1,4 +1,4 @@
-/* ------------------------------ 颜色体系 ------------------------------ */
+// ------------------------------ 颜色体系 ------------------------------ //
 // 主色
 $main-color:#26a8ff !default;
 $main-color-hover:darken(saturate($main-color,10%),10%) !default;
@@ -60,23 +60,7 @@ $weaken-btn-border-color-hover:$minor-color-hover !default;
 $ctr-color:$main-text-color !default;
 $ctr-border:$main-border-color !default;
 
-<<<<<<< HEAD
-$content: "First content";
-$content: "Second content?" !default;
-$new_content: "First time reference" !default;
-$new_content:"abc";
-
-$color: white;
-@mixin colors($color: blue) {
-  background-color: $color;
-  @content;
-  border-color: $color;
-}
-.colors {
-  @include colors { color: $color; }
-}
-=======
-/* ------------------------------ 间距体系 ------------------------------ */
+// ------------------------------ 间距体系 ------------------------------ //
 // 字体大小
 $font-size-base:14px !default; // 基础大小
 $font-size-step:2 !default; // 增量步长
@@ -107,7 +91,7 @@ $form-row-spacing:$spacing-base*2 !default;
 $ctr-spacing:floor($spacing-base*1.5) !default;
 $btn-spacing:floor($spacing-base*1.5) !default;
 
-/* ------------------------------ 尺寸体系 ------------------------------ */
+// ------------------------------ 尺寸体系 ------------------------------ //
 // 控件
 $ctr-height-base:30px !default;
 $ctr-height-medium:$ctr-height-base + 6px !default;
@@ -117,11 +101,9 @@ $btn-min-width:90px !default;
 $btn-height-base:$ctr-height-base !default;
 $btn-height-medium:$btn-height-base + 6px !default;
 
-/* ------------------------------ 响应式体系(PC端优先) ------------------------------ */
+// ------------------------------ 响应式体系(PC优先) ------------------------------ //
 // 响应式断点
-$viewport-large:1200px !default;
-$viewport-medium:992px !default;
-$viewport-small:768px !default;
+$viewport-map:(lg:1200px,md:992px,sm:768px,xs:0) !default;
 
 // 内容宽度
 $content-min-width:320px !default;
@@ -167,7 +149,3 @@ $grid-gutter-width:$spacing-medium !default;
 
 
 
-
-
-
->>>>>>> 080ba1c3762b5875ed83fcd0b4c366e716b32c1c
