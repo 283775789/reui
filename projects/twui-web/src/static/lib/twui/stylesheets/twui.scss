@@ -1,6 +1,91 @@
 /*!------------------------------------------------------------
- * 样式:reui.css
+ * 样式:twui.scss
  * 版本:v1.0.0
  * ------------------------------------------------------------ */
+// 变量与公用scss
 @import "variables";
+@import "common";
+
+// 通用样式:复制于bootstrap，如已引用bootstrap样式，请勿启用，以免重复，反之需要启用
+// ------------------------------------------------------------------------------------------------
+@import "normalize";
+@import "scaffolding";
+
+// 核心scss
+@import "globle";
 @import "grid";
+
+/* 导航 */
+// 导航变量
+$nav-height:60px !default;
+$nav-line-height:$nav-height !default;
+$nav-link-padding:$padding-base * 1.5 !default;
+$nav-link-hover-bg:$main-color-hover !default;
+$nav-link-active-bg:$main-color-hover !default;
+$nav-link-color:$main-color-inverse !default;
+
+// 导航
+.m-nav {
+    height: $nav-height;
+    line-height: $nav-line-height;
+    @include clearfix;
+
+    > li {
+        float: left;
+
+        > a {
+            display:block;
+            padding-left: $nav-link-padding;
+            padding-right: $nav-link-padding;
+            color: $nav-link-color;
+
+            &:hover {
+                background: $nav-link-hover-bg;
+            }
+
+            &.active {
+                background: $nav-link-active-bg;
+            }
+        }
+    }
+}
+
+/* 头部 */
+// 头部变量
+$header-height:60px !default;
+$header-line-height:$header-height !default;
+$header-bg:$main-color !default;
+$header-color:$main-color-inverse !default;
+
+// 头部
+.m-header {
+    position:relative;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

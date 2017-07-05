@@ -13,7 +13,7 @@
     // ------------------------------
     Fixer.prototype.selector = '.jsx-fixer';
 
-    // 方法:reui调用的入口方法
+    // 方法:twui调用的入口方法
     // ------------------------------
     Fixer.prototype.init = function () {
         var me = this;
@@ -22,12 +22,12 @@
         // 滚动监视
         // ------------------------------
         var $dataLink = me.getLinkBox();
-        $dataLink.on('lazyScroll.reui.fixer', function () {
+        $dataLink.on('lazyScroll.twui.fixer', function () {
             me.fix($(this));
         });
 
         // 浏览器尺寸变化时，重新计算尺寸
-        $(window).on('lazyResize.reui.fixer', function () {
+        $(window).on('lazyResize.twui.fixer', function () {
             me.reInit();
             me.fix($dataLink);
         });
@@ -53,7 +53,7 @@
         if (typeof $me.data('style') == 'string') $me.attr('style', $me.data('style'));
         $me.removeClass('c-fixer top bottom');
 
-        var matrix = reui.getElementMatrix($me);
+        var matrix = twui.getElementMatrix($me);
         $me.data('matrix', matrix);
 
         if (typeof $me.data('style') == 'undefined') {
@@ -104,12 +104,12 @@
         if (typeof tempFix == 'undefined' || tempFix != $me.data('fix')) {
             $me.data('tempFix', dataFix);
 
-            var changeFix = $.Event('changeFix.reui');
+            var changeFix = $.Event('changeFix.twui');
             $me.trigger(changeFix);
         }
     };
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(Fixer);
+    twui.module(Fixer);
 }(jQuery);

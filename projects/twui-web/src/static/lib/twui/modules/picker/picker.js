@@ -13,12 +13,12 @@
     // ------------------------------
     SelectList.prototype.selector = '.jsx-selectlist';
 
-    // 方法:reui调用的入口方法
+    // 方法:twui调用的入口方法
     // ------------------------------
     SelectList.prototype.init = function () {
         var me = this;
 
-        this.$.on('click.reui.top', function () {
+        this.$.on('click.twui.top', function () {
             me.toTop();
         });
     };
@@ -84,12 +84,12 @@
 
     // 方法:滚动浏览器滚动动条时，显示或隐藏top组件
     // ------------------------------------------
-    $(window).on('click.reui.selectList','.jst-selectlist > *', function () {
+    $(window).on('click.twui.selectList','.jst-selectlist > *', function () {
         var $selectlist = $(this).parent();
         $selectlist.twui('select', '.jst-selectlist', $option);
     });
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(SelectList);
+    twui.module(SelectList);
 }(jQuery);

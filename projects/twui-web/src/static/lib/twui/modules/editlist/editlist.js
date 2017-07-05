@@ -13,13 +13,13 @@
     // ------------------------------
     EditList.prototype.selector = '.jsx-editlist';
 
-    // 方法:reui调用的入口方法
+    // 方法:twui调用的入口方法
     // ------------------------------
     EditList.prototype.init = function () {
         var me = this,
             $addBtn = me.$.find('.js-addbtn');
 
-        $addBtn.on('click.reui.editlist', function () {
+        $addBtn.on('click.twui.editlist', function () {
             me.addItem(this);
         });
     };
@@ -30,12 +30,12 @@
         var $editList=this.$,
             $addBtn = $(element),
             $parent = $addBtn.parent(),
-            $editItem = $(reui.templete.editItem),
+            $editItem = $(twui.templete.editItem),
             $editBtn = $editItem.find('.js-editbtn'),
             addEvent = null;
 
-        $editItem.one('change.reui', function (event) {
-            addEvent = $.Event('add.reui', { element: this, value: event.value });
+        $editItem.one('change.twui', function (event) {
+            addEvent = $.Event('add.twui', { element: this, value: event.value });
             $editList.trigger(addEvent);
 
             if (addEvent.isDefaultPrevented()) {
@@ -43,18 +43,18 @@
                 $(this).remove();
             }
 
-            $editItem.off('nochange.reui');
+            $editItem.off('nochange.twui');
         });
 
-        $editItem.one('nochange.reui', function () {
+        $editItem.one('nochange.twui', function () {
             $(this).remove();
         });
 
-        $editItem.insertBefore($parent).reui('init');
-        $editBtn.trigger('click.reui.edititem');
+        $editItem.insertBefore($parent).twui('init');
+        $editBtn.trigger('click.twui.edititem');
     };
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(EditList);
+    twui.module(EditList);
 }(jQuery);

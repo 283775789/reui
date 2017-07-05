@@ -1,28 +1,26 @@
-@import "temp";
-/* ---------------------------- 等分栅格 -------------------------------- */
-// mixin:生成不同尺寸的栅格
-@mixin make-columns ($breakpoints:$viewport-map,$columns:$grid-columns) {
+// ---------------------------- 等分栅格 --------------------------------
+// mixin:生成列
+@mixin make-column($columns,$key) {
+    @for $i from 1 through $columns {
+        .m-grid.#{$key}-x#{$i} {
+            > .grid-col {
+                width:percentage(1 / $i);
+            }
+        }
+    }
+}
+
+// mixin:生成栅格
+@mixin make-grid ($breakpoints:$viewport-map,$columns:$grid-columns) {
     $max:nth(nth($breakpoints,1),2);
-    $prevWidth:1200px;
 
     @each $key,$width in $breakpoints {
         @if $width == $max {
-            @for $i from 1 through $columns {
-                .m-grid.#{$key}-x#{$i} {
-                    > .grid-col {
-                        width:percentage(1 / $i);
-                    }
-                }
-            }
-        } @else if $width < $max {
+            @include make-column($columns,$key);
+        }        
+        @if $width < $max {
             @media (max-width:$prevWidth - 1){
-                @for $i from 1 through $columns {
-                    .m-grid.#{$key}-x#{$i} {
-                        > .grid-col {
-                            width:percentage(1 / $i);
-                        }
-                    }
-                }
+                @include make-column($columns,$key);
             }
         }
         $prevWidth:$width;
@@ -43,12 +41,8 @@
     padding:$grid-gutter-width / 2;
 }
 
-@include make-columns;
-
-
-
-
-
+// 栅格组
+@include make-grid;
 
 
 

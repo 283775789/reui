@@ -1,0 +1,104 @@
+// ---------------------------- 公用mixin与scss --------------------------------
+// 清除浮动
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// 媒体查询快捷入口:md
+@mixin pc {
+    @media (max-width:map-get($viewport-map,lg)-1) {
+        & {
+            @content;
+        }
+    }
+}
+
+// 媒体查询快捷入口:sm
+@mixin pad {
+    @media (max-width:map-get($viewport-map,md)-1) {
+        & {
+            @content;
+        }
+    }
+}
+
+// 媒体查询快捷入口:xs
+@mixin mobil {
+    @media (max-width:map-get($viewport-map,sm)-1) {
+        & {
+            @content;
+        }
+    }
+}
+
+// 媒体查询快捷入口:仅md
+@mixin only-pc {
+    @media (min-width:map-get($viewport-map,md)) and (max-width:map-get($viewport-map,lg)-1) {
+        & {
+            @content;
+        }
+    }
+}
+
+// 媒体查询快捷入口:仅sm
+@mixin only-pad {
+    @media (min-width:map-get($viewport-map,sm)) and (max-width:map-get($viewport-map,md)-1) {
+        & {
+            @content;
+        }
+    }
+}
+
+// 媒体查询快捷入口:仅xs
+@mixin only-mobil {
+    @media (max-width:map-get($viewport-map,sm)-1) {
+        & {
+            @content;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

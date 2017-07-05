@@ -1,6 +1,6 @@
 /* ------------------------------------------------------------
  * 版本:1.0
- * 描述:reui基础模块
+ * 描述:twui基础模块
  * ------------------------------------------------------------ */
 +function ($) {
     // 注册jQuery事件:lazyScroll(减少滚动时滚动事件重复触发次数)
@@ -41,8 +41,8 @@
         }
     };
 
-    // 注册jQuery实例方法:获取jquery对象class属性中与reui模块相关的模块名称
-    $.fn.getReuiNames = function () {
+    // 注册jQuery实例方法:获取jquery对象class属性中与twui模块相关的模块名称
+    $.fn.getTwuiNames = function () {
         var moduleSelectorRegex = /\bjsx-[^\s"]+/g,
             classString = this.attr('class'),
             matches = '',
@@ -58,7 +58,7 @@
 
             moduleName = matches[0].substring(4);
 
-            if(reui.modules[moduleName] instanceof reui){
+            if(twui.modules[moduleName] instanceof twui){
                 moduleNames.push(moduleName);
             }
         } while (true)
@@ -66,30 +66,30 @@
         return moduleNames;
     };
 
-    // 注册jQuery实例方法:获取对应的reui模块实例
-    $.fn.getReuiModules = function () {
-        var moduleNames = this.getReuiNames(),
+    // 注册jQuery实例方法:获取对应的twui模块实例
+    $.fn.getTwuiModules = function () {
+        var moduleNames = this.getTwuiNames(),
             modules = [];
 
         // 初始化相关的模块
         for (var i = 0; i < moduleNames.length; i++) {
-            modules.push(reui.modules[moduleNames[i]]);
+            modules.push(twui.modules[moduleNames[i]]);
         }
 
         return modules;
     };
 
     /* ------------------------------------------------------------------------------------------------------------------------
-     * 注册jQuery实例方法reui，参数说明：
+     * 注册jQuery实例方法twui，参数说明：
      * 1.methodName:可选，要调用的方法名,不指定或指定的方法在组件上不存在，会将方法自动赋值为init初始化方法。
-     * 2.moduleSelector:模块选择器，可选，当该元素绑定了多个reui组件对象时且对象存在同名方法时，必须指定。
-     * 3.如果该元素还未构造成reui组件，将在其上自动运行reui.build()方法使其转变为reui组件。
+     * 2.moduleSelector:模块选择器，可选，当该元素绑定了多个twui组件对象时且对象存在同名方法时，必须指定。
+     * 3.如果该元素还未构造成twui组件，将在其上自动运行twui.build()方法使其转变为twui组件。
      * 4.如果第二个参数不是模块选择器，则第二个参数后的所有参数，都会传递给调用的方法。
      * ------------------------------------------------------------------------------------------------------------------------ */
-    $.fn.reui = function (methodName, moduleSelector) {
+    $.fn.twui = function (methodName, moduleSelector) {
         var args = [],
             i=1,
-            optionName = reui.getModuleName(moduleSelector);
+            optionName = twui.getModuleName(moduleSelector);
 
         if (typeof optionName == 'string') i = 2;
 
@@ -100,7 +100,7 @@
         return this.each(function () {
             var $this = $(this),
                 tagName = $(this).tagName,
-                moduleNames = $this.getReuiNames(),
+                moduleNames = $this.getTwuiNames(),
                 moduleName = name = '',
                 conflict = -1,
                 component = null;
@@ -110,15 +110,15 @@
                 methodName = 'init';
             }
 
-            // 构建reui组件及检测方法是否有冲突
+            // 构建twui组件及检测方法是否有冲突
             for (var i = 0; i < moduleNames.length; i++) {
                 name = moduleNames[i];
 
-                component = $this.data('reui.' + name);
+                component = $this.data('twui.' + name);
 
                 if (!component) {
-                    reui.modules[name].build($this);
-                    component = $this.data('reui.' + name);
+                    twui.modules[name].build($this);
+                    component = $this.data('twui.' + name);
                 }
 
                 if (methodName != 'init' && component[methodName]) {
@@ -131,15 +131,15 @@
             if (conflict > 0) {
                 if (typeof optionName != 'string') {
                     if (console.error) {
-                        console.error(this, '\n以上元素绑定了多个reui组件且组件存在同名方法，调用方法时必须指定模块选择器".jsx-moduleName"!');
+                        console.error(this, '\n以上元素绑定了多个twui组件且组件存在同名方法，调用方法时必须指定模块选择器".jsx-moduleName"!');
                     }
-                    throw Error('元素【' + $this[0].tagName + '.' + $this.attr('class').replace(/\s+/g, '.') + '】绑定了多个reui组件且组件存在同名方法，调用方法时必须指定模块选择器".jsx-moduleName"!');
+                    throw Error('元素【' + $this[0].tagName + '.' + $this.attr('class').replace(/\s+/g, '.') + '】绑定了多个twui组件且组件存在同名方法，调用方法时必须指定模块选择器".jsx-moduleName"!');
                 } else {
                     moduleName = optionName;
                 }
             }
 
-            component = $this.data('reui.' + moduleName);
+            component = $this.data('twui.' + moduleName);
 
             if (component && component[methodName]) {
                 component[methodName].apply(component, args);

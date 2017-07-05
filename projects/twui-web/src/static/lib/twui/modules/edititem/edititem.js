@@ -13,18 +13,18 @@
     // ------------------------------
     EditItem.prototype.selector = '.jsx-edititem';
 
-    // 方法:reui调用的入口方法
+    // 方法:twui调用的入口方法
     // ------------------------------
     EditItem.prototype.init = function () {
         var me = this,
             $editBtn = me.$.find('.js-editbtn'),
             $delBtn = me.$.find('.js-delbtn');
             
-        $editBtn.on('click.reui.edititem', function () {
+        $editBtn.on('click.twui.edititem', function () {
             me.edit(this);
         });
 
-        $delBtn.on('click.reui.edititem', function () {
+        $delBtn.on('click.twui.edititem', function () {
             me.deleteItem();
         });
     };
@@ -37,15 +37,15 @@
             $editBtn = $(element),
             $editValue = $editItem.find('.js-value'),
             originalText = $editValue.text(),
-            $editInput = $(reui.templete.editInput);
+            $editInput = $(twui.templete.editInput);
 
-        reui.copyMatrix($editValue, $editInput);
+        twui.copyMatrix($editValue, $editInput);
 
-        $editInput.on('blur.reui.edititem', function () {
+        $editInput.on('blur.twui.edititem', function () {
             me.setValue($editValue, this, originalText);
         });
 
-        $editInput.on('keyup.reui.edititem', function (event) {
+        $editInput.on('keyup.twui.edititem', function (event) {
             if (event.keyCode === 13) {
                 me.setValue($editValue, this, originalText);
             }
@@ -70,14 +70,14 @@
 
         //当前值不等于原来的值时，才触发change事件,否则触发nochange事件
         if (value !== originalText && value != '') {
-            changeEvent = $.Event('change.reui', { value: value });
+            changeEvent = $.Event('change.twui', { value: value });
             this.$.trigger(changeEvent);
 
             if (!changeEvent.isDefaultPrevented()) {
                 $value.text(value);
             }
         } else {
-            noChangeEvent = $.Event('nochange.reui');
+            noChangeEvent = $.Event('nochange.twui');
             this.$.trigger(noChangeEvent);
         }
 
@@ -88,18 +88,18 @@
     // ------------------------------
     EditItem.prototype.deleteItem = function () {
         var $editItem = this.$,
-            deleteEvent = $.Event('delete.reui');
+            deleteEvent = $.Event('delete.twui');
 
         $editItem.trigger(deleteEvent);
 
         //显示确认对话框，点确定才删除当前项
-        reui.confirm('是否删除该项?', '删除', function () {
+        twui.confirm('是否删除该项?', '删除', function () {
             if (deleteEvent.isDefaultPrevented()) return;
             $editItem.remove();
         });
     };
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(EditItem);
+    twui.module(EditItem);
 }(jQuery);

@@ -19,10 +19,10 @@
         var $me = this.$,
             $target = $($me.data('target')),
             speed = this.speed(),
-            showEvent = $.Event('show.reui.collapse'),
-            shownEvent = $.Event('shown.reui.collapse'),
-            hideEvent = $.Event('hide.reui.collapse'),
-            hiddenEvent = $.Event('hidden.reui.collapse');
+            showEvent = $.Event('show.twui.collapse'),
+            shownEvent = $.Event('shown.twui.collapse'),
+            hideEvent = $.Event('hide.twui.collapse'),
+            hiddenEvent = $.Event('hidden.twui.collapse');
 
         if ($target.is(':visible')) {
             $me.trigger(hideEvent);
@@ -49,11 +49,11 @@
 
     // 方法:在document上委托click事件
     // ------------------------------
-    $(document).on('click.reui.collapse', '.jsx-collapse', function () {
-        $(this).reui('toggle', '.jsx-collapse');
+    $(document).on('click.twui.collapse', '.jsx-collapse', function () {
+        $(this).twui('toggle', '.jsx-collapse');
     });
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(Collapse);
+    twui.module(Collapse);
 }(jQuery);

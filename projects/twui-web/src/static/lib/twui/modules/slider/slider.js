@@ -11,7 +11,7 @@
     // ------------------------------
     Slider.prototype.selector = '.jsx-slider';
 
-    // 方法:reui调用的入口方法
+    // 方法:twui调用的入口方法
     // 如果指定此函数，页面加载时，会自动调用该方法
     // ------------------------------------------------------------
     Slider.prototype.init = function () {
@@ -34,12 +34,12 @@
         if (typeof suffix != 'string') suffix = '';
 
         if ($link.length > 0) {
-            $me.off('change.slider.reui.link').on('change.reui.slider.link', function (e) {
+            $me.off('change.slider.twui.link').on('change.twui.slider.link', function (e) {
                 if (e.isLink) return;
                 $link.val(e.value + suffix);
             });
 
-            $link.off('keyup.slider.reui.link').on('keyup.reui.slider.link', function () {
+            $link.off('keyup.slider.twui.link').on('keyup.twui.slider.link', function () {
                 me.setValue($(this).val(), false, false,true);
             });
         }
@@ -113,28 +113,28 @@
     Slider.prototype.drag = function () {
         var me = this;
 
-        $(document).on('mousemove.reui.slider', function (e) {
+        $(document).on('mousemove.twui.slider', function (e) {
             me.move(e.pageX);
         });
 
-        $(document).on('mouseup.reui.slider', function (e) {
-            $(this).off('mousemove.reui.slider');
+        $(document).on('mouseup.twui.slider', function (e) {
+            $(this).off('mousemove.twui.slider');
         });
     };
 
     // 方法:在document上委托click事件
     // ------------------------------
-    $(document).on('click.reui.slider', '.jsx-slider', function (e) {
-        $(this).reui('move', '.jsx-slider', e.pageX);
+    $(document).on('click.twui.slider', '.jsx-slider', function (e) {
+        $(this).twui('move', '.jsx-slider', e.pageX);
     });
 
     // 方法:在document上委托mousedown事件
     // ------------------------------
-    $(document).on('mousedown.reui.slider', '.jsx-slider > .js-sh', function (e) {
-        $(this).parent().reui('drag', '.jsx-slider');
+    $(document).on('mousedown.twui.slider', '.jsx-slider > .js-sh', function (e) {
+        $(this).parent().twui('drag', '.jsx-slider');
     });
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(Slider);
+    twui.module(Slider);
 }(jQuery);

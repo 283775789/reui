@@ -46,12 +46,12 @@ paths.twuiDest = dest + 'static/lib/twui/';
 paths.twuiScss = paths.twui + 'stylesheets/twui.scss';
 paths.twuiCssFiles = [paths.twui + '**/*.scss', paths.twui + '**/*.css'];
 paths.twuiHtmlFiles = paths.twui + '**/*.html';
-paths.twuiScript = paths.twui + 'script/';
-paths.twuiScriptConcat = [paths.twuiScript + '_core.js', paths.twuiScript + '_base.js', paths.twuiScript + '_config.js', paths.twuiScript + '_common.js', paths.twui + 'modules/**/*.js'];
+paths.twuiCore = paths.twui + 'core/';
+paths.twuiScriptConcat = [paths.twuiCore + '_core.js', paths.twuiCore + '_base.js', paths.twuiCore + '_config.js', paths.twuiCore + '_common.js', paths.twui + 'modules/**/*.js'];
 paths.twuiScriptFiles = paths.twui + '**/*.js';
 
 // javascript库相关路径
-paths.jsLibFiles = [src + 'static/lib/javascript/**/**'];
+paths.jsLibFiles = [src + 'static/lib/javascripts/**/**'];
 
 // 插件相关路径
 paths.plugs = [src + 'static/plugs/**/**'];
@@ -163,6 +163,7 @@ var tasks = {
 // 函数:错误处理
 // ------------------------------
 var errorHandler = function (error) {
+    console.error(error);
     this.emit('end');
 };
 
@@ -182,6 +183,12 @@ gulp.task('bootstrapSass', function () {
 // ------------------------------
 gulp.task('twuiSass', function () {
     return tasks.sass(paths.twuiScss, paths.twuiDest);
+});
+
+// 任务:twui脚本处理
+// ------------------------------
+gulp.task('twuiScript', function () {
+    return tasks.script(paths.twuiScriptConcat, 'twui.js', paths.twuiDest);
 });
 
 // 任务:编译_main.scss
@@ -208,12 +215,6 @@ gulp.task('copyFiles', function () {
     return tasks.copyFiles();
 });
 
-// 任务:twui脚本处理
-// ------------------------------
-gulp.task('twuiScript', function () {
-    return tasks.script(paths.twuiScriptConcat, 'twui.js', paths.twuiDest);
-});
-
 // 任务:浏览器自动刷新
 // ------------------------------
 gulp.task('server', ['bootstrapSass', 'twuiSass', 'twuiScript', 'sassAll', 'copyFiles', 'html'], function () {
@@ -238,6 +239,10 @@ gulp.task('watch', function () {
     // 监控：twui样式文件变化
     // ------------------------------
     gulp.watch(paths.twuiCssFiles, ['twuiSass']);
+
+    // 监控：twui脚本文件变化
+    // ------------------------------
+    gulp.watch(paths.twuiScriptFiles, ['twuiScript']);
 
     // 监控：html文件的改变
     // ------------------------------

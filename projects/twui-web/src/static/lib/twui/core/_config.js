@@ -3,7 +3,7 @@
  * 描述:默认配置项
  * ------------------------------------------------------------ */
 +function ($) {
-    reui.config = {
+    twui.config = {
         animate: true,
         speed: 300,
         win: {
@@ -73,7 +73,7 @@
  * 描述:html模板
  * ------------------------------------------------------------ */
 +function ($) {
-    reui.templete = {
+    twui.templete = {
         editInput: '<input class="c-editinput" type="text" />',
         win: '<div class="m-win info jsx-win"><div class="win-body"><div></div></div></div>',
         winHeader: '<div class="win-header"><a class="shut js-win-close" title="关闭">×</a><h4></h4></div>',

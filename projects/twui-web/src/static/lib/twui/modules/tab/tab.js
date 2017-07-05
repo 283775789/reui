@@ -3,7 +3,7 @@
  * 描述:tab
  * ------------------------------------------------------------ */
 +function ($) {
-    var speed = reui.config.speed;
+    var speed = twui.config.speed;
 
     // 定义:tab组件类
     // ------------------------------
@@ -15,18 +15,18 @@
     // ------------------------------
     Tab.prototype.selector = '.jsx-tabnav';
 
-    // 方法:reui调用的入口方法
+    // 方法:twui调用的入口方法
     // ------------------------------
     Tab.prototype.init = function () {
         var me = this,
             $me = me.$,
             $tabBtn = $me.find('a');
 
-        $me.on('click.reui.tab', 'a', function () {
+        $me.on('click.twui.tab', 'a', function () {
             me.show($(this));
         });
 
-        $me.on('click.reui.tab', '.js-more > span', function () {
+        $me.on('click.twui.tab', '.js-more > span', function () {
             me.showMore($(this));
         });
 
@@ -42,7 +42,7 @@
         //    width = 0,
         //    $oldMore = $tab.find('.js-more'),
         //    $oldMoreLinks = $oldMore.find('div > a'),
-        //    $more = $(reui.templete.tabMore),
+        //    $more = $(twui.templete.tabMore),
         //    $moreBody = $more.find('div'),
         //    more = false;
 
@@ -91,7 +91,7 @@
     Tab.prototype.hideMore = function ($moreBody) {
         //var me = this;
 
-        //$(document).one('click.reui.tab.more', function (event) {
+        //$(document).one('click.twui.tab.more', function (event) {
         //    var $target = $(event.target).parent().find(' > div');
 
         //    if ($target.is($moreBody)) {
@@ -112,8 +112,8 @@
             $prevTabBtn = $tabBtn.closest('.jsx-tabnav').find('a.active'),
             $target = $($tabBtn.data('target')),
             $activeTab = $target.parent().find(' > .active'),
-            changeEvent = $.Event('change.reui', { relatedTarget: $prevTabBtn[0], currentTarget: $tabBtn[0] }),
-            changedEvent = $.Event('changed.reui', { relatedTarget: $prevTabBtn[0], currentTarget: $tabBtn[0] }),
+            changeEvent = $.Event('change.twui', { relatedTarget: $prevTabBtn[0], currentTarget: $tabBtn[0] }),
+            changedEvent = $.Event('changed.twui', { relatedTarget: $prevTabBtn[0], currentTarget: $tabBtn[0] }),
             speed = this.speed();
 
         if ($tabBtn.hasClass('active')) return;
@@ -140,11 +140,11 @@
 
     // 方法:浏览器变化尺寸时，重新生成more菜单
     // ---------------------------------
-    $(window).on('lazyResize.reui.tab', function () {
-        $('.jsx-tabnav').reui('createMore');
+    $(window).on('lazyResize.twui.tab', function () {
+        $('.jsx-tabnav').twui('createMore');
     });
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(Tab);
+    twui.module(Tab);
 }(jQuery);

@@ -3,7 +3,7 @@
  * 描述:返回顶部
  * ------------------------------------------------------------ */
 +function ($) {
-    var speed = reui.config.speed;
+    var speed = twui.config.speed;
 
     // 定义:Top组件类
     // ------------------------------
@@ -15,12 +15,12 @@
     // ------------------------------
     Top.prototype.selector = '.jsx-top';
 
-    // 方法:reui调用的入口方法
+    // 方法:twui调用的入口方法
     // ------------------------------
     Top.prototype.init = function () {
         var me = this;
 
-        this.$.on('click.reui.top', function () {
+        this.$.on('click.twui.top', function () {
             me.toTop();
         });
     };
@@ -51,17 +51,17 @@
 
     // 方法:滚动浏览器滚动动条时，显示或隐藏top组件
     // ------------------------------------------
-    $(window).on('lazyScroll.reui.top', function () {
+    $(window).on('lazyScroll.twui.top', function () {
         var scrollTop = $(window).scrollTop();
 
         if (scrollTop > 150) {
-            $('.jsx-top').reui('show');
+            $('.jsx-top').twui('show');
         } else {
-            $('.jsx-top').reui('hide');
+            $('.jsx-top').twui('hide');
         }
     });
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(Top);
+    twui.module(Top);
 }(jQuery);

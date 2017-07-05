@@ -13,7 +13,7 @@
     // ------------------------------
     Anchor.prototype.selector = '.jsx-anchor';
 
-    // 方法:reui调用的入口方法
+    // 方法:twui调用的入口方法
     // ------------------------------
     Anchor.prototype.init = function () {
         var me = this;
@@ -21,7 +21,7 @@
         var $anchors = $me.find('a');
 
         // 点击锚点调用滑动方法
-        $anchors.on('click.reui.anchor', function () {
+        $anchors.on('click.twui.anchor', function () {
             me.slide($(this));
         });
 
@@ -29,7 +29,7 @@
         var $dataLink = $($me.data('link'));
         $dataLink = $dataLink.length > 0 ? $dataLink : $(window);
 
-        $dataLink.on('scroll.reui.anchor', function () {
+        $dataLink.on('scroll.twui.anchor', function () {
             me.scrollSpy($(this));
         });
     };
@@ -43,8 +43,8 @@
 
         if ($activeAnchor.is($this)) return;
 
-        var slideEvent = $.Event('slide.reui.scrollspy');
-        var slidEvent = $.Event('slid.reui.scrollspy');
+        var slideEvent = $.Event('slide.twui.scrollspy');
+        var slidEvent = $.Event('slid.twui.scrollspy');
 
         $me.trigger(slideEvent);
         if (slideEvent.isDefaultPrevented()) return;
@@ -96,7 +96,7 @@
         });
     };
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(Anchor);
+    twui.module(Anchor);
 }(jQuery);

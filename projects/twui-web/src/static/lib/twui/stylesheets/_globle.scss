@@ -1,0 +1,36 @@
+// ---------------------------- 全局样式 --------------------------------
+html {
+    height:100%;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial,"Microsoft YaHei",'\5b8b\4f53',sans-serif;
+    font-size:$font-size-base;
+    color:$main-text-color;
+    background:$body-bg;
+}
+
+a {
+    color: $link-color;
+    cursor:pointer;
+
+    &:hover {
+        color:$link-color-hover;
+    }
+}
+
+ul, li {
+    margin:0;
+    padding:0;
+}
+
+li {
+    list-style:none;
+}
+
+// 控件占位文本颜色
+input::-webkit-input-placeholder { color:$placeholder-text-color; }
+input:-moz-placeholder { color:$placeholder-text-color; }
+input::-moz-placeholder { color:$placeholder-text-color; }
+input:-ms-input-placeholder { color:$placeholder-text-color; }
+

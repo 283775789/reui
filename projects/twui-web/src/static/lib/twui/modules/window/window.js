@@ -15,9 +15,9 @@
 
     // 属性:Win组件公用的半透明层
     // ------------------------------
-    Win.prototype.dim = $(reui.templete.dim);
+    Win.prototype.dim = $(twui.templete.dim);
 
-    // 方法:reui调用的入口方法
+    // 方法:twui调用的入口方法
     // ------------------------------
     Win.prototype.init = function () {
         var me = this,
@@ -25,7 +25,7 @@
             $header = $me.find('.win-header');
 
         // 监听拖动事件
-        $header.on('mousedown.reui.win', function (event) {
+        $header.on('mousedown.twui.win', function (event) {
             var origX = event.clientX,
                 origY = event.clientY;
 
@@ -33,12 +33,12 @@
         });
 
         // 监听关闭事件
-        $me.on('click.reui.win','.js-win-close', function () {
+        $me.on('click.twui.win','.js-win-close', function () {
             me.close();
         });
 
         // 监听最大化事件
-        $me.on('click.reui.win','.js-win-max', function () {
+        $me.on('click.twui.win','.js-win-max', function () {
             me.max(this);
         });
     };
@@ -56,8 +56,8 @@
     Win.prototype.open = function (nodim) {
         var speed = this.speed(),
             $me = this.$,
-            showEvent = $.Event('show.reui.win'),
-            shownEvent = $.Event('shown.reui.win');
+            showEvent = $.Event('show.twui.win'),
+            shownEvent = $.Event('shown.twui.win');
 
         if ($me.is(':visible')) return;
 
@@ -101,13 +101,13 @@
 
         if ($me.is(':hidden')) return;
 
-        var hideEvent = $.Event('hide.reui.win');
+        var hideEvent = $.Event('hide.twui.win');
         $me.trigger(hideEvent);
 
         if (hideEvent.isDefaultPrevented()) return;
 
         var speed = this.speed();
-        var hiddenEvent = $.Event('hidden.reui.win');
+        var hiddenEvent = $.Event('hidden.twui.win');
 
         $me.fadeOut(speed, function () {
             $me.trigger(hiddenEvent);
@@ -135,8 +135,8 @@
     Win.prototype.max = function (element) {
         var $me = this.$,
             $btn = $(element),
-            maxEvent = $.Event('max.reui.win'),
-            minEvent = $.Event('min.reui.win');
+            maxEvent = $.Event('max.twui.win'),
+            minEvent = $.Event('min.twui.win');
 
         if ($me.hasClass('max')) {
             $me.trigger(minEvent);
@@ -176,7 +176,7 @@
         }
 
         // 拖动窗体
-        $(document).on('mousemove.reui.win', function (event) {
+        $(document).on('mousemove.twui.win', function (event) {
             var differenceX = event.clientX - origX,
                 differenceY = event.clientY - origY,
                 currentTop = 0,
@@ -191,8 +191,8 @@
         });
 
         // 取消拖动
-        $(document).one('mouseup.reui.win', function () {
-            $(document).off('mousemove.reui.win');
+        $(document).one('mouseup.twui.win', function () {
+            $(document).off('mousemove.twui.win');
         });
     };
 
@@ -209,18 +209,18 @@
         // 如果已移动过，不再启用居中
         //if (this.moved) return;
 
-        reui.center($(window), this.$, true);
+        twui.center($(window), this.$, true);
     };
 
     // 方法:浏览器resize时重新居中
     // ------------------------------
-    $(window).on('lazyResize.reui.win', function () {
-        $('.jsx-win:visible').reui('center', '.jsx-win');
+    $(window).on('lazyResize.twui.win', function () {
+        $('.jsx-win:visible').twui('center', '.jsx-win');
     });
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(Win);
+    twui.module(Win);
 }(jQuery);
 
 /* ------------------------------------------------------------
@@ -244,37 +244,37 @@
         var $me = this.$,
             $target = $($me.data('target'));
 
-        $target.reui('open', '.jsx-win');
+        $target.twui('open', '.jsx-win');
     };
 
     // 方法:在document上监听组件的click事件
     // ------------------------------
-    $(document).on('click.reui.openwin', '.jsx-openwin', function () {
-        $(this).reui('open', '.jsx-openwin');
+    $(document).on('click.twui.openwin', '.jsx-openwin', function () {
+        $(this).twui('open', '.jsx-openwin');
     });
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(OpenWin);
+    twui.module(OpenWin);
 }(jQuery);
 
 /* ------------------------------------------------------------
  * 版本:1.0
- * 描述:reui公用方法-信息提示,及快捷方法
+ * 描述:twui公用方法-信息提示,及快捷方法
  * ------------------------------------------------------------ */
 +function ($) {
-    reui.win = function (opts) {
-        var option = $.extend({}, reui.config.win, opts);
+    twui.win = function (opts) {
+        var option = $.extend({}, twui.config.win, opts);
         var time = parseInt(option.time);
         var dim = false;
 
         if (option.type == 'msg') {
-            var $win = $(reui.templete.msgWin);
+            var $win = $(twui.templete.msgWin);
             var $winContent = $win.find('div');
             dim = true;
             $win.data('nodim', dim);
         } else {
-            var $win = $(reui.templete.win);
+            var $win = $(twui.templete.win);
             var $winBody = $win.find('.win-body');
             var $winContent = $winBody.find('div');
 
@@ -282,12 +282,12 @@
             var $winHeader = $();
 
             if (option.title) {
-                $winHeader = $(reui.templete.winHeader);
+                $winHeader = $(twui.templete.winHeader);
                 var $headerBody = $winHeader.find('h4');
                 $headerBody.html(option.title);
 
                 if (option.max === true) {
-                    $headerBody.before($(reui.templete.winMax));
+                    $headerBody.before($(twui.templete.winMax));
                 }
 
                 $win.prepend($winHeader);
@@ -309,11 +309,11 @@
                             $btn.addClass('js-win-close');
                         }
 
-                        if (typeof btns[i].callback == 'function') $btn.on('click.reui.win', btns[i].callback);
+                        if (typeof btns[i].callback == 'function') $btn.on('click.twui.win', btns[i].callback);
                         $btns = $btns.add($btn);
                     }
 
-                    $winFooter = $(reui.templete.winFooter).append($btns);
+                    $winFooter = $(twui.templete.winFooter).append($btns);
                     $win.append($winFooter);
                 }
             } catch (e) {
@@ -334,22 +334,22 @@
 
         // 注册hide事件
         if (typeof option.hide === 'function') {
-            $win.on('hide.reui.win', option.hide);
+            $win.on('hide.twui.win', option.hide);
         }
 
         // 关闭时删除自身
-        $win.on('hidden.reui.win', function () {
+        $win.on('hidden.twui.win', function () {
             $win.remove();
         });
 
         $winContent.html(option.content);
         $('body').append($win);
-        $win.reui('open', '.jsx-win', dim);
+        $win.twui('open', '.jsx-win', dim);
 
         // 自动关闭
         if (!isNaN(time) && time != 0) {
             setTimeout(function () {
-                $win.reui('close');
+                $win.twui('close');
             }, time);
         }
 
@@ -357,9 +357,9 @@
     };
 
     // 函数：生成窗体函数
-    var wins = reui.config.wins;
+    var wins = twui.config.wins;
     for (var winType in wins) {
-        reui[winType] = function (type) {
+        twui[winType] = function (type) {
             return function (content, unsure, cb1, cb2, cb3) {
                 var option = null;
 
@@ -380,7 +380,7 @@
                     option.time = unsure;
                 }
 
-                var configOption = reui.config.wins[type];
+                var configOption = twui.config.wins[type];
                 var btns = configOption.btns ? configOption.btns : [];
                 var btnIndex = -1;
 
@@ -400,7 +400,7 @@
                 }
 
                 option = $.extend(true, {}, configOption, option);
-                return reui.win(option);
+                return twui.win(option);
             };
         }(winType);
     }

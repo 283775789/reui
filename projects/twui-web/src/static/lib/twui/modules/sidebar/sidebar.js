@@ -14,13 +14,13 @@
     Sidebar.prototype.selector = '.jsx-sidebar';
 
 
-    // 方法:reui调用的入口方法
+    // 方法:twui调用的入口方法
     // ------------------------------
     Sidebar.prototype.init = function () {
         var me = this,
             $link = me.$.find('a');
 
-        $link.on('click.reui.slidebar', function () {
+        $link.on('click.twui.slidebar', function () {
             me.showMenu(this);
         });
     };
@@ -63,7 +63,7 @@
         $hideElement.css('display', '');
     };
 
-    // 注册成reui模块
+    // 注册成twui模块
     // ------------------------------
-    reui.module(Sidebar);
+    twui.module(Sidebar);
 }(jQuery);          

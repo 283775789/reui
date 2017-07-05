@@ -1,56 +1,32 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <link href="../static/lib/bootstrap/css/bootstrap.twui.css" rel="stylesheet" />
-    <link href="../static/lib/twui/twui.css" rel="stylesheet" />
-    <style>
-        .grid-col { height:100px; border:1px solid #ccc; }
-    </style>
-</head>
+@@include('include/_head.html',{"title":"标题"})
 <body>
-    <div class="m-grid lg-x6 md-x5 sm-x4 xs-x3">
-        <div class="grid-col">
+    <ul class="m-nav">
+        <li>
+            <a>导航名称1</a>
+        </li>
+        <li>
+            <a>导航名称2</a>
+        </li>
+        <li>
+            <a>导航名称3</a>
+        </li>
+        <li>
+            <a>导航名称4</a>
+        </li>
+        <li>
+            <a>导航名称5</a>
+        </li>
+        <li>
+            <a>导航名称6</a>
+        </li>
+    </ul>
+    <!-- 主体 -->
+    <div class="container g-body">
 
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
-        <div class="grid-col">
-
-        </div>
     </div>
+    <!-- /主体 -->
+    @@include('include/_script.html')
 </body>
 </html>
