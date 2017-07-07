@@ -1,19 +1,31 @@
 /*!------------------------------------------------------------
  * 样式:twui.scss
- * 版本:v1.0.0
+ * 基线版本:v1.0.0
  * ------------------------------------------------------------ */
+// 框架设置
+@import "setting";
+
 // 变量与公用scss
+// ------------------------------------------------------------
 @import "variables";
 @import "common";
 
-// 通用样式:复制于bootstrap，如已引用bootstrap样式，请勿启用，以免重复，反之需要启用
+// 通用样式:复制于bootstrap，如已引用bootstrap样式，需注释以下引用，以免重复
 // ------------------------------------------------------------------------------------------------
 @import "normalize";
 @import "scaffolding";
 
 // 核心scss
+// ------------------------------------------------------------
 @import "globle";
 @import "grid";
+
+
+// 功能相关scss
+// ------------------------------------------------------------
+@import "responsive";
+
+
 
 /* 导航 */
 // 导航变量
@@ -28,7 +40,7 @@ $nav-link-color:$main-color-inverse !default;
 .m-nav {
     height: $nav-height;
     line-height: $nav-line-height;
-    @include clearfix;
+    //@include clearfix;
 
     > li {
         float: left;
@@ -62,6 +74,7 @@ $header-color:$main-color-inverse !default;
     position:relative;
 }
 
+// ---------------------------- 模块名称测试用 --------------------------------
 
 
 
@@ -83,6 +96,15 @@ $header-color:$main-color-inverse !default;
 
 
 
+
+
+
+
+
+
+
+
+// ---------------------------- 模块名称测试用 --------------------------------
 
 
 

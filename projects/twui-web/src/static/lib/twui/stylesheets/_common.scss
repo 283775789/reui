@@ -1,3 +1,7 @@
+
+// 变量与公用scss
+@import "variables";
+
 // ---------------------------- 公用mixin与scss --------------------------------
 // 清除浮动
 @mixin clearfix() {
@@ -11,62 +15,70 @@
   }
 }
 
-// 媒体查询快捷入口:md
-@mixin pc {
-    @media (max-width:map-get($viewport-map,lg)-1) {
+// 获取前一个map值
+@function map-prev($map,$key,$keys:map-keys($map)) {
+    $n:index($keys,$key);
+    @if $n == null or $n == 1 {
+        @return null;
+    } @else {
+        @return nth(map-values($map),$n - 1);
+    }
+}
+
+// 获取后一个map值
+@function map-next($map,$key,$keys:map-keys($map)) {
+    $n:index($keys,$key);
+    @if $n == null or $n == length($map) {
+        @return null;
+    } @else {
+          @return nth(map-values($map),$n + 1);
+    }
+}
+
+// 向下媒体查询：小于等于媒体关键字所在范围
+@mixin media-down($key,$breakpoints:$media-breakpoints) {
+    $prev: map-prev($breakpoints,$key);
+
+    @if $prev {
+        @media (max-width:$prev - 1) {
+            & {
+                @content;
+            }
+        }
+    }
+    @else {
         & {
             @content;
         }
     }
 }
 
-// 媒体查询快捷入口:sm
-@mixin pad {
-    @media (max-width:map-get($viewport-map,md)-1) {
+// 向上媒体查询：大于等于媒体关键字所在范围
+@mixin media-up($key,$breakpoints:$media-breakpoints) {
+    $next: map-next($media-breakpoints,$key);
+
+    @if $next {
+        @media (min-width:map-get($breakpoints,$key)) {
+            & {
+                @content;
+            }
+        }
+    }
+    @else {
         & {
             @content;
         }
     }
 }
 
-// 媒体查询快捷入口:xs
-@mixin mobil {
-    @media (max-width:map-get($viewport-map,sm)-1) {
-        & {
+// 单一媒体查询：仅包含媒体关键字所在范围
+@mixin media-only($key,$breakpoints:$media-breakpoints) {
+    @include media-up($key,$breakpoints) {
+        @include media-down($key,$breakpoints) {
             @content;
         }
     }
 }
-
-// 媒体查询快捷入口:仅md
-@mixin only-pc {
-    @media (min-width:map-get($viewport-map,md)) and (max-width:map-get($viewport-map,lg)-1) {
-        & {
-            @content;
-        }
-    }
-}
-
-// 媒体查询快捷入口:仅sm
-@mixin only-pad {
-    @media (min-width:map-get($viewport-map,sm)) and (max-width:map-get($viewport-map,md)-1) {
-        & {
-            @content;
-        }
-    }
-}
-
-// 媒体查询快捷入口:仅xs
-@mixin only-mobil {
-    @media (max-width:map-get($viewport-map,sm)-1) {
-        & {
-            @content;
-        }
-    }
-}
-
-
-
 
 
 

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 @@include('include/_head.html',{"title":"标题"})
 <body>
-    <ul class="m-nav">
+    <ul class="m-nav hidden-xs">
         <li>
             <a>导航名称1</a>
         </li>
@@ -24,7 +24,26 @@
     </ul>
     <!-- 主体 -->
     <div class="container g-body">
+        <ul class="m-grid xl-x10 lg-x8 md-x6 sm-x4 xs-x2">
+            <li class="grid-col"></li>
+            <li class="grid-col"></li>
+            <li class="grid-col"></li>
+            <li class="grid-col"></li>
+            <li class="grid-col"></li>
+            <li class="grid-col"></li>
+        </ul>
 
+        <ul class="m-grid pc10 hpad8 vpad6 hphone4 vphone2">
+            <li class="grid-col"></li>
+            <li class="grid-col"></li>
+            <li class="grid-col"></li>
+            <li class="grid-col"></li>
+            <li class="grid-col"></li>
+            <li class="grid-col"></li>
+        </ul>
+
+        <div class="twui-grid x-two"></div>
+        <div class="twui-grid two"></div>
     </div>
     <!-- /主体 -->
     @@include('include/_script.html')

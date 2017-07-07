@@ -1,0 +1,21 @@
+// ---------------------------- 响应相关类 --------------------------------
+// 生成响应式css
+@mixin responsive-class($class-suffix) {
+    @each $key in map-keys($media-breakpoints) {
+        @include media-down($key,$media-breakpoints) {
+            .#{$key}-down-#{$class-suffix} {
+                @content;
+            }
+        }
+
+        @include media-up($key,$media-breakpoints) {
+            .#{$key}-up-#{$class-suffix} {
+                @content;
+            }
+        }
+    }
+}
+
+@include responsive-class(hide) {
+    display:none !important;
+}
