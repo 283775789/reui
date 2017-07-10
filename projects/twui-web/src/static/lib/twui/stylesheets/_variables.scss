@@ -101,11 +101,11 @@ $btn-height-medium:$btn-height-base + 6px !default;
 $media-breakpoints:(pc:1200px,hpad:992px,vpad:768px,hphone:554px,vphone:0) !default;
 
 // 内容宽度
-$content-min-width:320px !default;
+$content-min-width:1000px !default;
 $content-max-width:1200px !default;
 
 // 栅格
-$grid-columns:16 !default;
+$grid-columns:12 !default;
 $grid-gutter-width:$spacing-medium !default;
 
 

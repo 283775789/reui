@@ -2,48 +2,41 @@
 <html lang="zh-CN">
 @@include('include/_head.html',{"title":"标题"})
 <body>
-    <ul class="m-nav hidden-xs">
-        <li>
-            <a>导航名称1</a>
-        </li>
-        <li>
-            <a>导航名称2</a>
-        </li>
-        <li>
-            <a>导航名称3</a>
-        </li>
-        <li>
-            <a>导航名称4</a>
-        </li>
-        <li>
-            <a>导航名称5</a>
-        </li>
-        <li>
-            <a>导航名称6</a>
-        </li>
-    </ul>
+    <div class="m-header">
+        <div class="header-inner">
+            <a class="header-left">
+                <img class="header-logo" src="../static/images/tw-white.png" />
+            </a>
+            <div class="header-body">
+                <ul class="m-nav hidden-xs">
+                    <li>
+                        <a>导航名称1</a>
+                    </li>
+                    <li>
+                        <a>导航名称2</a>
+                    </li>
+                    <li>
+                        <a>导航名称3</a>
+                    </li>
+                    <li>
+                        <a>导航名称4</a>
+                    </li>
+                    <li>
+                        <a>导航名称5</a>
+                    </li>
+                    <li>
+                        <a>导航名称6</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header-right">
+                右侧信息
+            </div>
+        </div>
+    </div>
     <!-- 主体 -->
-    <div class="container g-body">
-        <ul class="m-grid xl-x10 lg-x8 md-x6 sm-x4 xs-x2">
-            <li class="grid-col"></li>
-            <li class="grid-col"></li>
-            <li class="grid-col"></li>
-            <li class="grid-col"></li>
-            <li class="grid-col"></li>
-            <li class="grid-col"></li>
-        </ul>
+    <div class="container">
 
-        <ul class="m-grid pc10 hpad8 vpad6 hphone4 vphone2">
-            <li class="grid-col"></li>
-            <li class="grid-col"></li>
-            <li class="grid-col"></li>
-            <li class="grid-col"></li>
-            <li class="grid-col"></li>
-            <li class="grid-col"></li>
-        </ul>
-
-        <div class="twui-grid x-two"></div>
-        <div class="twui-grid two"></div>
     </div>
     <!-- /主体 -->
     @@include('include/_script.html')

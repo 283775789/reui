@@ -1,12 +1,10 @@
 // ---------------------------- 等分栅格 --------------------------------
 // 生成栅格
 @mixin make-grid ($breakpoints: $media-breakpoints,$columns: $grid-columns) {
-    $keys: map-keys($breakpoints);
-
-    @each $key in $keys {
+    @each $key in map-keys($breakpoints) {
         @include media-down($key) {
             @for $i from 1 through $columns {
-                .m-grid.#{$key}#{$i} {
+                .m-grid.#{$key}-x#{$i} {
                     > .grid-col {
                         width: percentage(1 / $i);
                     }
