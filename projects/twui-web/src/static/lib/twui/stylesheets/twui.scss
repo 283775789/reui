@@ -52,12 +52,9 @@ $nav-link-ico-spacing:$spacing-small !default;
             font-size:$nav-link-font-size;
             color: $nav-link-color;
 
-            &:hover {
-                background: $nav-link-hover-bg;
-            }
-
+            &:hover,
             &.active {
-                background: $nav-link-active-bg;
+                background: $nav-link-hover-bg;
             }
 
             > .ico {
