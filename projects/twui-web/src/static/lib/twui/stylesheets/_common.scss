@@ -77,18 +77,29 @@
     }
 }
 
+// 生成内容包含容器
+@mixin make-container {
+    padding-left: $container-padding;
+    padding-right: $container-padding;
+    @include clearfix;
+    margin-left: auto;
+    margin-right: auto;
 
-// 设置纯web端内容宽度
-@mixin web-width {
-    width:$content-max-width;
-    margin-left:auto;
-    margin-right:auto;
+    $firstKey: nth(map-keys($container-widths),1);
 
-    @include media-down(hpad){
-        width:$content-min-width;
+    @each $key, $width in $container-widths {
+        @if $key != $firstKey {
+            @include media-down($key,$media-breakpoints) {
+                & {
+                    width: $width;
+                }
+            }
+        }
+        @else {
+            width: $width;
+        }
     }
 }
-
 
 
 

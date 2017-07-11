@@ -2,45 +2,38 @@
 <html lang="zh-CN">
 @@include('include/_head.html',{"title":"标题"})
 <body>
-    <div class="m-header">
+    <!-- 头部 -->
+    <div class="g-header">
         <div class="header-inner">
             <a class="header-left">
                 <img class="header-logo" src="../static/images/tw-white.png" />
             </a>
             <ul class="m-nav">
-                <li>
-                    <a>导航名称1</a>
-                </li>
-                <li>
-                    <a>导航名称2</a>
-                </li>
-                <li>
-                    <a>导航名称3</a>
-                </li>
-                <li>
-                    <a>导航名称4</a>
-                </li>
-                <li>
-                    <a>导航名称5</a>
-                </li>
-                <li>
-                    <a>导航名称6</a>
-                </li>
+                <li class="active"><a>导航名称1</a></li>
+                <li><a>导航名称2</a></li>
+                <li><a>导航名称3</a></li>
+                <li><a>导航名称4</a></li>
+                <li><a>导航名称5</a></li>
+                <li><a>导航名称6</a></li>
             </ul>
             <div class="header-right">
                 右侧信息
             </div>
         </div>
     </div>
+    <!-- /头部 -->
     <!-- 主体 -->
-    <div class="container">
-        <div>
-            x
-            <span style="font-size:100px; background:#f00;">3</span>
-            <span style="font-size:20px; background:#f00;">3</span>
+    <div class="g-body">
+        <div class="body-inner">
+
         </div>
     </div>
     <!-- /主体 -->
+    <!-- 页脚 -->
+    <div class="g-footer">
+        <div class="footer-inner">Copyright © 2008-2017 Tianwen. All Rights Reserved.  V006R001C03SP01  400-888-9045</div>
+    </div>
+    <!-- /页脚 -->
     @@include('include/_script.html')
 </body>
 </html>

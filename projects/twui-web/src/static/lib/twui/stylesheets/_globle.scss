@@ -4,10 +4,18 @@ html {
 }
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial,"Microsoft YaHei",'\5b8b\4f53',sans-serif;
-    font-size:$font-size-base;
-    color:$main-text-color;
-    background:$body-bg;
+    position: relative;
+    min-height: 100%;
+    font-family: "Helvetica Neue","Microsoft YaHei",'\5b8b\4f53',Arial,Helvetica,sans-serif;
+    font-size: $font-size-base;
+    color: $main-text-color;
+    background: $body-bg;
+
+    &:after {
+        display:block;
+        content:" ";
+        height:$footer-height;
+    }
 }
 
 a {

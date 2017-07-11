@@ -20,18 +20,40 @@
 @import "globle";
 @import "grid";
 
-
 // 功能相关scss
 // ------------------------------------------------------------
 @import "responsive";
+
+// 组件
+// ------------------------------------------------------------
+@import "../modules/footer/footer";
+
+// 容器
+$container-padding:$grid-gutter-width / 2 !default;
+
+.g-body,
+.g-container,
+.g-navbar,
+.g-header,
+.g-footer {
+    min-width: $container-min-width;
+}
+
+.g-body,
+.g-container,
+.g-nav > .nav-inner,
+.g-header > .header-inner,
+.g-footer > .footer-inner {
+    @include make-container;
+}
 
 /* 导航 */
 // 导航变量
 $nav-height:40px !default;
 $nav-line-height:$nav-height !default;
+$nav-item-hover-bg:$main-color-hover !default;
+$nav-item-active-bg:$main-color-hover !default;
 $nav-link-padding:$padding-base * 1.5 !default;
-$nav-link-hover-bg:$main-color-hover !default;
-$nav-link-active-bg:$main-color-hover !default;
 $nav-link-color:$main-color-inverse !default;
 $nav-link-font-size:$font-size-medium !default;
 $nav-link-ico-spacing:$spacing-small !default;
@@ -40,35 +62,34 @@ $nav-link-ico-spacing:$spacing-small !default;
 .m-nav {
     height: $nav-height;
     line-height: $nav-line-height;
+    word-spacing:-3px;
     @include clearfix;
-}
-
-.nav-inner {
-    @include clearfix;
-    @include web-width;
 
     > li {
-        float: left;
+        display: inline-block;
+        word-spacing:normal;
+
+        &:hover {
+            background: $nav-item-hover-bg;
+        } 
+
+        &.active {
+            background: $nav-item-active-bg;
+        }
 
         > a {
-            display:block;
+            display: block;
             padding-left: $nav-link-padding;
             padding-right: $nav-link-padding;
-            font-size:$nav-link-font-size;
+            font-size: $nav-link-font-size;
             color: $nav-link-color;
 
-            &:hover,
-            &.active {
-                background: $nav-link-hover-bg;
-            }
-
             > .ico {
-                margin-right:$nav-link-ico-spacing;
+                margin-right: $nav-link-ico-spacing;
             }
         }
     }
 }
-
 
 /* 头部 */
 // 头部变量
@@ -82,38 +103,27 @@ $header-title-spacing:$spacing-base !default;
 $header-left-spacing:$spacing-base !default;
 
 // 头部
-.m-header {
-    height:$header-height;
-    line-height:$header-line-height;
-    background:$header-bg;
-    color:$header-color;
+.g-header {
+    height: $header-height;
+    line-height: $header-line-height;
+    background: $header-bg;
+    color: $header-color;
 }
 
 .header-inner {
-    @include clearfix;
-    @include web-width;
-
     > .header-left,
     > .header-body,
     > .m-nav {
-        float:left;
+        float: left;
     }
 
     > .m-nav {
-        height:$header-height;
-        line-height:$header-height;
-
-        > .nav-inner {
-            width:auto;
-        }
+        height: $header-height;
+        line-height: $header-height;
 
         > li > a {
-            font-size:$font-size-large;
+            font-size: $font-size-large;
         }
-    }
-
-    @if $design-style == web {
-        min-width:$content-min-width;
     }
 }
 
@@ -122,10 +132,6 @@ $header-left-spacing:$spacing-base !default;
     display:block;
     margin-right:$header-left-spacing;
     color:$header-color;
-}
-
-.header-right {
-    float:right;
 }
 
 .header-logo {
@@ -139,7 +145,9 @@ $header-left-spacing:$spacing-base !default;
     vertical-align:middle;
 }
 
-
+.header-right {
+    float:right;
+}
 
 // ---------------------------- 模块名称测试用 --------------------------------
 

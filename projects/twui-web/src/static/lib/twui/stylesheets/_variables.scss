@@ -96,17 +96,43 @@ $btn-min-width:90px !default;
 $btn-height-base:$ctr-height-base !default;
 $btn-height-medium:$btn-height-base + 6px !default;
 
+// 页脚尺寸
+$footer-height:50px !default;
+
 // ------------------------------ 响应式体系(PC优先) ------------------------------ //
 // 响应式断点
 $media-breakpoints:(pc:1200px,hpad:992px,vpad:768px,hphone:554px,vphone:0) !default;
 
-// 内容宽度
-$content-min-width:1000px !default;
-$content-max-width:1200px !default;
+// 断点对应的主容器宽度
+$container-widths:(pc:1200px,hpad:960px,vpad:auto,hphone:auto,vphone:auto) !default;
+$container-min-width:960px !default;
 
 // 栅格
 $grid-columns:12 !default;
-$grid-gutter-width:$spacing-medium !default;
+$grid-gutter-width:$spacing-medium * 2 !default;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
