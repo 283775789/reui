@@ -27,20 +27,25 @@
 
 /* 导航 */
 // 导航变量
-$nav-height:60px !default;
+$nav-height:40px !default;
 $nav-line-height:$nav-height !default;
 $nav-link-padding:$padding-base * 1.5 !default;
 $nav-link-hover-bg:$main-color-hover !default;
 $nav-link-active-bg:$main-color-hover !default;
 $nav-link-color:$main-color-inverse !default;
-$nav-link-font-size:$font-size-large !default;
+$nav-link-font-size:$font-size-medium !default;
 $nav-link-ico-spacing:$spacing-small !default;
 
 // 导航
 .m-nav {
     height: $nav-height;
     line-height: $nav-line-height;
-    //@include clearfix;
+    @include clearfix;
+}
+
+.nav-inner {
+    @include clearfix;
+    @include web-width;
 
     > li {
         float: left;
@@ -64,6 +69,7 @@ $nav-link-ico-spacing:$spacing-small !default;
     }
 }
 
+
 /* 头部 */
 // 头部变量
 $header-height:60px !default;
@@ -81,42 +87,56 @@ $header-left-spacing:$spacing-base !default;
     line-height:$header-line-height;
     background:$header-bg;
     color:$header-color;
+}
 
-    > .header-inner {
-        @include clearfix;
-        @include web-width;
-    }
+.header-inner {
+    @include clearfix;
+    @include web-width;
 
-    .header-left,
-    .header-body {
+    > .header-left,
+    > .header-body,
+    > .m-nav {
         float:left;
     }
 
-    .header-left {
-        font-size:0;
-        display:block;
-        margin-right:$header-left-spacing;
-        color:$header-color;
-    }
+    > .m-nav {
+        height:$header-height;
+        line-height:$header-height;
 
-    .header-right {
-        float:right;
-    }
+        > .nav-inner {
+            width:auto;
+        }
 
-    .header-logo {
-        height:$header-logo-height;
-    }
-
-    .header-title {
-        display:inline-block;
-        margin-left:$header-title-spacing;
-        font-size:$header-title-font-size;
-        vertical-align:middle;
+        > li > a {
+            font-size:$font-size-large;
+        }
     }
 
     @if $design-style == web {
         min-width:$content-min-width;
     }
+}
+
+.header-left {
+    font-size:0;
+    display:block;
+    margin-right:$header-left-spacing;
+    color:$header-color;
+}
+
+.header-right {
+    float:right;
+}
+
+.header-logo {
+    height:$header-logo-height;
+}
+
+.header-title {
+    display:inline-block;
+    margin-left:$header-title-spacing;
+    font-size:$header-title-font-size;
+    vertical-align:middle;
 }
 
 
