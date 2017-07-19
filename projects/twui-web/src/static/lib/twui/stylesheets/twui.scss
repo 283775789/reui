@@ -7,6 +7,7 @@
 
 // 变量与公用scss
 // ------------------------------------------------------------
+@import "config";
 @import "variables";
 @import "common";
 
@@ -97,7 +98,6 @@ $header-height:60px !default;
 $header-line-height:$header-height !default;
 $header-bg:$main-color !default;
 $header-color:$main-color-inverse !default;
-$header-logo-height:$header-height * 0.7 !default;
 $header-title-font-size:$font-size-base + $font-size-step * 6 !default;
 $header-title-spacing:$spacing-base !default;
 $header-left-spacing:$spacing-base !default;
@@ -120,10 +120,10 @@ $header-left-spacing:$spacing-base !default;
     > .m-nav {
         height: $header-height;
         line-height: $header-height;
+    }
 
-        > li > a {
-            font-size: $font-size-large;
-        }
+    > .m-nav.right {
+        float:right;
     }
 }
 
@@ -132,10 +132,6 @@ $header-left-spacing:$spacing-base !default;
     display:block;
     margin-right:$header-left-spacing;
     color:$header-color;
-}
-
-.header-logo {
-    height:$header-logo-height;
 }
 
 .header-title {
