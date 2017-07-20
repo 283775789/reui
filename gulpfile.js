@@ -12,8 +12,10 @@ var dest = gulpPath + 'dist/';
 
 // 引用插件
 // ------------------------------
+var fs = require('fs');
 var gulp = require('gulp');
 var include = require('gulp-file-include');
+var markdown = require('markdown').markdown;
 var replace = require('gulp-replace');
 var changed = require('gulp-changed');
 var plumber = require('gulp-plumber');
@@ -41,7 +43,7 @@ paths.bootstrapScssFiles = [paths.bootstrap + 'stylesheets/**/*.scss'];
 paths.bootstrapScript = paths.bootstrap + 'javascripts/bootstrap.min.js';
 
 // twui相关路径
-paths.twui = [src + 'static/lib/twui/'];
+paths.twui = src + 'static/lib/twui/';
 paths.twuiDest = dest + 'static/lib/twui/';
 paths.twuiScss = paths.twui + 'stylesheets/twui.scss';
 paths.twuiCssFiles = [paths.twui + '**/*.scss', paths.twui + '**/*.css'];
@@ -49,6 +51,7 @@ paths.twuiHtmlFiles = paths.twui + '**/*.html';
 paths.twuiCore = paths.twui + 'core/';
 paths.twuiScriptConcat = [paths.twuiCore + '_core.js', paths.twuiCore + '_base.js', paths.twuiCore + '_config.js', paths.twuiCore + '_common.js', paths.twui + 'modules/**/*.js'];
 paths.twuiScriptFiles = paths.twui + '**/*.js';
+paths.twuiMarkdown = [paths.twui + '**/*.md'];
 
 // javascript库相关路径
 paths.jsLibFiles = [src + 'static/lib/javascripts/**/**'];
@@ -77,8 +80,11 @@ paths.imgDest = dest + 'static/images/';
 paths.scriptDest = dest + 'static/js/';
 paths.script = [src + 'static/js/**/**'];
 
+// 字体图标路径
+paths.iconfont = [paths.cssSrc + 'fonts/**/**', paths.twui + 'stylesheets/fonts/**/**'];
+
 // 所有需要直接复制的文件
-paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script);
+paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script, paths.iconfont);
 
 // 任务对象:保存各种任务调用的函数
 // ------------------------------
@@ -92,6 +98,9 @@ var tasks = {
         }
 
         return stream.pipe(include()).pipe(replace(repalceReg,'')).pipe(gulp.dest(paths.htmlDest)).pipe(reload({ stream: true }));
+    },
+    markdown: function () {
+        return gulp.src(paths.twuiMarkdown, { base: src }).pipe(twuiMarkdown()).pipe(gulp.dest(dest)).pipe(reload({ stream: true }));
     },
     server: function () {
         var opt = {
@@ -173,6 +182,12 @@ gulp.task('html', function () {
     return tasks.include();
 });
 
+// 任务:将markdown转换为html文件
+// ------------------------------
+gulp.task('markdown', function () {
+    return tasks.markdown();
+});
+
 // 任务:编译_bootstrap.twui.scss
 // ------------------------------
 gulp.task('bootstrapSass', function () {
@@ -217,7 +232,7 @@ gulp.task('copyFiles', function () {
 
 // 任务:浏览器自动刷新
 // ------------------------------
-gulp.task('server', ['bootstrapSass', 'twuiSass', 'twuiScript', 'sassAll', 'copyFiles', 'html'], function () {
+gulp.task('server', ['bootstrapSass', 'twuiSass', 'twuiScript', 'markdown', 'sassAll', 'copyFiles', 'html'], function () {
     tasks.server();
 });
 
@@ -253,6 +268,12 @@ gulp.task('watch', function () {
     // 监控：include文件改变
     // ------------------------------
     gulp.watch(paths.include, function () {
+        return taskHandler(event, tasks.markdown);
+    });
+
+    // 监控：md文件改变
+    // ------------------------------
+    gulp.watch(paths.twuiMarkdown, function () {
         return tasks.include(true);
     });
 
@@ -278,3 +299,36 @@ gulp.task('watch', function () {
 // 任务:默认任务
 // ------------------------------
 gulp.task('default', ['server', 'watch']);
+
+var through = require('through2');
+var gutil = require('gulp-util');
+var PluginError = gutil.PluginError;
+
+// 常量
+const PLUGIN_NAME = 'twui-markdown';
+
+// 插件级别的函数（处理文件）
+function twuiMarkdown() {
+    // 创建一个 stream 通道，以让每个文件通过
+    var stream = through.obj(function (file, enc, cb) {
+        if (file.isStream()) {
+            this.emit('error', new PluginError(PLUGIN_NAME, 'Streams are not supported!'));
+            return cb();
+        }
+
+        if (file.isBuffer()) {
+            var contents = markdown.toHTML(file.contents.toString('utf8'));
+            var contentsBuffer = new Buffer(contents);
+            file.contents = contentsBuffer;
+        }
+
+        // 确保文件进入下一个 gulp 插件
+        this.push(file);
+
+        // 告诉 stream 引擎，我们已经处理完了这个文件
+        cb();
+    });
+
+    // 返回文件 stream
+    return stream;
+}

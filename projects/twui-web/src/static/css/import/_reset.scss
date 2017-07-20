@@ -1,29 +1,50 @@
 /* ------------------------------ twui重置或自定义 ------------------------------ */
+.header-logo {
+    height:36px;
+}
+
 .header-search {
-    width: 200px;
-    height: 30px;
-    line-height:28px;
-    background: transparent;
-    color: #fff;
-    border:none;
+    position: relative;
+    display: inline-block;
+    margin-right: 30px;
 
-    &:focus{
-        outline:none;
+    > input {
+        width: 200px;
+        height: 28px;
+        line-height: 24px;
+        padding: 0 15px;
+        font-size:12px;
+        background: transparent;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 14px;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::-webkit-input-placeholder {
+            color: #eee;
+        }
+
+        &:-moz-placeholder {
+            color: #eee;
+        }
+
+        &::-moz-placeholder {
+            color: #eee;
+        }
+
+        &:-ms-input-placeholder {
+            color: #eee;
+        }
     }
 
-    &::-webkit-input-placeholder {
-        color: #eee;
-    }
-
-    &:-moz-placeholder {
-        color: #eee;
-    }
-
-    &::-moz-placeholder {
-        color: #eee;
-    }
-
-    &:-ms-input-placeholder {
-        color: #eee;
+    > .icof {
+        position: absolute;
+        top: 0;
+        right: 12px;
+        font-size: 16px;
+        color:#fff;
     }
 }
