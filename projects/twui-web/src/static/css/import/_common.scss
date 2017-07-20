@@ -1,2 +1,101 @@
-/* ------------------------------ 布局 ------------------------------ */
+// 引用twui库的scss变量及mixin
+// ------------------------------------------------------------
+@import "../../lib/twui/stylesheets/config";
+@import "../../lib/twui/stylesheets/variables";
+@import "../../lib/twui/stylesheets/common";
 
+/* ------------------------------ 通用 ------------------------------ */
+.m-markdown {
+    color: $minor-text-color;
+
+    > h2,
+    > h3 {
+        position: relative;
+        padding-bottom: $padding-base;
+        margin-bottom:$spacing-base;
+        border-bottom: 1px dashed $main-border-color;
+
+        &:before {
+            content: " ";
+            position: absolute;
+            left: -$spacing-medium * 0.8;
+            top: 0.6em;
+            height: 5px;
+            width: 5px;
+            background: $main-color;
+        }
+    }
+
+    > h2 {
+        margin-top:$spacing-large;
+        font-size: $font-size-medium;
+    }
+
+    > h3 {
+        margin-top:$spacing-medium;
+        font-size: $font-size-base;
+    }
+
+    p {
+        line-height:1.5;
+        margin-bottom:$spacing-medium;
+    }
+
+    > ul,
+    > ol {
+        line-height: 1.75;
+
+        > li {
+            margin-left: 20px;
+        }
+    }
+
+    > ul {
+        > li {
+            list-style: circle;
+        }
+    }
+
+    > ol {
+        > li {
+            list-style: decimal;
+        }
+    }
+
+    blockquote {
+        display: none;
+    }
+
+    table {
+        width: 100%;
+        table-layout: fixed;
+
+        > thead > tr > th,
+        > tbody > tr > td {
+            padding: $padding-base;
+            text-align: left;
+            border: 1px solid $minor-border-color;
+        }
+
+        > thead > tr > th {
+            background: #f5f5f5;
+        }
+    }
+}
+
+/* 侧边栏 */
+.m-sidebar { position:absolute; z-index:1; top:60px; left:0; bottom:0; width:200px; font-size:14px; background:#3497db; }
+.m-sidebar a { display:block; cursor:pointer; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.m-sidebar > li { position:relative; line-height:42px; }
+.m-sidebar > li.active,
+.m-sidebar > li:hover { background: #1e85cc; }
+.m-sidebar > li > a { position:relative; display: block; padding:0 20px 0 40px; border-left:3px solid transparent; color:#c9e9ff; }
+.m-sidebar > li:first-child > a { border-top:none; }
+.m-sidebar > li.active > a,
+.m-sidebar > li:hover > a { color:#fff; }
+.m-sidebar > li > a > .ico { position:absolute; left:15px; top:14px; }
+.m-sidebar > li > a > .ico-sidearr { left:auto; right: 0; top: 18px; }
+.m-sidebar > li > a > .ico-sidearr:first-child { left:0; right: auto; }
+.m-sidebar > li.active > a { border-left-color:#20d090; }
+.m-sidebar > li.active > a > .ico-sidearr { -ms-transform: rotate(90deg); transform: rotate(90deg); }
+.sidebar-header { padding:15px 20px !important; text-align:center; background:transparent !important; }
