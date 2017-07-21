@@ -12,7 +12,6 @@ var dest = gulpPath + 'dist/';
 
 // 引用插件
 // ------------------------------
-var fs = require('fs');
 var gulp = require('gulp');
 var include = require('gulp-file-include');
 var markdown = require('gulp-markdown');
@@ -44,7 +43,6 @@ paths.bootstrapScript = paths.bootstrap + 'javascripts/bootstrap.min.js';
 
 // twui相关路径
 paths.twui = src + 'static/lib/twui/';
-paths.twui = 'D:/ab-twui/projects/twui-web/src/static/lib/twui/';
 paths.twuiDest = dest + 'static/lib/twui/';
 paths.twuiScss = paths.twui + 'stylesheets/twui.scss';
 paths.twuiCssFiles = [paths.twui + '**/*.scss', paths.twui + '**/*.css'];
