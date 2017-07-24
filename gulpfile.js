@@ -115,10 +115,10 @@ var tasks = {
     },
     sass: function (srcPath,destPath) {
         var opt = {
-            outputStyle:'expanded'
+            outputStyle: 'compact'
         };
 
-        return gulp.src(srcPath).pipe(sass(opt)).on('error', errorHandler).pipe(postcss([autoprefixer()])).pipe(gulp.dest(destPath)).pipe(reload({ stream: true }));
+        return gulp.src(srcPath).pipe(sass(opt)).on('error', errorHandler).pipe(postcss([autoprefixer()])).pipe(replace(/^\n/gm, '')).pipe(gulp.dest(destPath)).pipe(reload({ stream: true }));
     },
     sprite: function () {
         var opt = {
