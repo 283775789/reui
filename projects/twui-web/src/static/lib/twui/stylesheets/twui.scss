@@ -32,19 +32,19 @@
 // 容器
 $container-padding:$grid-gutter-width / 2 !default;
 
-.g-body,
-.g-container,
-.g-navbar,
-.g-header,
-.g-footer {
+.twui-body,
+.twui-container,
+.twui-navbar,
+.twui-header,
+.twui-footer {
     min-width: $container-min-width;
 }
 
-.g-body,
-.g-container,
-.g-nav > .nav-inner,
-.g-header > .header-inner,
-.g-footer > .footer-inner {
+.twui-body,
+.twui-container,
+.twui-nav-inner,
+.twui-header-inner,
+.twui-footer-inner {
     @include make-container;
 }
 
@@ -60,7 +60,7 @@ $nav-link-font-size:$font-size-medium !default;
 $nav-link-ico-spacing:$spacing-small !default;
 
 // 导航
-.m-nav {
+.twui-nav {
     height: $nav-height;
     line-height: $nav-line-height;
     word-spacing:-3px;
@@ -103,46 +103,47 @@ $header-title-spacing:$spacing-base !default;
 $header-left-spacing:$spacing-base !default;
 
 // 头部
-.g-header {
+.twui-header {
     height: $header-height;
     line-height: $header-line-height;
     background: $header-bg;
     color: $header-color;
-}
 
-.header-inner {
-    > .header-left,
-    > .header-body,
-    > .m-nav {
-        float: left;
+
+    .header-inner {
+        > .header-left,
+        > .header-body,
+        > .twui-nav {
+            float: left;
+        }
+
+        > .twui-nav {
+            height: $header-height;
+            line-height: $header-height;
+        }
+
+        > .twui-nav.right {
+            float: right;
+        }
     }
 
-    > .m-nav {
-        height: $header-height;
-        line-height: $header-height;
+    .header-left {
+        font-size: 0;
+        display: block;
+        margin-right: $header-left-spacing;
+        color: $header-color;
     }
 
-    > .m-nav.right {
-        float:right;
+    .header-title {
+        display: inline-block;
+        margin-left: $header-title-spacing;
+        font-size: $header-title-font-size;
+        vertical-align: middle;
     }
-}
 
-.header-left {
-    font-size:0;
-    display:block;
-    margin-right:$header-left-spacing;
-    color:$header-color;
-}
-
-.header-title {
-    display:inline-block;
-    margin-left:$header-title-spacing;
-    font-size:$header-title-font-size;
-    vertical-align:middle;
-}
-
-.header-right {
-    float:right;
+    .header-right {
+        float: right;
+    }
 }
 
 // ---------------------------- 模块名称测试用 --------------------------------

@@ -4,8 +4,8 @@
     @each $key in map-keys($breakpoints) {
         @include media-down($key) {
             @for $i from 1 through $columns {
-                .m-grid.#{$key}-x#{$i} {
-                    > .grid-col {
+                .twui-grid.x#{$key}-x#{$i} {
+                    > .twui-grid-col {
                         width: percentage(1 / $i);
                     }
                 }
@@ -15,17 +15,16 @@
 }
 
 // 栅格容器
-.m-grid {
+.twui-grid {
     margin:ceil($grid-gutter-width / -2);
     @include clearfix;
-}
 
-// 栅格列
-.m-grid > .grid-col {
-    float:left;
-    width:100%;
-    min-height:1px;
-    padding:$grid-gutter-width / 2;
+    &-col {
+        float:left;
+        width:100%;
+        min-height:1px;
+        padding:$grid-gutter-width / 2;
+    }
 }
 
 // 栅格组

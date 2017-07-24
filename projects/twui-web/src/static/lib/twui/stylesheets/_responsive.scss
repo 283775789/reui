@@ -3,13 +3,13 @@
 @mixin responsive-class($class-suffix) {
     @each $key in map-keys($media-breakpoints) {
         @include media-down($key,$media-breakpoints) {
-            .#{$key}-down-#{$class-suffix} {
+            .twui-x#{$key}down#{$class-suffix} {
                 @content;
             }
         }
 
         @include media-up($key,$media-breakpoints) {
-            .#{$key}-up-#{$class-suffix} {
+            .twui-x#{$key}up#{$class-suffix} {
                 @content;
             }
         }
