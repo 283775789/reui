@@ -6,23 +6,43 @@ $sidebar-width:220px !default;
 $sidebar-item-indent:20px !default;
 $sidebar-item-line-height:50px !default;
 $sidebar-item-color:$main-text-color !default;
-$sidebar-item-hover-bg:#e4eefb !default;
-$sidebar-item-active-bg:#e4eefb !default;
+$sidebar-item-hover-bg:#f6fafd !default;
+$sidebar-item-active-bg:#f6fafd !default;
+$sidebar-item-icon-color: #ffbf00 !default;
 $sidebar-item-border-color:$main-border-color !default;
 $sidebar-item-font-size:$font-size-medium !default;
 $sidebar-subnav-font-size:$font-size-base !default;
 $sidebar-subnav-color:$minor-text-color !default;
 $sidebar-subnav-line-height:40px !default;
-$sidebar-subnav-hover-bg:$main-color !default;
+$sidebar-subnav-hover-bg:$main-color-hover !default;
 $sidebar-subnav-hover-color:$main-color-inverse !default;
 $sidebar-subnav-active-bg:$main-color !default;
 $sidebar-subnav-active-color:$main-color-inverse !default;
 
 .twui-sidebar {
+    float:left;
     width: $sidebar-width;
     background: #fff;
-    box-shadow: 0 3px 8px #ececec;
+    // box-shadow: 0 3px 8px #ececec;
+}
 
+.twui-sidebar-header {
+    position: relative;
+    padding: $sidebar-item-indent;
+    text-align: center;
+
+    &:after {
+        content: " ";
+        position: absolute;
+        left: $sidebar-item-indent;
+        right: $sidebar-item-indent;
+        bottom:0;
+        display:block;
+        border-bottom:1px dashed $sidebar-item-border-color;
+    }
+}
+
+.twui-sidebar-body {
     > li {
         position: relative;
 
@@ -31,7 +51,7 @@ $sidebar-subnav-active-color:$main-color-inverse !default;
         }
 
         &.active {
-            background:$sidebar-item-active-bg;
+            background: $sidebar-item-active-bg;
         }
 
         > a {
@@ -52,6 +72,12 @@ $sidebar-subnav-active-color:$main-color-inverse !default;
         display: block;
         border-top: 1px dashed $sidebar-item-border-color;
     }
+
+    .twui-ifont {
+        margin-right:$sidebar-item-indent / 2;
+        font-size:20px;
+        color:$sidebar-item-icon-color;
+    }
 }
 
 .twui-sidebar-subnav {
@@ -62,7 +88,17 @@ $sidebar-subnav-active-color:$main-color-inverse !default;
             padding-left: $sidebar-item-indent *2;
             line-height: $sidebar-subnav-line-height;
             color: $sidebar-subnav-color;
-            font-weight: bold;
+
+            &:before {
+                content:" ";
+                display:inline-block;
+                width:4px;
+                height:4px;
+                margin-right:$sidebar-item-indent / 2;
+                background:$sidebar-subnav-color;
+                border-radius:50%;
+                vertical-align:middle;
+            }
         }
 
         &:hover {
@@ -71,6 +107,10 @@ $sidebar-subnav-active-color:$main-color-inverse !default;
             > a {
                 display: block;
                 color: $sidebar-subnav-hover-color;
+
+                &:before {
+                    background:$sidebar-subnav-hover-color;
+                }
             }
         }
 
@@ -79,6 +119,10 @@ $sidebar-subnav-active-color:$main-color-inverse !default;
 
             > a {
                 color: $sidebar-subnav-active-color;
+
+                &:before {
+                    background:$sidebar-subnav-active-color;
+                }
             }
         }
     }

@@ -9,13 +9,58 @@
   url('fonts/iconfont.svg#iconfont') format('svg');
 }
 
-.icof {
-  font-family:"iconfont" !important;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.twui-ifont {
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.icof-search:before {
-    content:"\e60b";
+.twui-ifont.xsearch:before {
+    content: "\e60b";
+}
+
+.twui-ifont.xnav:before {
+    content: "\e688";
+}
+
+.twui-ifont.xunit:before {
+    content: "\e635";
+}
+
+.twui-ifont.xlayout:before {
+    content: "\e600";
+}
+
+.twui-ifont.xform:before {
+    content: "\e60c";
+}
+
+
+.twui-ifont.xjquery:before {
+    content: "\e605";
+}
+
+.twui-ifont.xreact:before {
+    content: "\e770";
+}
+
+.twui-ifont.xvue:before {
+    content: "\e617";
+}
+
+.twui-ifont.xtip:before {
+    content: "\e7df";
+}
+
+.twui-ifont.xpage:before {
+    content: "\e602";
+}
+
+.twui-ifont.xdata:before {
+    content: "\e62a";
+}
+
+.twui-ifont.xwin:before {
+    content: "\e800";
 }

@@ -54,6 +54,21 @@ $container-padding:$grid-gutter-width / 2 !default;
     @include make-container;
 }
 
+.twui-body {
+    margin-bottom:$spacing-large;
+    padding-left:0;
+    background:#fff;
+}
+
+.twui-body-content {
+    display:table-cell;
+    width:10000px;
+    padding:$padding-large;
+    padding-left:$padding-base * 5;
+    background:#fff;
+    border-left:1px solid #eee;
+}
+
 /* 导航 */
 // 导航变量
 $nav-height:40px !default;
