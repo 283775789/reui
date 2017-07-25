@@ -1,0 +1,47 @@
+
+// ---------------------------- 布局通用样式 --------------------------------
+// 容器边距
+$container-padding:$grid-gutter-width / 2 !default;
+
+.twui-body,
+.twui-container,
+.twui-navbar,
+.twui-header,
+.twui-footer {
+    min-width: $container-min-width;
+}
+
+.twui-body,
+.twui-container,
+.twui-nav-inner,
+.twui-header-inner,
+.twui-footer-inner {
+    @include make-container;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

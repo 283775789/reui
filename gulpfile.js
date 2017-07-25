@@ -14,7 +14,6 @@ var dest = gulpPath + 'dist/';
 // ------------------------------
 var gulp = require('gulp');
 var include = require('gulp-file-include');
-var markdown = require('gulp-markdown');
 var replace = require('gulp-replace');
 var changed = require('gulp-changed');
 var plumber = require('gulp-plumber');
@@ -26,6 +25,7 @@ var concat = require('gulp-concat');
 var del = require('del');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
+var cssnano = require('gulp-cssnano');
 
 // globs对象：保存用到的各种路径
 // ------------------------------
@@ -83,7 +83,7 @@ paths.script = [src + 'static/js/**/**'];
 paths.iconfont = [paths.cssSrc + 'fonts/**/**', paths.twui + 'stylesheets/fonts/**/**'];
 
 // 所有需要直接复制的文件
-paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script, paths.iconfont);
+paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script, paths.iconfont, paths.twuiMarkdown);
 
 // 任务对象:保存各种任务调用的函数
 // ------------------------------
@@ -97,9 +97,6 @@ var tasks = {
         }
 
         return stream.pipe(include()).pipe(replace(repalceReg,'')).pipe(gulp.dest(paths.htmlDest)).pipe(reload({ stream: true }));
-    },
-    markdown: function () {
-        return gulp.src(paths.twuiMarkdown, { base: src }).pipe(markdown()).pipe(gulp.dest(dest)).pipe(reload({ stream: true }));
     },
     server: function () {
         var opt = {
@@ -181,12 +178,6 @@ gulp.task('html', function () {
     return tasks.include();
 });
 
-// 任务:将markdown转换为html文件
-// ------------------------------
-gulp.task('markdown', function () {
-    return tasks.markdown();
-});
-
 // 任务:编译_bootstrap.twui.scss
 // ------------------------------
 gulp.task('bootstrapSass', function () {
@@ -231,7 +222,7 @@ gulp.task('copyFiles', function () {
 
 // 任务:浏览器自动刷新
 // ------------------------------
-gulp.task('server', ['bootstrapSass', 'twuiSass', 'twuiScript', 'markdown', 'sassAll', 'copyFiles', 'html'], function () {
+gulp.task('server', ['bootstrapSass', 'twuiSass', 'twuiScript', 'sassAll', 'copyFiles', 'html'], function () {
     tasks.server();
 });
 
@@ -268,12 +259,6 @@ gulp.task('watch', function () {
     // ------------------------------
     gulp.watch(paths.include, function () {
         return tasks.include(true);
-    });
-
-    // 监控：md文件改变
-    // ------------------------------
-    gulp.watch(paths.twuiMarkdown, function (event) {
-        return taskHandler(event, tasks.markdown);
     });
 
     // 监控：scss文件改变

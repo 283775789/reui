@@ -27,147 +27,18 @@
 
 // 布局
 // ------------------------------------------------------------
+@import "layout-common";
+@import "../modules/header/header";
+@import "../modules/body/body";
 @import "../modules/footer/footer";
 
 // 组件
 // ------------------------------------------------------------
 @import "../modules/sidebar/sidebar";
 
-
-
-// 容器
-$container-padding:$grid-gutter-width / 2 !default;
-
-.twui-body,
-.twui-container,
-.twui-navbar,
-.twui-header,
-.twui-footer {
-    min-width: $container-min-width;
-}
-
-.twui-body,
-.twui-container,
-.twui-nav-inner,
-.twui-header-inner,
-.twui-footer-inner {
-    @include make-container;
-}
-
-.twui-body {
-    margin-bottom:$spacing-large;
-    padding-left:0;
-    background:#fff;
-}
-
-.twui-body-content {
-    display:table-cell;
-    width:10000px;
-    padding:$padding-large;
-    padding-left:$padding-base * 5;
-    background:#fff;
-    border-left:1px solid #eee;
-}
-
-/* 导航 */
-// 导航变量
-$nav-height:40px !default;
-$nav-line-height:$nav-height !default;
-$nav-item-hover-bg:$main-color-hover !default;
-$nav-item-active-bg:$main-color-hover !default;
-$nav-link-padding:$padding-base * 1.5 !default;
-$nav-link-color:$main-color-inverse !default;
-$nav-link-font-size:$font-size-medium !default;
-$nav-link-ico-spacing:$spacing-small !default;
-
-// 导航
-.twui-nav {
-    height: $nav-height;
-    line-height: $nav-line-height;
-    word-spacing:-3px;
-    @include clearfix;
-
-    > li {
-        display: inline-block;
-        word-spacing:normal;
-
-        &:hover {
-            background: $nav-item-hover-bg;
-        } 
-
-        &.active {
-            background: $nav-item-active-bg;
-        }
-
-        > a {
-            display: block;
-            padding-left: $nav-link-padding;
-            padding-right: $nav-link-padding;
-            font-size: $nav-link-font-size;
-            color: $nav-link-color;
-
-            > .ico {
-                margin-right: $nav-link-ico-spacing;
-            }
-        }
-    }
-}
-
-/* 头部 */
-// 头部变量
-$header-height:60px !default;
-$header-line-height:$header-height !default;
-$header-bg:$main-color !default;
-$header-color:$main-color-inverse !default;
-$header-spacing:$spacing-medium !default;
-$header-title-font-size:$font-size-base + $font-size-step * 6 !default;
-$header-title-spacing:$spacing-base !default;
-$header-left-spacing:$spacing-base !default;
-
-// 头部
-.twui-header {
-    height: $header-height;
-    line-height: $header-line-height;
-    margin-bottom:$header-spacing;
-    background: $header-bg;
-    color: $header-color;
-
-    &-inner {
-
-        > .twui-nav {
-            height: $header-height;
-            line-height: $header-height;
-        }
-
-        > .twui-nav.xright {
-            float: right;
-        }
-    }
-
-    &-left,
-    &-body,
-    .twui-nav {
-        float: left;
-    }
-
-    &-left {
-        font-size: 0;
-        display: block;
-        margin-right: $header-left-spacing;
-        color: $header-color;
-    }
-
-    &-title {
-        display: inline-block;
-        margin-left: $header-title-spacing;
-        font-size: $header-title-font-size;
-        vertical-align: middle;
-    }
-
-    &-right {
-        float: right;
-    }
-}
+// 公共样式
+// ------------------------------------------------------------
+@import "placehold";
 
 // ---------------------------- 模块名称测试用 --------------------------------
 

@@ -1,0 +1,50 @@
+/* 头部 */
+$header-height:60px !default;
+$header-line-height:$header-height !default;
+$header-bg:$main-color !default;
+$header-color:$main-color-inverse !default;
+$header-spacing:$spacing-medium !default;
+$header-title-font-size:$font-size-base + $font-size-step * 6 !default;
+$header-title-spacing:$spacing-base !default;
+$header-left-spacing:$spacing-base !default;
+
+// 头部
+.twui-header {
+    height: $header-height;
+    line-height: $header-line-height;
+    margin-bottom:$header-spacing;
+    background: $header-bg;
+    color: $header-color;
+}
+
+.twui-header-inner {
+
+    > .twui-nav {
+        float: left;
+        height: $header-height;
+        line-height: $header-height;
+    }
+}
+
+.twui-header-left,
+.twui-header-body {
+    float: left;
+}
+
+.twui-header-left {
+    font-size: 0;
+    display: block;
+    margin-right: $header-left-spacing;
+    color: $header-color;
+}
+
+.twui-header-title {
+    display: inline-block;
+    margin-left: $header-title-spacing;
+    font-size: $header-title-font-size;
+    vertical-align: middle;
+}
+
+.twui-header-right {
+    float: right;
+}

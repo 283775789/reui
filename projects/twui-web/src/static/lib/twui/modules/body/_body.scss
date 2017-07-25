@@ -1,7 +1,13 @@
-@import "../../stylesheets/variables";
-@import "../../stylesheets/common";
-
-/* 内容主体 */
+/* 主体 */
 .twui-body {
-    
+    margin-bottom:$spacing-large;
+}
+
+.twui-body-content {
+    display:table-cell;
+    width:10000px;
+    padding:$padding-large;
+    padding-left:$padding-base * 5;
+    background:#fff;
+    border-left:1px solid #eee;
 }

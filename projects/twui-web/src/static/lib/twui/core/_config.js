@@ -75,12 +75,12 @@
 +function ($) {
     twui.templete = {
         editInput: '<input class="c-editinput" type="text" />',
-        win: '<div class="m-win info jsx-win"><div class="win-body"><div></div></div></div>',
+        win: '<div class="m-win info jst-win"><div class="win-body"><div></div></div></div>',
         winHeader: '<div class="win-header"><a class="shut js-win-close" title="关闭">×</a><h4></h4></div>',
         winMax:'<a class="max js-win-max" title="最大化"></a>',
         winFooter:'<div class="win-footer"></div>',
-        msgWin: '<div class="m-win msg jsx-win"><i></i><div></div></div>',
-        editItem: '<li class="jsx-edititem"><a><span class="js-value"></span><div class="sidebar-edititems-icons"><span class="js-editbtn"><i class="ico ico-edit2"></i></span><span class="js-delbtn"><i class="ico ico-delete2"></i></span></div></a></li>',
+        msgWin: '<div class="m-win msg jst-win"><i></i><div></div></div>',
+        editItem: '<li class="jst-edititem"><a><span class="js-value"></span><div class="sidebar-edititems-icons"><span class="js-editbtn"><i class="ico ico-edit2"></i></span><span class="js-delbtn"><i class="ico ico-delete2"></i></span></div></a></li>',
         tabMore: '<div class="tabnav-more js-more"><span>更多<b class="caret"></b></span><div></div></div>',
         dim: '<div class="c-dim"></div>'
     };

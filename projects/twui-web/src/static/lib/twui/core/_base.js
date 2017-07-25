@@ -43,13 +43,13 @@
 
     // 注册jQuery实例方法:获取jquery对象class属性中与twui模块相关的模块名称
     $.fn.getTwuiNames = function () {
-        var moduleSelectorRegex = /\bjsx-[^\s"]+/g,
+        var moduleSelectorRegex = /\bjst-[^\s"]+/g,
             classString = this.attr('class'),
             matches = '',
             moduleName='',
             moduleNames = [];
 
-        // 获取所有的以jsx-开头的class类名
+        // 获取所有的以jst-开头的class类名
         do {
             matches = moduleSelectorRegex.exec(classString);
             if (matches == null) {
@@ -131,9 +131,9 @@
             if (conflict > 0) {
                 if (typeof optionName != 'string') {
                     if (console.error) {
-                        console.error(this, '\n以上元素绑定了多个twui组件且组件存在同名方法，调用方法时必须指定模块选择器".jsx-moduleName"!');
+                        console.error(this, '\n以上元素绑定了多个twui组件且组件存在同名方法，调用方法时必须指定模块选择器".jst-moduleName"!');
                     }
-                    throw Error('元素【' + $this[0].tagName + '.' + $this.attr('class').replace(/\s+/g, '.') + '】绑定了多个twui组件且组件存在同名方法，调用方法时必须指定模块选择器".jsx-moduleName"!');
+                    throw Error('元素【' + $this[0].tagName + '.' + $this.attr('class').replace(/\s+/g, '.') + '】绑定了多个twui组件且组件存在同名方法，调用方法时必须指定模块选择器".jst-moduleName"!');
                 } else {
                     moduleName = optionName;
                 }

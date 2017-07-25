@@ -5,12 +5,12 @@
 +function ($) {
     // 构造函数:用于构造twui对象实例
      window.twui = function (constructor) {
-        var prefix = /^.jsx-[a-zA-Z][a-zA-Z0-9]{0,19}$/,
+        var prefix = /^.jst-[a-zA-Z][a-zA-Z0-9]{0,19}$/,
             temp = new constructor(),
             selector = temp.selector;
 
         if (!prefix.test(selector)) {
-            throw Error('选择器无效，请以".jsx-"开头，然后输入模块名字（需符合js变量规则）!');
+            throw Error('选择器无效，请以".jst-"开头，然后输入模块名字（需符合js变量规则）!');
         }
 
         this.selector = selector;
