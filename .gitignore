@@ -7,3 +7,4 @@ projects/*/dist/
 node_modules/
 **/.vs/
 **/temp/
+**/design/

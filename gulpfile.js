@@ -51,6 +51,8 @@ paths.twuiCore = paths.twui + 'core/';
 paths.twuiScriptConcat = [paths.twuiCore + '_core.js', paths.twuiCore + '_base.js', paths.twuiCore + '_config.js', paths.twuiCore + '_common.js', paths.twui + 'modules/**/*.js'];
 paths.twuiScriptFiles = paths.twui + '**/*.js';
 paths.twuiMarkdown = [paths.twui + '**/*.md'];
+paths.twuiModulesHtml = [paths.twui + 'modules/**/*.html'];
+paths.twuiDesign = [paths.twui + 'design/**/**'];
 
 // javascript库相关路径
 paths.jsLibFiles = [src + 'static/lib/javascripts/**/**'];
@@ -83,7 +85,7 @@ paths.script = [src + 'static/js/**/**'];
 paths.iconfont = [paths.cssSrc + 'fonts/**/**', paths.twui + 'stylesheets/fonts/**/**'];
 
 // 所有需要直接复制的文件
-paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script, paths.iconfont, paths.twuiMarkdown);
+paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script, paths.iconfont, paths.twuiMarkdown, paths.twuiModulesHtml, paths.twuiDesign);
 
 // 任务对象:保存各种任务调用的函数
 // ------------------------------

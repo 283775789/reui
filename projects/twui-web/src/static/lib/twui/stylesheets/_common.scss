@@ -79,8 +79,8 @@
 
 // 生成内容包含容器
 @mixin make-container {
-    padding-left: $container-padding;
-    padding-right: $container-padding;
+    padding-left: $grid-gutter-width / 2;
+    padding-right: $grid-gutter-width / 2;
     @include clearfix;
     margin-left: auto;
     margin-right: auto;

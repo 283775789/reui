@@ -1,0 +1,33 @@
+/* 主体 */
+.twui-body {
+    margin-bottom:$spacing-large;
+}
+
+.twui-layout {
+    @include clearfix;
+}
+
+.twui-layout-item {
+    float: left;
+
+    &.xright {
+        float:right;
+    }
+}
+
+.twui-layout-cell {
+    display:table-cell;
+    width:10000px;
+}
+
+.twui-layout-content {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+.twui-layout-body {
+    padding-left:$grid-gutter-width / 2;
+    padding-right:$grid-gutter-width / 2;
+    display:table-cell;
+}

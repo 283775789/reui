@@ -28,12 +28,13 @@
 // 布局
 // ------------------------------------------------------------
 @import "layout-common";
-@import "../modules/header/header";
-@import "../modules/body/body";
-@import "../modules/footer/footer";
+@import "../modules/layout/header/header";
+@import "../modules/layout/body/body";
+@import "../modules/layout/footer/footer";
 
 // 组件
 // ------------------------------------------------------------
+@import "../modules/nav/nav";
 @import "../modules/sidebar/sidebar";
 
 // 公共样式
@@ -41,10 +42,6 @@
 @import "placehold";
 
 // ---------------------------- 模块名称测试用 --------------------------------
-
-
-
-
 
 
 
