@@ -12,25 +12,32 @@
 1. 浏览器大于1200px分辨率时，内容宽度为:1200px
 2. 浏览器小于1200px分辨率时，内容宽度为:960px
 
-### 组件演示
+### 组件演示：带导航
 > [引用](../static/lib/twui/modules/layout/header/_header.html)
 
-### html代码
+### 组件演示：不带导航
+> [引用](../static/lib/twui/modules/layout/header/_header-nonav.html)
+
+### html代码 
 
 ```
-{{ ../static/lib/twui/modules/layout/header/_header.html }}
+{{../static/lib/twui/modules/layout/header/_header.html}}
+```
+
+```
+{{../static/lib/twui/modules/layout/header/_header-nonav.html}}
 ```
 
 ### css代码
 
 ```
-{{ code path }}
+{{code path}}
 ```
 
 ### js代码
 
 ```
-{{ code path }}
+{{code path}}
 ```
 
 ### data属性

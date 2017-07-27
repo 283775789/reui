@@ -33,7 +33,7 @@
     }
 
     > h3 {
-        margin-top: $spacing-medium;
+        margin-top: $spacing-large;
         font-size: $font-size-base;
     }
 
@@ -63,11 +63,11 @@
         }
     }
 
-    blockquote {
+    > blockquote {
         display: none;
     }
 
-    table {
+    > table {
         width: 100%;
         table-layout: fixed;
 
@@ -83,20 +83,54 @@
         }
     }
 
-    .xdownload,
-    .xcopy {
+    > pre {
+        margin-top:-1px;
+    }
+
+    .xpsd,
+    .xcopy,
+    .xdownload {
+        position:absolute;
+        right:5px;
         margin-left:$padding-base;
         font-size:16px;
-        color:$main-color;
+        font-weight:normal;
+        color:$weaken-text-color;
+        vertical-align:middle;
+
+        &:hover {
+            color:$main-color;
+        }
+    }
+
+    .xcopy {
+        top:6px;
     }
 }
 
+.twui-markdown-copybox {
+    position:relative;
+}
+
 .twui-demobox {
-    .twui-header {
-        min-width: 100%;
-    }
+    overflow:auto;
 
     .twui-header-inner {
         width: 100%;
+    }
+}
+
+.twui-shortcut {
+    position:absolute;
+    left:1em;
+    top:1em;
+    font-size:$font-size-small;
+    color:$weaken-text-color;
+
+    > .twui-ifont {
+        font-size:14px;
+        margin-right:$spacing-base;
+        color:$main-color;
+        vertical-align:middle;
     }
 }

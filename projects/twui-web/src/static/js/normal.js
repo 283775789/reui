@@ -40,7 +40,17 @@
             var $codes = $markdown.find('pre code');
             $codes.each(function () {
                 var $code = $(this),
-                    codeUrl = $(this).text().replace(/\{|\}/g, '');
+                    codeUrl = $(this).text().replace(/\{|\}/g, ''),
+                    filename = codeUrl.substring(codeUrl.lastIndexOf('/') + 1, codeUrl.lastIndexOf('.')).replace('_', ''),
+                    ext = $.trim(codeUrl.substring(codeUrl.lastIndexOf('.') + 1)),
+                    $copy = $('<div class="twui-markdown-copybox"><span class="twui-shortcut"><i class="twui-ifont xshortcut" title="快捷输入"></i>' + ext + '@' + filename + '</span><a class="twui-ifont xcopy" title="复制代码"></a></div>');
+
+                $code.parent().before($copy);
+                new Clipboard($copy.find('a')[0], {
+                    text: function () {
+                        return $code.text();
+                    }
+                });
 
                 $.get(codeUrl, function (data) {
                     data=data.replace(/^\r\n/, '');
