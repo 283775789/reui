@@ -26,6 +26,8 @@ var del = require('del');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var cssnano = require('gulp-cssnano');
+var fs = require('fs');
+var path = require('path');
 
 // globs对象：保存用到的各种路径
 // ------------------------------
@@ -50,8 +52,8 @@ paths.twuiHtmlFiles = paths.twui + '**/*.html';
 paths.twuiCore = paths.twui + 'core/';
 paths.twuiScriptConcat = [paths.twuiCore + '_core.js', paths.twuiCore + '_base.js', paths.twuiCore + '_config.js', paths.twuiCore + '_common.js', paths.twui + 'modules/**/*.js'];
 paths.twuiScriptFiles = paths.twui + '**/*.js';
-paths.twuiMarkdown = [paths.twui + '**/*.md'];
-paths.twuiModulesHtml = [paths.twui + 'modules/**/*.html'];
+paths.twuiModulesDir = paths.twui + 'modules/';
+paths.twuiModuleFiles = [paths.twui + 'modules/**/**'];
 paths.twuiDesign = [paths.twui + 'design/**/**'];
 
 // javascript库相关路径
@@ -84,8 +86,12 @@ paths.script = [src + 'static/js/**/**'];
 // 字体图标路径
 paths.iconfont = [paths.cssSrc + 'fonts/**/**', paths.twui + 'stylesheets/fonts/**/**'];
 
+// 快捷输入目录
+paths.shortcut = [src + 'html/**/*.html', paths.cssSrc + '**/*.+(css|scss)', src + 'static/js/**/*.js'];
+console.log(paths.shortcut);
 // 所有需要直接复制的文件
-paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script, paths.iconfont, paths.twuiMarkdown, paths.twuiModulesHtml, paths.twuiDesign);
+paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script, paths.iconfont, paths.twuiModuleFiles, paths.twuiDesign);
+
 
 // 任务对象:保存各种任务调用的函数
 // ------------------------------
@@ -161,6 +167,49 @@ var tasks = {
     script: function (srcPath,filename,destPath) {
         return gulp.src(srcPath).pipe(concat(filename)).pipe(gulp.dest(destPath)).pipe(reload({ stream: true }));
     },
+    shortcut: function (file) {
+        var root = paths.twuiModulesDir;
+
+        fs.readFile(file, 'utf8', function (err, sourceContent) {
+            var shortcutReg = /(html|scss|js)@(\w*)/m;
+
+            var matches = shortcutReg.exec(sourceContent);
+            if (matches === null) return;
+
+            console.log('(→_→)查询中，稍候...\n');
+            var filename = matches[2] + '.' + matches[1];
+
+            var filePath = undefined;
+
+            +function getFilePath(root) {
+                fs.readdirSync(root).forEach(function (name) {
+                    var dirPath = path.join(root, name);
+
+                    if (name.replace(/^_/, '') == filename) {
+                        filePath = dirPath;
+                    }
+
+                    if (fs.statSync(dirPath).isDirectory()) {
+                        getFilePath(dirPath);
+                    }
+                });
+            }(root);
+
+            if (!filePath) {
+                console.log('(⊙_⊙)妈了个鸡蛋，未找到对应的快捷内容...\n');
+                return;
+            }
+
+            fs.readFile(filePath, 'utf8', function (err, content) {
+                sourceContent = sourceContent.replace(shortcutReg, content);
+                setTimeout(function () {
+                    fs.writeFile(file, sourceContent, function () {
+                        console.log("╮(￣▽￣)╭so easy,内容已替换\n");
+                    });
+                }, 2001);
+            });
+        });
+    },
     del: function (delpath) {
         delpath = delpath.replace(/\\/g, '/').replace(src, dest);
         del.sync(delpath);
@@ -222,9 +271,15 @@ gulp.task('copyFiles', function () {
     return tasks.copyFiles();
 });
 
+// 任务:快捷输入
+// ------------------------------
+gulp.task('shortcut', function () {
+    return tasks.shortcut();
+});
+
 // 任务:浏览器自动刷新
 // ------------------------------
-gulp.task('server', ['bootstrapSass', 'twuiSass', 'twuiScript', 'sassAll', 'copyFiles', 'html'], function () {
+gulp.task('server', ['bootstrapSass', 'twuiSass', 'twuiScript', 'sassAll', 'copyFiles','html'], function () {
     tasks.server();
 });
 
@@ -276,7 +331,14 @@ gulp.task('watch', function () {
     gulp.watch(paths.copyFiles, function (event) {
         return taskHandler(event, tasks.copyFiles);
     });
-    
+
+    // 监控：允许快捷输入的文件改变
+    // ------------------------------
+    gulp.watch(paths.shortcut, function (event) {
+        if (event.type === 'deleted') return;
+        tasks.shortcut(event.path);
+    });
+
     // 监控：脚本变化
     // ------------------------------
     gulp.watch(paths.scriptAll, ['script']);

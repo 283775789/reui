@@ -1,4 +1,4 @@
-## 页面头部(header)[<i class="twui-ifont xdownload" title="下载设计源文件"></i>](/static/lib/twui/design/header.psd)
+## 页面头部(header)[设计文件](header.psd)
 
 前台系统中，顶部导航为默认导航，没有特殊原因，左侧导航通常只作为顶部导航的附属出现，不会取代顶部导航
 
@@ -28,10 +28,10 @@
 {{../static/lib/twui/modules/layout/header/_header-nonav.html}}
 ```
 
-### css代码
+### scss代码
 
 ```
-{{code path}}
+{{../static/lib/twui/modules/layout/header/_header.scss}}
 ```
 
 ### js代码

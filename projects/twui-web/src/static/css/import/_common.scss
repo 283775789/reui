@@ -108,7 +108,7 @@
     }
 }
 
-.twui-markdown-copybox {
+.twui-markdown-codeheader {
     position:relative;
 }
 
@@ -122,10 +122,13 @@
 
 .twui-shortcut {
     position:absolute;
-    left:1em;
-    top:1em;
+    left:0;
+    top:-1px;
+    padding: 3px 10px;
     font-size:$font-size-small;
     color:$weaken-text-color;
+    background: #fff;
+    border: 1px solid #ccc;
 
     > .twui-ifont {
         font-size:14px;
