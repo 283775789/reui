@@ -1,34 +1,34 @@
-## 组件名称
+## 组件名称[设计文件](header.pdf)
+文档内容
 
-+ 组件名称介绍
-+ 组件名称介绍
++ 无序列表项
++ 无序列表项
 
 ### 内容标题
-
 文档内容
 
 1. 有序列表项
 2. 有序列表项
 
 ### 组件演示
-> [引用](../modules/nav/nav.html)
+> [引用](../static/lib/twui/modules/layout/header/_name.html)
 
 ### html代码
 
 ```
-{{ code path }}
+{{../static/lib/twui/modules/layout/header/_name.html}}
 ```
 
-### css代码
+### scss代码
 
 ```
-{{ code path }}
+{{../static/lib/twui/modules/layout/header/_name.scss}}
 ```
 
 ### js代码
 
 ```
-{{ code path }}
+{{../static/lib/twui/modules/layout/header/_name.js}}
 ```
 
 ### data属性

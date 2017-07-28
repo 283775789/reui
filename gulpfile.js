@@ -175,7 +175,6 @@ var tasks = {
             var matches = shortcutReg.exec(sourceContent);
             if (matches === null) return;
 
-            console.log('\n(→_→)查询中，稍候...\n');
             var filename = matches[2] + '.' + matches[1];
             var filePath = undefined;
 
@@ -200,11 +199,9 @@ var tasks = {
 
             fs.readFile(filePath, 'utf8', function (err, content) {
                 sourceContent = sourceContent.replace(shortcutReg, content);
-                setTimeout(function () {
-                    fs.writeFile(file, sourceContent,'utf8',function () {
-                        console.log("\n╮(￣▽￣)╭so easy,内容已替换\n");
-                    });
-                }, 2001);
+                fs.writeFile(file, sourceContent,'utf8',function () {
+                    console.log("\n╮(￣▽￣)╭so easy,内容已替换\n");
+                });
             });
         });
     },
@@ -334,7 +331,14 @@ gulp.task('watch', function () {
     // ------------------------------
     gulp.watch(paths.shortcut, function (event) {
         if (event.type === 'deleted') return;
-        tasks.shortcut(event.path);
+        console.log('\n(→_→)查询中，稍候...\n');
+
+        // 妹的，为什么要延时2000ms系统才能监控到改变
+        // 哪位大神知道原因后请告知一声哦
+        // ------------------------------------------------------------
+        setTimeout(function () {
+            tasks.shortcut(event.path);
+        }, 2000);
     });
 
     // 监控：脚本变化
