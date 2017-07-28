@@ -88,10 +88,9 @@ paths.iconfont = [paths.cssSrc + 'fonts/**/**', paths.twui + 'stylesheets/fonts/
 
 // 快捷输入目录
 paths.shortcut = [src + 'html/**/*.html', paths.cssSrc + '**/*.+(css|scss)', src + 'static/js/**/*.js'];
-console.log(paths.shortcut);
+
 // 所有需要直接复制的文件
 paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script, paths.iconfont, paths.twuiModuleFiles, paths.twuiDesign);
-
 
 // 任务对象:保存各种任务调用的函数
 // ------------------------------
@@ -176,9 +175,8 @@ var tasks = {
             var matches = shortcutReg.exec(sourceContent);
             if (matches === null) return;
 
-            console.log('(→_→)查询中，稍候...\n');
+            console.log('\n(→_→)查询中，稍候...\n');
             var filename = matches[2] + '.' + matches[1];
-
             var filePath = undefined;
 
             +function getFilePath(root) {
@@ -196,15 +194,15 @@ var tasks = {
             }(root);
 
             if (!filePath) {
-                console.log('(⊙_⊙)妈了个鸡蛋，未找到对应的快捷内容...\n');
+                console.log('\n(⊙_⊙)妈了个鸡蛋，未找到对应的快捷内容...\n');
                 return;
             }
 
             fs.readFile(filePath, 'utf8', function (err, content) {
                 sourceContent = sourceContent.replace(shortcutReg, content);
                 setTimeout(function () {
-                    fs.writeFile(file, sourceContent, function () {
-                        console.log("╮(￣▽￣)╭so easy,内容已替换\n");
+                    fs.writeFile(file, sourceContent,'utf8',function () {
+                        console.log("\n╮(￣▽￣)╭so easy,内容已替换\n");
                     });
                 }, 2001);
             });
@@ -219,7 +217,7 @@ var tasks = {
 // 函数:错误处理
 // ------------------------------
 var errorHandler = function (error) {
-    console.error(error);
+    console.error('\n⊙﹏⊙‖∣° 自己猜，哪出问题了...\n');
     this.emit('end');
 };
 
