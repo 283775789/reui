@@ -1,0 +1,62 @@
+@charset "UTF-8";
+/* ------------------------------ twui重置或自定义 ------------------------------ */
+.twui-header-logo { height: 36px; }
+.twui-header-search { position: relative; display: inline-block; margin-right: 30px; }
+.twui-header-search > input { width: 200px; height: 28px; line-height: 24px; padding: 0 15px; font-size: 12px; background: transparent; color: #fff; border: 1px solid #fff; border-radius: 14px; }
+.twui-header-search > input:focus { outline: none; }
+.twui-header-search > input::-webkit-input-placeholder { color: #eee; }
+.twui-header-search > input:-moz-placeholder { color: #eee; }
+.twui-header-search > input::-moz-placeholder { color: #eee; }
+.twui-header-search > input:-ms-input-placeholder { color: #eee; }
+.twui-header-search > .twui-ifont { position: absolute; top: 0; right: 12px; font-size: 17px; color: #fff; }
+.twui-sidebar { -webkit-box-shadow: none; box-shadow: none; }
+.twui-layout { background: #fff; }
+.twui-layout-cell { border-left: 1px solid #eee; }
+/* ------------------------------ 重置highlight ------------------------------ */
+code, kbd, pre, samp { font-family: Consolas, "Microsoft YaHei",monospace, monospace; font-size: 13px; }
+.hljs { padding: 3em 1.5em 1.5em; background: #f5f5f5; border: 1px solid #ddd; color: #666; }
+.hljs-keyword, .hljs-attribute, .hljs-selector-tag, .hljs-meta-keyword, .hljs-doctag, .hljs-name { font-weight: normal; }
+.hljs-keyword, .hljs-selector-tag, .hljs-built_in, .hljs-name, .hljs-tag { color: #0091f2; }
+@font-face { font-family: 'iconfont'; src: url("fonts/iconfont.eot"); src: url("fonts/iconfont.eot?#iefix") format("embedded-opentype"), url("fonts/iconfont.woff") format("woff"), url("fonts/iconfont.ttf") format("truetype"), url("fonts/iconfont.svg#iconfont") format("svg"); }
+.twui-ifont { font-family: "iconfont" !important; font-style: normal; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.twui-ifont.xsearch:before { content: "\e60b"; }
+.twui-ifont.xnav:before { content: "\e688"; }
+.twui-ifont.xunit:before { content: "\e635"; }
+.twui-ifont.xlayout:before { content: "\e600"; }
+.twui-ifont.xform:before { content: "\e60c"; }
+.twui-ifont.xjquery:before { content: "\e605"; }
+.twui-ifont.xreact:before { content: "\e770"; }
+.twui-ifont.xvue:before { content: "\e617"; }
+.twui-ifont.xtip:before { content: "\e7df"; }
+.twui-ifont.xpage:before { content: "\e602"; }
+.twui-ifont.xdata:before { content: "\e62a"; }
+.twui-ifont.xwin:before { content: "\e800"; }
+.twui-ifont.xarrow-down:before { content: "\e606"; }
+.twui-ifont.xcopy:before { content: "\e697"; }
+.twui-ifont.xpsd:before { content: "\e608"; }
+.twui-ifont.xdownload:before { content: "\e743"; }
+.twui-ifont.xshortcut:before { content: "\e613"; }
+/* ------------------------------ 通用 ------------------------------ */
+.twui-markdown { min-height: 1000px; padding: 30px 20px; color: #666; }
+.twui-markdown > h2, .twui-markdown > h3 { position: relative; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px dashed #ccc; }
+.twui-markdown > h2:before, .twui-markdown > h3:before { content: " "; position: absolute; left: -16px; top: 0.6em; height: 5px; width: 5px; background: #26a8ff; }
+.twui-markdown > h2 { font-size: 16px; }
+.twui-markdown > h3 { margin-top: 30px; font-size: 14px; }
+.twui-markdown p { line-height: 1.5; margin-bottom: 10px; }
+.twui-markdown > ul, .twui-markdown > ol { line-height: 1.75; }
+.twui-markdown > ul > li, .twui-markdown > ol > li { margin-left: 20px; }
+.twui-markdown > ul > li { list-style: circle; }
+.twui-markdown > ol > li { list-style: decimal; }
+.twui-markdown > blockquote { display: none; }
+.twui-markdown > table { width: 100%; table-layout: fixed; }
+.twui-markdown > table > thead > tr > th, .twui-markdown > table > tbody > tr > td { padding: 10px; text-align: left; border: 1px solid #ddd; }
+.twui-markdown > table > thead > tr > th { background: #f5f5f5; }
+.twui-markdown > pre { margin-top: -1px; }
+.twui-markdown .xpsd, .twui-markdown .xcopy, .twui-markdown .xdownload { position: absolute; right: 5px; margin-left: 10px; font-size: 16px; font-weight: normal; color: #999; vertical-align: middle; }
+.twui-markdown .xpsd:hover, .twui-markdown .xcopy:hover, .twui-markdown .xdownload:hover { color: #26a8ff; }
+.twui-markdown .xcopy { top: 6px; }
+.twui-markdown-codeheader { position: relative; }
+.twui-demobox { overflow: auto; }
+.twui-demobox .twui-header-inner { width: 100%; }
+.twui-shortcut { position: absolute; left: 0; top: -1px; padding: 3px 10px; font-size: 12px; color: #999; background: #fff; border: 1px solid #ccc; }
+.twui-shortcut > .twui-ifont { font-size: 14px; margin-right: 10px; color: #26a8ff; vertical-align: middle; }

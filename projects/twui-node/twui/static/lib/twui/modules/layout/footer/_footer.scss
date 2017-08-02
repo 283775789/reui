@@ -1,0 +1,18 @@
+/* 页脚 */
+$footer-height:50px !default; // 高度
+$footer-line-height:$footer-height !default; // 行高
+$footer-bg:darken($body-bg,15%) !default;  // 背景
+$footer-color:$weaken-text-color !default; // 文字颜色
+$footer-font-size:$font-size-small !default; // 字体大小
+
+.twui-footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:$footer-height;
+    line-height:$footer-line-height;
+    font-size:$footer-font-size;
+    background:$footer-bg;
+    color:$footer-color;
+    text-align:center;
+}

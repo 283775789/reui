@@ -1,0 +1,31 @@
+/* ---------------------------- 等分栅格 -------------------------------- */
+// 生成栅格
+@mixin make-grid ($breakpoints: $media-breakpoints,$columns: $grid-columns) {
+    @each $key in map-keys($breakpoints) {
+        @include media-down($key) {
+            @for $i from 1 through $columns {
+                .twui-grid.x#{$key}-x#{$i} {
+                    > .twui-grid-col {
+                        width: percentage(1 / $i);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 栅格容器
+.twui-grid {
+    margin:ceil($grid-gutter-width / -2);
+    @include clearfix;
+
+    &-col {
+        float:left;
+        width:100%;
+        min-height:1px;
+        padding:$grid-gutter-width / 2;
+    }
+}
+
+// 栅格组
+@include make-grid();
