@@ -1,6 +1,5 @@
 ﻿let config = {
-    homepage: '/twui/web/design.html',
-    staticType:['.html','.md']
+    homepage: '/web/design.html'
 };
 
 module.exports = config;

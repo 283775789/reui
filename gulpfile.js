@@ -64,9 +64,9 @@ paths.plugs = [src + 'static/plugs/**/**'];
 paths.plugsDest = dest + 'static/plugs/';
 
 // 项目html相关路径
-paths.html = [src + 'html/**/*.html', '!' + src + 'html/include/*.*'];
-paths.htmlDest = dest + 'html/';
-paths.include = [src + 'html/include/**/_*.html', paths.twuiHtmlFiles];
+paths.html = [src + 'web/**/*.html', '!' + src + 'web/include/*.*'];
+paths.htmlDest = dest + 'web/';
+paths.include = [src + 'web/include/**/_*.html', paths.twuiHtmlFiles];
 
 // 项目scss及css相关路径
 paths.mainScss = [paths.cssSrc + 'main.scss'];
@@ -87,7 +87,7 @@ paths.script = [src + 'static/js/**/**'];
 paths.iconfont = [paths.cssSrc + 'fonts/**/**', paths.twui + 'stylesheets/fonts/**/**'];
 
 // 快捷输入目录
-paths.shortcut = [src + 'html/**/*.html', paths.cssSrc + '**/*.+(css|scss)', src + 'static/js/**/*.js'];
+paths.shortcut = [src + 'web/**/*.html', paths.cssSrc + '**/*.+(css|scss)', src + 'static/js/**/*.js'];
 
 // 所有需要直接复制的文件
 paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script, paths.iconfont, paths.twuiModuleFiles, paths.twuiDesign);

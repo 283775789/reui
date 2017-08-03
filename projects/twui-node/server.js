@@ -2,8 +2,11 @@
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
-const {homepage, staticType} = require('./config');
+const {homepage} = require('./config');
+const mime = require('./mime');
 let port = 9898;
+
+console.log(__dirname);
 
 // http处理
 function httpHandler(req, rep) {
@@ -18,12 +21,12 @@ function httpHandler(req, rep) {
 
 // 请求处理
 let requestHandler = {
-    // 静态资源
-    static: function (pathname, rep) {
-        let content = fs.readFile(pathname, 'utf8', (err, data) => {
-            if (err) throw err;
+    // 处理静态资源
+    static: function (pathname, extname, rep) {
+        let content = fs.readFile(pathname, (err, data) => {
+            if (err) return;
 
-            rep.writeHead(200, { "Content-Type": "text/html" });
+            rep.writeHead(200, { "Content-Type": mime[extname] });
             rep.write(data);
             rep.end();
         });
@@ -32,12 +35,15 @@ let requestHandler = {
 
 // 路由
 function route(pathname, rep) {
-    pathname = './' + pathname;
-    let extname = path.extname(pathname);
+    pathname = '.' + pathname;
+    let extname = path.extname(pathname).substring(1);
+
+    console.log(pathname);
+    console.log(extname);
 
     // 静态资源路由
-    if (staticType.indexOf(extname) != -1) {
-        requestHandler.static(pathname,rep);
+    if (typeof mime[extname] === 'string') {
+        requestHandler.static(pathname,extname,rep);
     } else {
         console.log('not static request.')
     }
@@ -45,3 +51,10 @@ function route(pathname, rep) {
 
 // 监听http
 http.createServer(httpHandler).listen(port);
+
+
+
+
+
+
+
