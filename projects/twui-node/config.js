@@ -1,5 +1,5 @@
 ﻿let config = {
-    homepage: '/web/design.html'
+    homepage: '/web/index.html'
 };
 
 module.exports = config;

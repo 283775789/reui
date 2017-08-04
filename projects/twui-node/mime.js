@@ -10,7 +10,8 @@
     woff:'application/font-woff',
     eot:'application/font-eot',
     ttf:'application/font-ttf',
-    svg: 'image/svg+xml'
+    svg: 'image/svg+xml',
+    ico:'image/x-icon'
 };
 
 module.exports = mime;
