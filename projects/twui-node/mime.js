@@ -1,6 +1,7 @@
 ﻿let mime = {
     html: 'text/html',
     css: 'text/css',
+    scss:'text/plain',
     js: 'application/x-javascript',
     jpg: 'image/jpeg',
     png: 'image/png',
@@ -11,7 +12,9 @@
     eot:'application/font-eot',
     ttf:'application/font-ttf',
     svg: 'image/svg+xml',
-    ico:'image/x-icon'
+    ico: 'image/x-icon',
+    pdf: 'application/pdf',
+    psd:'application/octet-stream'
 };
 
 module.exports = mime;

@@ -2,51 +2,80 @@
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
-const {homepage} = require('./config');
 const mime = require('./mime');
-let port = 9898;
+const { index, indexNav, indexMd } = require('./config');
+let port = 9999;
 
-console.log(__dirname);
+// 文件数据缓存集
+let Dataset = function () {
+    this.length = 0;
+}
+
+// 获取缓存数据,key为文件数据路径
+Dataset.prototype.get = function (key, callback) {
+    let data = undefined;
+    let me = this;
+
+    if (this[key]) {
+        data = this[key];
+        callback(data);
+    } else {
+        fs.readFile(key, function (err,data) {
+            me[key] = data;
+            me.length++;
+            callback(data);
+        });
+    }
+};
+
+let dataset = new Dataset();
 
 // http处理
 function httpHandler(req, rep) {
     let pathname = url.parse(req.url).pathname;
+    route(pathname, req, rep);
+}
 
-    if (pathname === '/') {
-        pathname = homepage;
-    }
-
-    route(pathname,rep);
+// 响应处理
+function repHandler(rep, status, mimeType, data) {
+    rep.writeHead(status, { "Content-Type": mimeType });
+    rep.write(data);
+    rep.end();
 }
 
 // 请求处理
 let requestHandler = {
     // 处理静态资源
-    static: function (pathname, extname, rep) {
-        let content = fs.readFile(pathname, (err, data) => {
-            if (err) return;
-
-            rep.writeHead(200, { "Content-Type": mime[extname] });
-            rep.write(data);
-            rep.end();
+    static: function (pathname, rep) {
+        dataset.get(pathname, (data) => {
+            if (!data) return;
+            let extname = path.extname(pathname).substring(1);
+            repHandler(rep, 200, mime[extname], data);
         });
     }
 };
 
 // 路由
-function route(pathname, rep) {
+function route(pathname, req, rep) {
+    // 首页及GET请求路径转换
+    if (pathname === '/' || (req.method === "GET" && (/^\/web/.test(pathname) || /^\/static\/lib\/twui\/modules\//.test(pathname)))) {
+        pathname = index;
+    }
+
+    if (pathname === '/nav.html') {
+        pathname = indexNav;
+    }
+
+    if (pathname === '/.md') {
+        pathname = indexMd;
+    }
+
     pathname = '.' + pathname;
-    let extname = path.extname(pathname).substring(1);
 
     console.log(pathname);
-    console.log(extname);
 
     // 静态资源路由
-    if (typeof mime[extname] === 'string') {
-        requestHandler.static(pathname,extname,rep);
-    } else {
-        console.log('not static request.')
-    }
+    requestHandler.static(pathname, rep);
 }
 
 // 监听http

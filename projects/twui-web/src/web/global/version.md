@@ -1,4 +1,4 @@
-## 页面头部(header)[设计文件](header.pdf)
+## 版本管理(header)[设计文件](header.pdf)
 
 前台系统中，顶部导航为默认导航，没有特殊原因，左侧导航通常只作为顶部导航的附属出现，不会取代顶部导航
 
@@ -37,7 +37,7 @@
 ### js代码
 
 ```
-{{code path}}
+{{/static/lib/twui/modules/layout/header/_header.scss}}
 ```
 
 ### data属性

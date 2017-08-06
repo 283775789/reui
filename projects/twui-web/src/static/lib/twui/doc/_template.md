@@ -11,24 +11,24 @@
 2. 有序列表项
 
 ### 组件演示
-> [引用](../static/lib/twui/modules/layout/header/_name.html)
+> [引用](/static/lib/twui/modules/layout/header/_name.html)
 
 ### html代码
 
 ```
-{{../static/lib/twui/modules/layout/header/_name.html}}
+{{/static/lib/twui/modules/layout/header/_name.html}}
 ```
 
 ### scss代码
 
 ```
-{{../static/lib/twui/modules/layout/header/_name.scss}}
+{{/static/lib/twui/modules/layout/header/_name.scss}}
 ```
 
 ### js代码
 
 ```
-{{../static/lib/twui/modules/layout/header/_name.js}}
+{{/static/lib/twui/modules/layout/header/_name.js}}
 ```
 
 ### data属性

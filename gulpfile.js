@@ -6,10 +6,11 @@
 // ------------------------------
 var fullPath = process.argv.slice(2)[0].replace(/["\\]/g, '/');
 var isMobile = fullPath.indexOf('-1') == 0;
-var gulpPath = fullPath.substring(fullPath.lastIndexOf('projects'));
+var splitIndex = fullPath.lastIndexOf('projects');
+var gulpPath = fullPath.substring(splitIndex);
 var src = gulpPath + 'src/';
 // var dest = gulpPath + 'dist/';
-var dest = 'D:/ab-twui/projects/twui-node/';
+var dest = fullPath.substring(1, splitIndex) + 'projects/twui-node/';
 
 // 引用插件
 // ------------------------------
