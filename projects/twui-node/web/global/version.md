@@ -37,7 +37,7 @@
 ### js代码
 
 ```
-{{/static/lib/twui/modules/layout/header/_header333.scss}}
+{{/static/lib/twui/modules/layout/header/_header.scss}}
 ```
 
 ### data属性

@@ -92,7 +92,8 @@ paths.iconfont = [paths.cssSrc + 'fonts/**/**', paths.twui + 'stylesheets/fonts/
 paths.shortcut = [src + 'web/**/*.html', paths.cssSrc + '**/*.+(css|scss)', src + 'static/js/**/*.js'];
 
 // 所有需要直接复制的文件
-paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script, paths.iconfont, paths.twuiModuleFiles, paths.twuiDesign);
+paths.mdFiles = [src + 'web/**/*.md'];
+paths.copyFiles = paths.plugs.concat(paths.bootstrapScript, paths.jsLibFiles, paths.img, paths.script, paths.iconfont, paths.twuiModuleFiles, paths.twuiDesign, paths.mdFiles);
 
 // 任务对象:保存各种任务调用的函数
 // ------------------------------

@@ -54,6 +54,7 @@ var webui = {
             // 生成侧边栏
             webui.data(sidebarKey+'nav.html', 'sidebar', function (data) {
                 $sidebarBox.html(data);
+                $sidebarBox.addClass('jst-urlnav').twui('activate');
             });
         }
 
@@ -76,6 +77,9 @@ var webui = {
                 history.pushState({ uid: pathname }, pathname, pathname);
             }
         }
+
+        $('#nav').twui('activate');
+        $sidebarBox.addClass('jst-urlnav').twui('activate');
     },
     // 初始化导航
     initNav: function () {
@@ -163,9 +167,9 @@ var webui = {
             })
         });
     },
-    // 初始化导航
+    // 初始化侧边栏
     initSidebar: function () {
-        $(document).off('click.sidebar').on('click.sidebar', 'a', function (event) {
+        $(document).off('click.sidebar').on('click.sidebar', '#sidebar a', function (event) {
             var $this = $(this),
                 href = $this.attr('href');
 

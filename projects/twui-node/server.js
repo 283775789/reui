@@ -48,9 +48,13 @@ let requestHandler = {
     // 处理静态资源
     static: function (pathname, rep) {
         dataset.get(pathname, (data) => {
-            if (!data) return;
             let extname = path.extname(pathname).substring(1);
-            repHandler(rep, 200, mime[extname], data);
+            if (!data) {
+                // 404暂留
+                return;
+            } else {
+                repHandler(rep, 200, mime[extname], data);
+            }
         });
     }
 };
