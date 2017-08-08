@@ -9,6 +9,7 @@
     min-height: 1000px;
     padding: $padding-large $padding-medium;
     color: $minor-text-color;
+    line-height: 1.75;
 
     > h2,
     > h3 {
@@ -38,8 +39,8 @@
     }
 
     p {
-        line-height: 1.5;
-        margin-bottom: $spacing-base;
+        line-height: 1.8;
+        margin: $spacing-base 0;
     }
 
     > ul,
@@ -69,63 +70,59 @@
 
     > table {
         width: 100%;
-        table-layout: fixed;
 
         > thead > tr > th,
         > tbody > tr > td {
+            min-width:120px;
             padding: $padding-base;
             text-align: left;
             border: 1px solid $minor-border-color;
         }
 
         > tbody > tr > td {
-            font-size:13px;
-            line-height:1.75;
+            font-size: 13px;
+            line-height: 1.75;
         }
 
         > thead > tr > th {
             background: #f5f5f5;
         }
-
-        > thead > tr > th:first-child {
-            width:25%;
-        }
-
-        > thead > tr > th:first-child + th {
-            width:45%;
-        }
     }
 
     > pre {
-        margin-top:-1px;
+        margin-top: -1px;
     }
 
     code {
-        padding:3px 5px;
-        margin:0 3px;
+        padding: 3px 5px;
+        margin: 0 3px;
         background: #f5f5f5;
         border: 1px solid #ddd;
         color: #666;
     }
 
+    strong {
+        font-weight:bold;
+    }
+
     .xpsd,
     .xcopy,
     .xdownload {
-        position:absolute;
-        right:5px;
-        margin-left:$padding-base;
-        font-size:16px;
-        font-weight:normal;
-        color:$weaken-text-color;
-        vertical-align:middle;
+        position: absolute;
+        right: 5px;
+        margin-left: $padding-base;
+        font-size: 16px;
+        font-weight: normal;
+        color: $weaken-text-color;
+        vertical-align: middle;
 
         &:hover {
-            color:$main-color;
+            color: $main-color;
         }
     }
 
     .xcopy {
-        top:6px;
+        top: 6px;
     }
 }
 
@@ -158,3 +155,31 @@
         vertical-align:middle;
     }
 }
+
+// 色块
+.twui-color {
+    display:inline-block;
+    width:50px;
+    height:50px;
+    margin:10px auto 0;
+    vertical-align:middle;
+}
+
+.twui-color.xmain {
+    background:$main-color;
+}
+
+.twui-color.xminor {
+    background:$minor-color;
+}
+
+.twui-color.xbg {
+    background:$body-bg;
+}
+
+.twui-color.xerror {
+    background:$error-color;
+}
+
+
+

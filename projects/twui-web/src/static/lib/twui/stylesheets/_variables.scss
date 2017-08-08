@@ -1,12 +1,14 @@
 // ------------------------------ 颜色体系 ------------------------------ //
 // 主色
 $main-color:#26a8ff !default;
-$main-color-hover:darken(saturate($main-color,10%),10%) !default;
+$main-color-hover:darken(saturate($main-color,8%),8%) !default;
+$main-color-active:darken(saturate($main-color,15%),15%) !default;
 $main-color-inverse:#fff;
 
 // 辅色
 $minor-color:#6ec940 !default;
-$minor-color-hover:darken(saturate($minor-color,10%),10%) !default;
+$minor-color-hover:darken(saturate($minor-color,8%),8%) !default;
+$minor-color-active:darken(saturate($minor-color,15%),15%) !default;
 $minor-color-inverse:#fff;
 
 // 错误色
@@ -40,7 +42,7 @@ $main-btn-color:$main-color-inverse !default;
 $main-btn-border-color:$main-color !default;
 $main-btn-border-color-hover:$main-color-hover !default;
 
-$minor-btn-bg:$main-color !default; // 铺按钮
+$minor-btn-bg:$minor-color !default; // 铺按钮
 $minor-btn-bg-hover:$minor-color-hover !default;
 $minor-btn-color:$minor-color-inverse !default;
 $minor-btn-border-color:$minor-color !default;

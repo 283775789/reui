@@ -1,7 +1,7 @@
 ﻿let config = {
     index:'/web/index.html',
     indexNav:'/web/design/nav.html',
-    indexMd: '/web/design/spec.md'
+    indexMd: '/web/design/design.md'
 };
 
 module.exports = config;
