@@ -217,7 +217,7 @@ var tasks = {
 // 函数:错误处理
 // ------------------------------
 var errorHandler = function (error) {
-    console.error('\n⊙﹏⊙‖∣° 自己猜，哪出问题了...\n');
+    console.error(error);
     this.emit('end');
 };
 

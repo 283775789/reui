@@ -168,7 +168,6 @@ input:-ms-input-placeholder { color: #999; }
 .twui-nav > li.active { background: #0091f2; }
 .twui-nav > li > a { display: block; padding-left: 30px; padding-right: 30px; font-size: 14px; color: #fff; }
 .twui-nav > li > a > .ico { margin-right: 5px; }
-/* 侧边栏 */
 .twui-sidebar { float: left; width: 220px; background: #fff; -webkit-box-shadow: 0 3px 8px #ececec; box-shadow: 0 3px 8px #ececec; }
 .twui-sidebar-header { position: relative; padding: 20px; text-align: center; }
 .twui-sidebar-header:after { content: " "; position: absolute; left: 20px; right: 20px; bottom: 0; display: block; border-bottom: 1px dashed #ccc; }

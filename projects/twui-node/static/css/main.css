@@ -13,8 +13,8 @@
 .twui-layout { background: #fff; }
 .twui-layout-cell { border-left: 1px solid #eee; }
 /* ------------------------------ 重置highlight ------------------------------ */
-code, kbd, pre, samp { font-family: Consolas, "Microsoft YaHei",monospace, monospace; font-size: 13px; }
-.hljs { padding: 3em 1.5em 1.5em; background: #f5f5f5; border: 1px solid #ddd; color: #666; }
+code, kbd, pre, samp { font-family: Lucida Console,Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace; font-size: 12px; line-height: 1.7; }
+.hljs { margin: 0 !important; padding: 3em 1.5em 1.5em !important; background: #f5f5f5; border: 1px solid #ddd; color: #666; }
 .hljs-keyword, .hljs-attribute, .hljs-selector-tag, .hljs-meta-keyword, .hljs-doctag, .hljs-name { font-weight: normal; }
 .hljs-keyword, .hljs-selector-tag, .hljs-built_in, .hljs-name, .hljs-tag { color: #0091f2; }
 @font-face { font-family: 'iconfont'; src: url("fonts/iconfont.eot"); src: url("fonts/iconfont.eot?#iefix") format("embedded-opentype"), url("fonts/iconfont.woff") format("woff"), url("fonts/iconfont.ttf") format("truetype"), url("fonts/iconfont.svg#iconfont") format("svg"); }
@@ -50,8 +50,12 @@ code, kbd, pre, samp { font-family: Consolas, "Microsoft YaHei",monospace, monos
 .twui-markdown > blockquote { display: none; }
 .twui-markdown > table { width: 100%; table-layout: fixed; }
 .twui-markdown > table > thead > tr > th, .twui-markdown > table > tbody > tr > td { padding: 10px; text-align: left; border: 1px solid #ddd; }
+.twui-markdown > table > tbody > tr > td { font-size: 13px; line-height: 1.75; }
 .twui-markdown > table > thead > tr > th { background: #f5f5f5; }
+.twui-markdown > table > thead > tr > th:first-child { width: 25%; }
+.twui-markdown > table > thead > tr > th:first-child + th { width: 45%; }
 .twui-markdown > pre { margin-top: -1px; }
+.twui-markdown code { padding: 3px 5px; margin: 0 3px; background: #f5f5f5; border: 1px solid #ddd; color: #666; }
 .twui-markdown .xpsd, .twui-markdown .xcopy, .twui-markdown .xdownload { position: absolute; right: 5px; margin-left: 10px; font-size: 16px; font-weight: normal; color: #999; vertical-align: middle; }
 .twui-markdown .xpsd:hover, .twui-markdown .xcopy:hover, .twui-markdown .xdownload:hover { color: #26a8ff; }
 .twui-markdown .xcopy { top: 6px; }

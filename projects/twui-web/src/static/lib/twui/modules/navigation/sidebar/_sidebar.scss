@@ -1,0 +1,200 @@
+$sidebar-width:220px !default;
+$sidebar-item-indent:20px !default;
+$sidebar-item-line-height:50px !default;
+$sidebar-item-color:$main-text-color !default;
+$sidebar-item-hover-bg:#f6fafd !default;
+$sidebar-item-active-bg:#f6fafd !default;
+$sidebar-item-icon-color: #ffbf00 !default;
+$sidebar-item-border-color:$main-border-color !default;
+$sidebar-item-font-size:$font-size-medium !default;
+$sidebar-subnav-font-size:$font-size-base !default;
+$sidebar-subnav-color:$minor-text-color !default;
+$sidebar-subnav-line-height:40px !default;
+$sidebar-subnav-hover-bg:$main-color-hover !default;
+$sidebar-subnav-hover-color:$main-color-inverse !default;
+$sidebar-subnav-active-bg:$main-color !default;
+$sidebar-subnav-active-color:$main-color-inverse !default;
+
+.twui-sidebar {
+    float:left;
+    width: $sidebar-width;
+    background: #fff;
+    box-shadow: 0 3px 8px #ececec;
+}
+
+.twui-sidebar-header {
+    position: relative;
+    padding: $sidebar-item-indent;
+    text-align: center;
+
+    &:after {
+        content: " ";
+        position: absolute;
+        left: $sidebar-item-indent;
+        right: $sidebar-item-indent;
+        bottom:0;
+        display:block;
+        border-bottom:1px dashed $sidebar-item-border-color;
+    }
+}
+
+.twui-sidebar-body {
+    > li {
+        position: relative;
+
+        &:hover {
+            background: $sidebar-item-hover-bg;
+        }
+
+        &.active {
+            background: $sidebar-item-active-bg;
+        }
+
+        > a {
+            display: block;
+            padding-left: $sidebar-item-indent;
+            padding-right: $sidebar-item-indent *2;
+            line-height: $sidebar-item-line-height;
+            font-size: $sidebar-item-font-size;
+            color: $sidebar-item-color;
+            @extend %cutoff;
+        }
+
+        &:after {
+            content: " ";
+            position: absolute;
+            bottom: 0;
+            left: $sidebar-item-indent;
+            right: $sidebar-item-indent;
+            display: block;
+            border-top: 1px dashed $sidebar-item-border-color;
+        }
+    }
+
+    .twui-ifont {
+        margin-right: $sidebar-item-indent / 2;
+        font-size: 20px;
+        color: $sidebar-item-icon-color;
+    }
+
+    .xarrow-down {
+        position: absolute;
+        margin-right:0;
+        right: $sidebar-item-indent;
+        top: 2px;
+        font-size: $font-size-small;
+        color:$weaken-text-color;
+    }
+}
+
+.twui-sidebar-subnav {
+    display: none;
+
+    > li {
+        > a {
+            padding-left: $sidebar-item-indent *2;
+            padding-right: $sidebar-item-indent *2;
+            line-height: $sidebar-subnav-line-height;
+            color: $sidebar-subnav-color;
+            @extend %cutoff;
+
+            &:before {
+                content:" ";
+                display:inline-block;
+                width:4px;
+                height:4px;
+                margin-right:$sidebar-item-indent / 2;
+                background:$sidebar-subnav-color;
+                border-radius:50%;
+                vertical-align:middle;
+            }
+        }
+
+        &:hover {
+            background: $sidebar-subnav-hover-bg;
+
+            > a {
+                display: block;
+                color: $sidebar-subnav-hover-color;
+
+                &:before {
+                    background:$sidebar-subnav-hover-color;
+                }
+            }
+        }
+
+        &.active {
+            background: $sidebar-subnav-active-bg;
+
+            > a {
+                color: $sidebar-subnav-active-color;
+
+                &:before {
+                    background:$sidebar-subnav-active-color;
+                }
+            }
+        }
+    }
+}
+
+.twui-sidebar li.active {
+    > .twui-sidebar-subnav {
+        display: block;
+    }
+}
+
+/* 侧边栏 */
+.m-sidebar { width:220px; font-size:14px; border:1px solid #cad8e6; }
+.m-sidebar a { display:block; cursor:pointer; overflow:hidden; text-overflow:ellipsis; }
+.m-sidebar > li { position:relative; padding:0 20px; line-height:50px; }
+.m-sidebar > li:hover,
+.m-sidebar > li.active { background: #f1f6fa; }
+.m-sidebar > li > a { position:relative; display: block; padding-left:25px; padding-right:20px; border-top:1px dashed #e6e6e6; }
+.m-sidebar > li:first-child > a { border-top:none; }
+.m-sidebar > li:hover > a { color:#2472dd; }
+.m-sidebar > li > a > .ico { position:absolute; left:0; top:17px; }
+.m-sidebar > li > a > .ico-sidearr { left:auto; right: 0; top: 18px; }
+.m-sidebar > li > a > .ico-sidearr:first-child { left:0; right: auto; }
+.m-sidebar > li.active > a > .ico-sidearr { -ms-transform: rotate(90deg); transform: rotate(90deg); }
+.sidebar-header { padding:15px 20px !important; text-align:center; background:transparent !important; }
+
+/* 侧边栏二级菜单 */
+.sidebar-level2  { display:none; margin:0 -21px; }
+.sidebar-level2 > li { position:relative; padding-left:27px; height:40px; line-height:40px; list-style:disc inside; color:#666; }
+.sidebar-level2 > li:hover,
+.sidebar-level2 > li.active { background:#368def; color:#fff; }
+.sidebar-level2 > li > a { position:absolute; top:0; left:0; width:100%; padding-left:47px; color:inherit; }
+
+/* 侧边栏可编辑项 */
+.sidebar-edititems { display:none; border-bottom:1px dashed #e6e6e6; }
+.sidebar-edititems > li { padding:10px 0; }
+.sidebar-edititems a { position:relative; line-height:30px; padding-left:20px; }
+.sidebar-edititems a > span { display:inline-block; height:30px; width:110px; padding-left:5px; vertical-align:top; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.sidebar-edititems-icons { position:absolute; right:0; top:0; display:none; }
+.sidebar-edititems a:hover .sidebar-edititems-icons { display:block; }
+.sidebar-edititems-icons > span { margin-left:10px; }
+.sidebar-edititems-add { color:#56b625; }
+.sidebar-edititems-add > b { font-size:120%; margin-right:5px; }
+
+/* 侧边栏:带滚动条 */
+.m-sidebar.hasscroll > li > a { font-weight:bold; }
+.m-sidebar.hasscroll .sidebar-level2 > li { list-style:none; padding:0 20px; }
+.m-sidebar.hasscroll .sidebar-scroll { display:none; max-height:400px; overflow-y:auto; }
+.m-sidebar.hasscroll .sidebar-scroll .sidebar-level2 { display:block; }
+.m-sidebar.hasscroll .sidebar-level2 > li > a { position:static; display:inline-block; width:auto; max-width:100%; padding:0 12px; vertical-align:top; }
+.m-sidebar.hasscroll .mCSB_inside > .mCSB_container { margin-right:20px; }
+.m-sidebar.hasscroll .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ background-color: #000 !important; opacity:.3; filter:alpha(opacity=30); }
+.m-sidebar.hasscroll .mCSB_scrollTools .mCSB_draggerRail { background-color:transparent; }
+
+.m-sidebar > li.active > .sidebar-level2,
+.m-sidebar > li.active > .sidebar-scroll,
+.m-sidebar > li.active > .sidebar-edititems {
+    display: block;
+}
+
+/* 编辑项文本框 */
+.c-editinput {
+    position: absolute;
+    border: 1px solid #26a7ff;
+}
+

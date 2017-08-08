@@ -156,7 +156,7 @@ var webui = {
                 codeUrl = $(this).text().replace(/\{|\}/g, ''),
                 filename = codeUrl.substring(codeUrl.lastIndexOf('/') + 1, codeUrl.lastIndexOf('.')).replace('_', ''),
                 ext = $.trim(codeUrl.substring(codeUrl.lastIndexOf('.') + 1)),
-                $codeHeader = $('<div class="twui-markdown-codeheader"><span class="twui-shortcut" title="快捷输入"><i class="twui-ifont xshortcut"></i><code>' + ext + '@' + filename + '</code></span><a class="twui-ifont xcopy js-copybtn" title="复制代码"></a></div>');
+                $codeHeader = $('<div class="twui-markdown-codeheader"><span class="twui-shortcut" title="快捷输入"><i class="twui-ifont xshortcut"></i><span>' + ext + '@' + filename + '</span></span><a class="twui-ifont xcopy js-copybtn" title="复制代码"></a></div>');
 
             $code.parent().before($codeHeader);
 

@@ -78,13 +78,34 @@
             border: 1px solid $minor-border-color;
         }
 
+        > tbody > tr > td {
+            font-size:13px;
+            line-height:1.75;
+        }
+
         > thead > tr > th {
             background: #f5f5f5;
+        }
+
+        > thead > tr > th:first-child {
+            width:25%;
+        }
+
+        > thead > tr > th:first-child + th {
+            width:45%;
         }
     }
 
     > pre {
         margin-top:-1px;
+    }
+
+    code {
+        padding:3px 5px;
+        margin:0 3px;
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        color: #666;
     }
 
     .xpsd,

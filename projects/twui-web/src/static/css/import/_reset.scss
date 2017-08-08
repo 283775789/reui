@@ -73,12 +73,14 @@
 
 /* ------------------------------ 重置highlight ------------------------------ */
 code, kbd, pre, samp {
-  font-family:Consolas, "Microsoft YaHei",monospace, monospace;
-  font-size:13px;
+  font-family:Lucida Console,Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  font-size:12px;
+  line-height:1.7;
 }
 
 .hljs {
-    padding:3em 1.5em 1.5em;
+    margin:0 !important;
+    padding:3em 1.5em 1.5em !important;
     background:#f5f5f5;
     border:1px solid $minor-border-color;
     color:$minor-text-color;
