@@ -84,7 +84,7 @@ var webui = {
     // 初始化导航
     initNav: function () {
         // 绑定侧边栏事件
-        $(document).off('click.nav').on('click.nav', '#nav a', function (event) {
+        $(document).off('click.webui.nav').on('click.webui.nav', '#nav a', function (event) {
             var $this = $(this),
                 href = $this.attr('href');
 
@@ -169,7 +169,7 @@ var webui = {
     },
     // 初始化侧边栏
     initSidebar: function () {
-        $(document).off('click.sidebar').on('click.sidebar', '#sidebar a', function (event) {
+        $(document).off('click.webui.sidebar').on('click.webui.sidebar', '#sidebar a', function (event) {
             var $this = $(this),
                 href = $this.attr('href');
 

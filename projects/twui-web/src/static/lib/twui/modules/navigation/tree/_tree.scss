@@ -1,145 +1,134 @@
-$sidebar-width:220px !default;
-$sidebar-item-indent:20px !default;
-$sidebar-item-line-height:50px !default;
-$sidebar-item-color:$main-text-color !default;
-$sidebar-item-hover-bg:#f6fafd !default;
-$sidebar-item-active-bg:#f6fafd !default;
-$sidebar-item-icon-color: #ffbf00 !default;
-$sidebar-item-border-color:$main-border-color !default;
-$sidebar-item-font-size:$font-size-medium !default;
-$sidebar-subnav-font-size:$font-size-base !default;
-$sidebar-subnav-color:$minor-text-color !default;
-$sidebar-subnav-line-height:40px !default;
-$sidebar-subnav-hover-bg:$main-color-hover !default;
-$sidebar-subnav-hover-color:$main-color-inverse !default;
-$sidebar-subnav-active-bg:$main-color !default;
-$sidebar-subnav-active-color:$main-color-inverse !default;
+$tree-bg:#fff;
+$tree-nested-level:3;
+$tree-width:220px !default;
+$tree-node-indent:20px !default;
+$tree-node-line-height:50px !default;
+$tree-node-color:$main-text-color !default;
+$tree-node-hover-bg:$main-color-hover !default;
+$tree-node-hover-color:#fff !default;
+$tree-node-active-bg:$main-color !default;
+$tree-node-icon-color: #ffbf00 !default;
+$tree-node-border-color:$main-border-color !default;
+$tree-node-font-size:$font-size-medium !default;
 
-.twui-sidebar {
+.twui-tree {
     float:left;
-    width: $sidebar-width;
-    background: #fff;
+    width: $tree-width;
+    background: $tree-bg;
     box-shadow: 0 3px 8px #ececec;
 }
 
-.twui-sidebar-header {
+.twui-tree-header {
     position: relative;
-    padding: $sidebar-item-indent;
+    padding: $tree-node-indent;
     text-align: center;
 
     &:after {
         content: " ";
         position: absolute;
-        left: $sidebar-item-indent;
-        right: $sidebar-item-indent;
+        left: $tree-node-indent;
+        right: $tree-node-indent;
         bottom:0;
         display:block;
-        border-bottom:1px dashed $sidebar-item-border-color;
+        border-bottom:1px dashed $tree-node-border-color;
     }
 }
 
-.twui-sidebar-body {
-    > li {
+.twui-tree-body {
+    li {
         position: relative;
 
-        &:hover {
-            background: $sidebar-item-hover-bg;
-        }
-
-        &.active {
-            background: $sidebar-item-active-bg;
-        }
-
-        > a {
+        a {
             display: block;
-            padding-left: $sidebar-item-indent;
-            padding-right: $sidebar-item-indent *2;
-            line-height: $sidebar-item-line-height;
-            font-size: $sidebar-item-font-size;
-            color: $sidebar-item-color;
+            padding-left: $tree-node-indent;
+            padding-right: $tree-node-indent *2;
+            line-height: $tree-node-line-height;
+            font-size: $tree-node-font-size;
+            color: $tree-node-color;
             @extend %cutoff;
-        }
 
-        &:after {
-            content: " ";
-            position: absolute;
-            bottom: 0;
-            left: $sidebar-item-indent;
-            right: $sidebar-item-indent;
-            display: block;
-            border-top: 1px dashed $sidebar-item-border-color;
+            &:hover {
+                background: $tree-node-hover-bg;
+                color: $tree-node-hover-color;
+            }
         }
     }
 
     .twui-ifont {
-        margin-right: $sidebar-item-indent / 2;
+        margin-right: $tree-node-indent / 2;
         font-size: 20px;
-        color: $sidebar-item-icon-color;
+        color: $tree-node-icon-color;
     }
 
     .xarrow-down {
         position: absolute;
-        margin-right:0;
-        right: $sidebar-item-indent;
+        margin-right: 0;
+        right: $tree-node-indent;
         top: 2px;
         font-size: $font-size-small;
-        color:$weaken-text-color;
+        color: $weaken-text-color;
+    }
+
+    li.active {
+        > a[href] {
+            background: $tree-node-active-bg;
+            color: $tree-node-hover-color;
+
+            .twui-ifont {
+                color: $tree-node-hover-color;
+            }
+        }
+    }
+
+    > li {
+        &:after {
+            content: " ";
+            position: absolute;
+            bottom: 0;
+            left: $tree-node-indent;
+            right: $tree-node-indent;
+            display: block;
+            border-top: 1px dashed $tree-node-border-color;
+        }
     }
 }
 
-.twui-sidebar-subnav {
-    display: none;
+.twui-tree-branch {
+    height: 0;
+    overflow:hidden;
+    transition:height .35s;
 
-    > li {
+    /*> li {
         > a {
-            padding-left: $sidebar-item-indent *2;
-            padding-right: $sidebar-item-indent *2;
-            line-height: $sidebar-subnav-line-height;
-            color: $sidebar-subnav-color;
-            @extend %cutoff;
-
             &:before {
                 content:" ";
                 display:inline-block;
                 width:4px;
                 height:4px;
-                margin-right:$sidebar-item-indent / 2;
-                background:$sidebar-subnav-color;
+                margin-right:$tree-node-indent / 2;
+                background:$tree-branch-color;
                 border-radius:50%;
                 vertical-align:middle;
             }
         }
+    }*/
+}
 
-        &:hover {
-            background: $sidebar-subnav-hover-bg;
 
-            > a {
-                display: block;
-                color: $sidebar-subnav-hover-color;
+// 按层级生成缩进值
+$tree-indent-slector:".twui-tree-body";
+$tree-nested-slector:" > li > .twui-tree-branch";
+@for $i from 1 through $tree-nested-level {
+    $tree-indent-slector: #{$tree-indent-slector} #{$tree-nested-slector};
 
-                &:before {
-                    background:$sidebar-subnav-hover-color;
-                }
-            }
-        }
-
-        &.active {
-            background: $sidebar-subnav-active-bg;
-
-            > a {
-                color: $sidebar-subnav-active-color;
-
-                &:before {
-                    background:$sidebar-subnav-active-color;
-                }
-            }
-        }
+    #{$tree-indent-slector} > li > a {
+        padding-left: $tree-node-indent*($i + 1) + 10 * $i;
     }
 }
 
-.twui-sidebar li.active {
-    > .twui-sidebar-subnav {
-        display: block;
+.twui-tree li.active {
+    > .twui-tree-branch {
+        height: auto;
     }
 }
 

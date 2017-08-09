@@ -473,73 +473,68 @@
     twui.module(Conponent);
 }(jQuery);
 /* ------------------------------------------------------------
- * 版本:1.0
- * 描述:sidebar组件
+ * 版本:{{version}}
+ * 描述:treenav组件
  * ------------------------------------------------------------ */
 +function ($) {
-    // 定义:Sidebar组件类
+    // 定义:Tree组件类
     // ------------------------------
-    var Sidebar = function ($element) {
+    var Tree = function ($element) {
         this.$ = $element;
     };
 
-    // 定义:sidebar组件的类选择器
+    // 定义:tree组件的类选择器
     // ------------------------------
-    Sidebar.prototype.selector = '.jst-sidebar';
+    Tree.prototype.selector = '.jst-tree';
 
-
-    // 方法:twui调用的入口方法
+    // 方法:激活节点
     // ------------------------------
-    Sidebar.prototype.init = function () {
-        var me = this,
-            $link = me.$.find('a');
+    Tree.prototype.activate = function ($node) {
+        var me = this.$,
+            $target = $node.closest('li'),
+            showEvent = $.Event('show');
 
-        $link.on('click.twui.slidebar', function () {
-            me.showMenu(this);
-        });
-    };
+        // 触发show事件
+        me.trigger(showEvent, { $target: $target });
+        if (showEvent.isDefaultPrevented()) return;
 
-    // 方法:显示选中的菜单
-    // ------------------------------
-    Sidebar.prototype.showMenu = function (element) {
-        var me = this,
-            $element = $(element),
-            $ul = $element.closest('ul'),
-            $subUl = $element.parent().children('ul,.sidebar-scroll'),
-            $active = $ul.find('> .active'),
-            $activeSubUl = $active.children('ul,.sidebar-scroll'),
-            speed = me.speed();
+        var $parentUl= $node.closest('ul'),
+            $active = $parentUl.find('> .active'),
+            $activeUl=$active.find('> ul'),
+            $branch = $target.find('> ul'),
+            startHeight = 0,
+            endHeight = 0;
 
-        if ($subUl.length > 0) {
-            $subUl.stop(true).slideToggle(speed, function () {
-                me.activate($element, $subUl, $activeSubUl);
-            });
+        if ($parentUl.hasClass('twui-tree-branch')) $parentUl.css('height', '');
 
-            if (!$subUl.is($activeSubUl)) {
-                $activeSubUl.stop(true).slideUp(speed);
-            }
+        $activeUl.height($activeUl.height());
+
+        if ($node.attr('href')) {
+            if ($target.hasClass('active')) return;
+            $target.addClass('active');
         } else {
-            if ($activeSubUl.length > 0) {
-                $activeSubUl.stop(true).slideUp(speed, function () {
-                    me.activate($element, $subUl, $activeSubUl);
-                });
-            } else {
-                me.activate($element, $subUl, $activeSubUl);
-            }
+            $target.toggleClass('active');
         }
+
+        $active.removeClass('active').find('ul').css('height', '');
+
+        $branch.css('height', '');
+        endHeight = $target.hasClass('active') ? $branch.height() : 0;
+        $branch.height(startHeight).height(endHeight);
     };
 
-    // 方法:为点击的菜单所在的li元素添加active
+    // 事件：点击节点时调用激活节点方法
     // ------------------------------
-    Sidebar.prototype.activate = function ($link, $showElement, $hideElement) {
-        $link.parent().toggleClass('active').siblings().removeClass('active');
-        $showElement.css('display', '');
-        $hideElement.css('display', '');
-    };
+    $(document).on('click.twui.tree', '.jst-tree a', function () {
+        var $this = $(this),
+            $tree = $this.closest('.jst-tree');
+
+        $tree.twui('activate', '.jst-tree', $this);
+    });
 
     // 注册成twui模块
     // ------------------------------
-    twui.module(Sidebar);
+    twui.module(Tree);
 }(jQuery);
 
 /* ------------------------------------------------------------

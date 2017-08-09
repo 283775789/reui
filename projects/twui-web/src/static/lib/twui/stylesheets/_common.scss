@@ -12,6 +12,16 @@
   }
 }
 
+// 返回hover色值
+@function hover($color){
+    @return darken(saturate($color,6%),6%);
+}
+
+// 返回active色值
+@function active($color){
+    @return darken(saturate($color,10%),10%);
+}
+
 // 获取前一个map值
 @function map-prev($map,$key,$keys:map-keys($map)) {
     $n:index($keys,$key);
