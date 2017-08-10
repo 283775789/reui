@@ -113,7 +113,9 @@ $container-min-width:960px !default;
 $grid-columns:12 !default;
 $grid-gutter-width:$spacing-medium * 2 !default;
 
-
+// ------------------------------ 其它 ------------------------------ //
+// 过渡效果时间
+$transition-duration:.3s !default;
 
 
 

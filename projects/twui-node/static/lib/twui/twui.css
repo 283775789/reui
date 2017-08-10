@@ -225,3 +225,4 @@ input:-ms-input-placeholder { color: #999; }
 /* 编辑项文本框 */
 .c-editinput { position: absolute; border: 1px solid #26a7ff; }
 .twui-tree-body li a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.abc { -webkit-transition: width 0.3s; -o-transition: width 0.3s; transition: width 0.3s; }
