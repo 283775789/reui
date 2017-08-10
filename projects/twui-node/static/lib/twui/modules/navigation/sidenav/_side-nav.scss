@@ -1,81 +1,92 @@
-$tree-bg:#fff;
-$tree-nested-level:3;
-$tree-width:220px !default;
-$tree-node-indent:20px !default;
-$tree-node-line-height:50px !default;
-$tree-node-color:$main-text-color !default;
-$tree-node-hover-bg:$main-color-hover !default;
-$tree-node-hover-color:#fff !default;
-$tree-node-active-bg:$main-color !default;
-$tree-node-icon-color: #ffbf00 !default;
-$tree-node-border-color:$main-border-color !default;
-$tree-node-font-size:$font-size-medium !default;
+$sidenav-bg:#fff;
+$sidenav-nested-level:3;
+$sidenav-width:220px !default;
+$sidenav-item-indent:20px !default;
+$sidenav-item-line-height:50px !default;
+$sidenav-item-color:$main-text-color !default;
+$sidenav-item-hover-bg:$main-color-hover !default;
+$sidenav-item-hover-color:#fff !default;
+$sidenav-item-active-bg:$main-color !default;
+$sidenav-item-icon-color: #ffbf00 !default;
+$sidenav-item-border-color:$main-border-color !default;
+$sidenav-item-font-size:$font-size-medium !default;
+$sidenav-icon-font-size:$font-size-xlarge !default;
 
-.twui-tree {
+.twui-sidenav {
     float:left;
-    width: $tree-width;
-    background: $tree-bg;
+    width: $sidenav-width;
+    background: $sidenav-bg;
     box-shadow: 0 3px 8px #ececec;
 }
 
-.twui-tree-header {
+.twui-sidenav-header {
     position: relative;
-    padding: $tree-node-indent;
+    padding: $sidenav-item-indent;
     text-align: center;
 
     &:after {
         content: " ";
         position: absolute;
-        left: $tree-node-indent;
-        right: $tree-node-indent;
+        left: $sidenav-item-indent;
+        right: $sidenav-item-indent;
         bottom:0;
         display:block;
-        border-bottom:1px dashed $tree-node-border-color;
+        border-bottom:1px dashed $sidenav-item-border-color;
     }
 }
 
-.twui-tree-body {
+.twui-sidenav-body {
     li {
         position: relative;
 
         a {
             display: block;
-            padding-left: $tree-node-indent;
-            padding-right: $tree-node-indent *2;
-            line-height: $tree-node-line-height;
-            font-size: $tree-node-font-size;
-            color: $tree-node-color;
+            padding-left: $sidenav-item-indent;
+            padding-right: $sidenav-item-indent *2;
+            line-height: $sidenav-item-line-height;
+            font-size: $sidenav-item-font-size;
+            color: $sidenav-item-color;
             @extend %cutoff;
 
             &:hover {
-                background: $tree-node-hover-bg;
-                color: $tree-node-hover-color;
+                background: $sidenav-item-hover-bg;
+                color: $sidenav-item-hover-color;
+
+                .twui-ifont {
+                    color: $sidenav-item-hover-color;
+                }
+
+                .xarrow-down {
+                    color: $sidenav-item-hover-color;
+                }
             }
         }
     }
 
     .twui-ifont {
-        margin-right: $tree-node-indent / 2;
+        position: relative;
+        top: ($sidenav-icon-font-size - $sidenav-item-font-size) /2;
+        margin-right: $sidenav-item-indent / 2;
         font-size: 20px;
-        color: $tree-node-icon-color;
+        color: $sidenav-item-icon-color;
     }
 
     .xarrow-down {
         position: absolute;
         margin-right: 0;
-        right: $tree-node-indent;
+        right: $sidenav-item-indent;
         top: 2px;
         font-size: $font-size-small;
         color: $weaken-text-color;
     }
 
-    li.active {
+    li.xactive {
         > a[href] {
-            background: $tree-node-active-bg;
-            color: $tree-node-hover-color;
+            background: $sidenav-item-active-bg;
+            color: $sidenav-item-hover-color;
 
             .twui-ifont {
-                color: $tree-node-hover-color;
+                color: $sidenav-item-hover-color;
             }
         }
     }
@@ -85,18 +96,18 @@ $tree-node-font-size:$font-size-medium !default;
             content: " ";
             position: absolute;
             bottom: 0;
-            left: $tree-node-indent;
-            right: $tree-node-indent;
+            left: $sidenav-item-indent;
+            right: $sidenav-item-indent;
             display: block;
-            border-top: 1px dashed $tree-node-border-color;
+            border-top: 1px dashed $sidenav-item-border-color;
         }
     }
 }
 
-.twui-tree-branch {
-    height: 0;
+.twui-sidenav-subnav {
+    height:0;
     overflow:hidden;
-    transition:height .35s;
+    transition:height .3s;
 
     /*> li {
         > a {
@@ -105,8 +116,8 @@ $tree-node-font-size:$font-size-medium !default;
                 display:inline-block;
                 width:4px;
                 height:4px;
-                margin-right:$tree-node-indent / 2;
-                background:$tree-branch-color;
+                margin-right:$sidenav-item-indent / 2;
+                background:$sidenav-subnav-color;
                 border-radius:50%;
                 vertical-align:middle;
             }
@@ -114,21 +125,20 @@ $tree-node-font-size:$font-size-medium !default;
     }*/
 }
 
-
 // 按层级生成缩进值
-$tree-indent-slector:".twui-tree-body";
-$tree-nested-slector:" > li > .twui-tree-branch";
-@for $i from 1 through $tree-nested-level {
-    $tree-indent-slector: #{$tree-indent-slector} #{$tree-nested-slector};
+$sidenav-indent-slector:".twui-sidenav-body";
+$sidenav-nested-slector:" > li > .twui-sidenav-subnav";
+@for $i from 1 through $sidenav-nested-level {
+    $sidenav-indent-slector: #{$sidenav-indent-slector} #{$sidenav-nested-slector};
 
-    #{$tree-indent-slector} > li > a {
-        padding-left: $tree-node-indent*($i + 1) + 10 * $i;
+    #{$sidenav-indent-slector} > li > a {
+        padding-left: $sidenav-item-indent*($i + 1) + 10 * $i;
     }
 }
 
-.twui-tree li.active {
-    > .twui-tree-branch {
-        height: auto;
+.twui-sidenav li.xactive {
+    > .twui-sidenav-subnav {
+        height:auto;
     }
 }
 

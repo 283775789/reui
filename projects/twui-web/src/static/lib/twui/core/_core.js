@@ -10,7 +10,7 @@
             selector = temp.selector;
 
         if (!prefix.test(selector)) {
-            throw Error('选择器无效，请以".jst-"开头，然后输入模块名字（需符合js变量规则）!');
+            throw Error('选择器无效，请以".jst-"开头，然后输入组件名字（需符合js变量规则）!');
         }
 
         this.selector = selector;
@@ -42,33 +42,24 @@
         });
     };
     
-    // twui模块容器
+    // twui组件容器
     twui.modules = {};
 
-    // 注册twui模块
+    // 注册twui组件
     twui.module = function (constructor) {
         var module = null;
 
-        // 为所有组件添加animate方法
-        constructor.prototype.animate = function () {
-            return twui.config.animate && this.$.data('animate') != false;
-        };
-
-        // 为所有组件添加speed方法
-        constructor.prototype.speed = function () {
-            var speed = twui.config.speed;
-
-            if (!this.animate()) speed = 0;
-
-            return speed;
-        };
-
         module = new twui(constructor);
+
+        // 检测是否已经存在该组件
+        if (this.modules[module.name] != undefined) {
+            throw Error(module.name + '组件已经存在，请检查是否与现有组件重名!');
+        }
 
         this.modules[module.name] = module;
     };
 
-    // 通过选择器获取模块名称
+    // 通过选择器获取组件名称
     twui.getModuleName = function (selector) {
         var moduleName = '';
 
@@ -81,7 +72,7 @@
         }
     };
 
-    // 初始化所有模块
+    // 初始化所有组件
     twui.init = function () {
         var modules = this.modules;
 
@@ -90,7 +81,7 @@
         }
     };
 
-    // 页面加载时初始化所有模块
+    // 页面加载时初始化所有组件
     $(document).ready(function () {
         twui.init();
     });

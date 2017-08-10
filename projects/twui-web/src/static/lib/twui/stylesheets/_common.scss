@@ -43,15 +43,10 @@
   }
 }
 
-// 过渡效果
-@mixin go($prop,$duration:$transition-duration){
-    transition:$prop $duration;
-}
-
 // 向下媒体查询：小于等于媒体关键字所在范围
 @mixin media-down($key,$breakpoints:$media-breakpoints) {
     $prev: map-prev($breakpoints,$key);
-
+    
     @if $prev {
         @media (max-width:$prev - 1) {
             & {

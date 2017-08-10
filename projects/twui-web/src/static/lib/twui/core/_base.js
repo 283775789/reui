@@ -41,6 +41,63 @@
         }
     };
 
+    // 来源于bootstrap的transitionend事件定义
+    function transitionEnd() {
+        var el = document.createElement('twui')
+
+        var transEndEventNames = {
+            WebkitTransition: 'webkitTransitionEnd',
+            MozTransition: 'transitionend',
+            OTransition: 'oTransitionEnd otransitionend',
+            transition: 'transitionend'
+        }
+
+        for (var name in transEndEventNames) {
+            if (el.style[name] !== undefined) {
+                return { end: transEndEventNames[name] }
+            }
+        }
+
+        return false // explicit for ie8 (  ._.)
+    }
+
+    // 手动触发过渡效果,此jquery实例方法修改自bootstrap的emulateTransitionEnd方法
+    $.fn.doGoend = function () {
+        var called = false;
+        var $el = this;
+        var duration = parseFloat($(this).css('transition-duration').split(','));
+
+        duration = isNaN(duration) ? 0 : duration * 1000;
+
+        $(this).one('goend', function () {
+            called = true;
+        })
+
+        var callback = function () {
+            if (!called) {
+                $($el).trigger($.support.transition.end);
+            }
+        }
+
+        setTimeout(callback, duration);
+        return this;
+    };
+
+    // 定义goend事件：也即transitionend事件的twui版
+    $(function () {
+        $.support.transition = transitionEnd()
+
+        if (!$.support.transition) return
+
+        $.event.special.goend = {
+            bindType: $.support.transition.end,
+            delegateType: $.support.transition.end,
+            handle: function (e) {
+                if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+            }
+        }
+    });
+
     // 注册jQuery实例方法:获取jquery对象class属性中与twui模块相关的模块名称
     $.fn.getTwuiNames = function () {
         var moduleSelectorRegex = /\bjst-[^\s"]+/g,

@@ -168,22 +168,24 @@ input:-ms-input-placeholder { color: #999; }
 .twui-nav > li.active { background: #0097fc; }
 .twui-nav > li > a { display: block; padding-left: 30px; padding-right: 30px; font-size: 14px; color: #fff; }
 .twui-nav > li > a > .ico { margin-right: 5px; }
-.twui-tree { float: left; width: 220px; background: #fff; -webkit-box-shadow: 0 3px 8px #ececec; box-shadow: 0 3px 8px #ececec; }
-.twui-tree-header { position: relative; padding: 20px; text-align: center; }
-.twui-tree-header:after { content: " "; position: absolute; left: 20px; right: 20px; bottom: 0; display: block; border-bottom: 1px dashed #ccc; }
-.twui-tree-body li { position: relative; }
-.twui-tree-body li a { display: block; padding-left: 20px; padding-right: 40px; line-height: 50px; font-size: 16px; color: #333; }
-.twui-tree-body li a:hover { background: #0097fc; color: #fff; }
-.twui-tree-body .twui-ifont { margin-right: 10px; font-size: 20px; color: #ffbf00; }
-.twui-tree-body .xarrow-down { position: absolute; margin-right: 0; right: 20px; top: 2px; font-size: 12px; color: #999; }
-.twui-tree-body li.active > a[href] { background: #26a8ff; color: #fff; }
-.twui-tree-body li.active > a[href] .twui-ifont { color: #fff; }
-.twui-tree-body > li:after { content: " "; position: absolute; bottom: 0; left: 20px; right: 20px; display: block; border-top: 1px dashed #ccc; }
-.twui-tree-branch { height: 0; overflow: hidden; -webkit-transition: height .35s; -o-transition: height .35s; transition: height .35s; /*> li { > a { &:before { content:" "; display:inline-block; width:4px; height:4px; margin-right:$tree-node-indent / 2; background:$tree-branch-color; border-radius:50%; vertical-align:middle; } } }*/ }
-.twui-tree-body > li > .twui-tree-branch > li > a { padding-left: 50px; }
-.twui-tree-body > li > .twui-tree-branch > li > .twui-tree-branch > li > a { padding-left: 80px; }
-.twui-tree-body > li > .twui-tree-branch > li > .twui-tree-branch > li > .twui-tree-branch > li > a { padding-left: 110px; }
-.twui-tree li.active > .twui-tree-branch { height: auto; }
+.twui-sidenav { float: left; width: 220px; background: #fff; -webkit-box-shadow: 0 3px 8px #ececec; box-shadow: 0 3px 8px #ececec; }
+.twui-sidenav-header { position: relative; padding: 20px; text-align: center; }
+.twui-sidenav-header:after { content: " "; position: absolute; left: 20px; right: 20px; bottom: 0; display: block; border-bottom: 1px dashed #ccc; }
+.twui-sidenav-body li { position: relative; }
+.twui-sidenav-body li a { display: block; padding-left: 20px; padding-right: 40px; line-height: 50px; font-size: 16px; color: #333; }
+.twui-sidenav-body li a:hover { background: #0097fc; color: #fff; }
+.twui-sidenav-body li a:hover .twui-ifont { color: #fff; }
+.twui-sidenav-body li a:hover .xarrow-down { color: #fff; }
+.twui-sidenav-body .twui-ifont { position: relative; top: 2px; margin-right: 10px; font-size: 20px; color: #ffbf00; }
+.twui-sidenav-body .xarrow-down { position: absolute; margin-right: 0; right: 20px; top: 2px; font-size: 12px; color: #999; }
+.twui-sidenav-body li.xactive > a[href] { background: #26a8ff; color: #fff; }
+.twui-sidenav-body li.xactive > a[href] .twui-ifont { color: #fff; }
+.twui-sidenav-body > li:after { content: " "; position: absolute; bottom: 0; left: 20px; right: 20px; display: block; border-top: 1px dashed #ccc; }
+.twui-sidenav-subnav { height: 0; overflow: hidden; -webkit-transition: height .3s; -o-transition: height .3s; transition: height .3s; /*> li { > a { &:before { content:" "; display:inline-block; width:4px; height:4px; margin-right:$sidenav-item-indent / 2; background:$sidenav-subnav-color; border-radius:50%; vertical-align:middle; } } }*/ }
+.twui-sidenav-body > li > .twui-sidenav-subnav > li > a { padding-left: 50px; }
+.twui-sidenav-body > li > .twui-sidenav-subnav > li > .twui-sidenav-subnav > li > a { padding-left: 80px; }
+.twui-sidenav-body > li > .twui-sidenav-subnav > li > .twui-sidenav-subnav > li > .twui-sidenav-subnav > li > a { padding-left: 110px; }
+.twui-sidenav li.xactive > .twui-sidenav-subnav { height: auto; }
 /* 侧边栏 */
 .m-sidebar { width: 220px; font-size: 14px; border: 1px solid #cad8e6; }
 .m-sidebar a { display: block; cursor: pointer; overflow: hidden; text-overflow: ellipsis; }
@@ -224,5 +226,4 @@ input:-ms-input-placeholder { color: #999; }
 .m-sidebar > li.active > .sidebar-level2, .m-sidebar > li.active > .sidebar-scroll, .m-sidebar > li.active > .sidebar-edititems { display: block; }
 /* 编辑项文本框 */
 .c-editinput { position: absolute; border: 1px solid #26a7ff; }
-.twui-tree-body li a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.abc { -webkit-transition: width 0.3s; -o-transition: width 0.3s; transition: width 0.3s; }
+.twui-sidenav-body li a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

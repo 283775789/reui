@@ -9,7 +9,7 @@
 .twui-header-search > input::-moz-placeholder { color: #eee; }
 .twui-header-search > input:-ms-input-placeholder { color: #eee; }
 .twui-header-search > .twui-ifont { position: absolute; top: 0; right: 12px; font-size: 17px; color: #fff; }
-.twui-tree { -webkit-box-shadow: none; box-shadow: none; }
+.twui-sidenav { -webkit-box-shadow: none; box-shadow: none; }
 .twui-layout { background: #fff; }
 .twui-layout-cell { border-left: 1px solid #eee; }
 /* ------------------------------ 重置highlight ------------------------------ */

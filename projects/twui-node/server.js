@@ -16,7 +16,7 @@ Dataset.prototype.get = function (key, callback) {
     let data = undefined;
     let me = this;
 
-    if (this[key]) {
+    if (this[key]==='删除') {
         data = this[key];
         callback(data);
     } else {

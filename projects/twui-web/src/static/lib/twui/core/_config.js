@@ -4,8 +4,6 @@
  * ------------------------------------------------------------ */
 +function ($) {
     twui.config = {
-        animate: true,
-        speed: 300,
         win: {
             content: '',
             miniTime: 3000

@@ -1,7 +1,7 @@
                 
                 <!-- 侧边栏 -->
-                <div class="twui-tree">
-                    <div class="twui-tree-header">
+                <div class="twui-sidenav">
+                    <div class="twui-sidenav-header">
                         <span>选择框架:</span>
                         <select>
                             <option>jquery</option>
@@ -9,31 +9,31 @@
                             <option>vue</option>
                         </select>
                     </div>
-                    <ul class="twui-tree-body jst-tree" id="sidebar">
+                    <ul class="twui-sidenav-body jst-sidenav" id="sidebar">
                         <li class="active">
                             <a href="/web/modules/spec"><i class="twui-ifont xnav"></i>组件规范</a>
                         </li>
                         <li>
-                            <a><i class="twui-ifont xlayout"></i>布局<i class="twui-ifont xarrow-down"></i></a>
-                            <ul class="twui-tree-branch">
-                                <li class="active js-branch-btn"><a href="/static/lib/twui/modules/layout/header/index">头部</a></li>
+                            <a class="js-subnav-btn"><i class="twui-ifont xlayout"></i>布局<i class="twui-ifont xarrow-down"></i></a>
+                            <ul class="twui-sidenav-subnav">
+                                <li><a href="/static/lib/twui/modules/layout/header/index">头部</a></li>
                                 <li><a>主体</a></li>
                                 <li><a>页脚</a></li>
                                 <li><a>布局</a></li>
                                 <li>
-                                    <a><i class="twui-ifont xlayout"></i>栅格<i class="twui-ifont xarrow-down"></i></a>
-                                    <ul class="twui-tree-branch">
-                                        <li class="active"><a href="/static/lib/twui/modules/layout/header/index">栅格1</a></li>
+                                    <a class="js-subnav-btn"><i class="twui-ifont xlayout"></i>栅格<i class="twui-ifont xarrow-down"></i></a>
+                                    <ul class="twui-sidenav-subnav">
+                                        <li><a href="/static/lib/twui/modules/layout/header/index">栅格1</a></li>
                                         <li><a>栅格2</a></li>
                                         <li><a>栅格3</a></li>
-                                        <li><a>栅格4</a></li>
+                                        <li><a>栅格4</a></li>c
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a><i class="twui-ifont xnav"></i>导航<i class="twui-ifont xarrow-down"></i></a>
-                            <ul class="twui-tree-branch">
+                            <a class="js-subnav-btn"><i class="twui-ifont xnav"></i>导航<i class="twui-ifont xarrow-down"></i></a>
+                            <ul class="twui-sidenav-subnav">
                                 <li><a>一级导航</a></li>
                                 <li><a>二级导航</a></li>
                                 <li><a href="/static/lib/twui/modules/navigation/url-nav/index">URL导航</a></li>
@@ -42,42 +42,42 @@
                             </ul>
                         </li>
                         <li>
-                            <a><i class="twui-ifont xunit"></i>元件<i class="twui-ifont xarrow-down"></i></a>
-                            <ul class="twui-tree-branch">
+                            <a class="js-subnav-btn"><i class="twui-ifont xunit"></i>元件<i class="twui-ifont xarrow-down"></i></a>
+                            <ul class="twui-sidenav-subnav">
                                 <li><a>按钮</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a><i class="twui-ifont xform"></i>表单<i class="twui-ifont xarrow-down"></i></a>
-                            <ul class="twui-tree-branch">
+                            <a class="js-subnav-btn"><i class="twui-ifont xform"></i>表单<i class="twui-ifont xarrow-down"></i></a>
+                            <ul class="twui-sidenav-subnav">
                                 <li><a>表单元素</a></li>
                                 <li><a>表单布局</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a><i class="twui-ifont xdata"></i>数据<i class="twui-ifont xarrow-down"></i></a>
-                            <ul class="twui-tree-branch">
+                            <a class="js-subnav-btn"><i class="twui-ifont xdata"></i>数据<i class="twui-ifont xarrow-down"></i></a>
+                            <ul class="twui-sidenav-subnav">
                                 <li><a>表单元素</a></li>
                                 <li><a>表单布局</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a><i class="twui-ifont xwin"></i>弹窗<i class="twui-ifont xarrow-down"></i></a>
-                            <ul class="twui-tree-branch">
+                            <a class="js-subnav-btn"><i class="twui-ifont xwin"></i>弹窗<i class="twui-ifont xarrow-down"></i></a>
+                            <ul class="twui-sidenav-subnav">
                                 <li><a>表单元素</a></li>
                                 <li><a>表单布局</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a><i class="twui-ifont xtip"></i>提示<i class="twui-ifont xarrow-down"></i></a>
-                            <ul class="twui-tree-branch">
+                            <a class="js-subnav-btn"><i class="twui-ifont xtip"></i>提示<i class="twui-ifont xarrow-down"></i></a>
+                            <ul class="twui-sidenav-subnav">
                                 <li><a>表单元素</a></li>
                                 <li><a>表单布局</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a><i class="twui-ifont xpage"></i>页面<i class="twui-ifont xarrow-down"></i></a>
-                            <ul class="twui-tree-branch">
+                            <a class="js-subnav-btn"><i class="twui-ifont xpage"></i>页面<i class="twui-ifont xarrow-down"></i></a>
+                            <ul class="twui-sidenav-subnav">
                                 <li><a>表单元素</a></li>
                                 <li><a>表单布局</a></li>
                             </ul>

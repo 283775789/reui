@@ -10,7 +10,6 @@
 @import "config";
 @import "common";
 @import "variables";
-@import "utilities";
 
 // 通用样式:复制于bootstrap，如已引用bootstrap样式，需注释以下引用，以免重复
 // ------------------------------------------------------------------------------------------------
@@ -36,7 +35,7 @@
 // 组件
 // ------------------------------------------------------------
 @import "../modules/navigation/nav/nav";
-@import "../modules/navigation/sidenav/side-nav";
+@import "../modules/navigation/tree/tree";
 
 // 公共样式
 // ------------------------------------------------------------

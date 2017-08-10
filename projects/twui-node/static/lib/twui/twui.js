@@ -10,7 +10,7 @@
             selector = temp.selector;
 
         if (!prefix.test(selector)) {
-            throw Error('选择器无效，请以".jst-"开头，然后输入模块名字（需符合js变量规则）!');
+            throw Error('选择器无效，请以".jst-"开头，然后输入组件名字（需符合js变量规则）!');
         }
 
         this.selector = selector;
@@ -42,33 +42,24 @@
         });
     };
     
-    // twui模块容器
+    // twui组件容器
     twui.modules = {};
 
-    // 注册twui模块
+    // 注册twui组件
     twui.module = function (constructor) {
         var module = null;
 
-        // 为所有组件添加animate方法
-        constructor.prototype.animate = function () {
-            return twui.config.animate && this.$.data('animate') != false;
-        };
-
-        // 为所有组件添加speed方法
-        constructor.prototype.speed = function () {
-            var speed = twui.config.speed;
-
-            if (!this.animate()) speed = 0;
-
-            return speed;
-        };
-
         module = new twui(constructor);
+
+        // 检测是否已经存在该组件
+        if (this.modules[module.name] != undefined) {
+            throw Error(module.name + '组件已经存在，请检查是否与现有组件重名!');
+        }
 
         this.modules[module.name] = module;
     };
 
-    // 通过选择器获取模块名称
+    // 通过选择器获取组件名称
     twui.getModuleName = function (selector) {
         var moduleName = '';
 
@@ -81,7 +72,7 @@
         }
     };
 
-    // 初始化所有模块
+    // 初始化所有组件
     twui.init = function () {
         var modules = this.modules;
 
@@ -90,7 +81,7 @@
         }
     };
 
-    // 页面加载时初始化所有模块
+    // 页面加载时初始化所有组件
     $(document).ready(function () {
         twui.init();
     });
@@ -137,6 +128,63 @@
             $(this).off('resize.lazyResize');
         }
     };
+
+    // 来源于bootstrap的transitionend事件定义
+    function transitionEnd() {
+        var el = document.createElement('twui')
+
+        var transEndEventNames = {
+            WebkitTransition: 'webkitTransitionEnd',
+            MozTransition: 'transitionend',
+            OTransition: 'oTransitionEnd otransitionend',
+            transition: 'transitionend'
+        }
+
+        for (var name in transEndEventNames) {
+            if (el.style[name] !== undefined) {
+                return { end: transEndEventNames[name] }
+            }
+        }
+
+        return false // explicit for ie8 (  ._.)
+    }
+
+    // 手动触发过渡效果,此jquery实例方法修改自bootstrap的emulateTransitionEnd方法
+    $.fn.doGoend = function () {
+        var called = false;
+        var $el = this;
+        var duration = parseFloat($(this).css('transition-duration').split(','));
+
+        duration = isNaN(duration) ? 0 : duration * 1000;
+
+        $(this).one('goend', function () {
+            called = true;
+        })
+
+        var callback = function () {
+            if (!called) {
+                $($el).trigger($.support.transition.end);
+            }
+        }
+
+        setTimeout(callback, duration);
+        return this;
+    };
+
+    // 定义goend事件：也即transitionend事件的twui版
+    $(function () {
+        $.support.transition = transitionEnd()
+
+        if (!$.support.transition) return
+
+        $.event.special.goend = {
+            bindType: $.support.transition.end,
+            delegateType: $.support.transition.end,
+            handle: function (e) {
+                if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+            }
+        }
+    });
 
     // 注册jQuery实例方法:获取jquery对象class属性中与twui模块相关的模块名称
     $.fn.getTwuiNames = function () {
@@ -251,8 +299,6 @@
  * ------------------------------------------------------------ */
 +function ($) {
     twui.config = {
-        animate: true,
-        speed: 300,
         win: {
             content: '',
             miniTime: 3000
@@ -412,43 +458,6 @@
 }(jQuery);
 /* ------------------------------------------------------------
  * 版本:1.0
- * 描述:组件名称或描述
- * ------------------------------------------------------------ */
-+function ($) {
-    // 定义:Conponent组件类
-    // ------------------------------
-    var Conponent = function ($element) {
-        this.$ = $element;
-    };
-
-    // 定义:Conponent组件的类选择器
-    // ------------------------------
-    Conponent.prototype.selector = '.jst-conponent';
-
-    // 方法:twui调用的入口方法
-    // ------------------------------------------------------------
-    Conponent.prototype.init = function () {
-
-    };
-
-    // 注册成twui模块
-    // ------------------------------
-    twui.module(Conponent);
-}(jQuery);
-/* ------------------------------------------------------------
- * �汾:1.0
- * ����:�������
- * ------------------------------------------------------------ */
-/* ------------------------------------------------------------
- * �汾:1.0
- * ����:�������
- * ------------------------------------------------------------ */
-/* ------------------------------------------------------------
- * �汾:1.0
- * ����:�������
- * ------------------------------------------------------------ */
-/* ------------------------------------------------------------
- * 版本:1.0
  * 描述:url激活导航
  * ------------------------------------------------------------ */
 +function ($) {
@@ -474,67 +483,55 @@
 }(jQuery);
 /* ------------------------------------------------------------
  * 版本:{{version}}
- * 描述:treenav组件
+ * 描述:sidenav组件
  * ------------------------------------------------------------ */
 +function ($) {
-    // 定义:Tree组件类
+    // 定义:sidenav组件类
     // ------------------------------
-    var Tree = function ($element) {
+    var SideNav = function ($element) {
         this.$ = $element;
     };
 
-    // 定义:tree组件的类选择器
+    // 定义:sidenav组件的类选择器
     // ------------------------------
-    Tree.prototype.selector = '.jst-tree';
+    SideNav.prototype.selector = '.jst-sidenav';
 
-    // 方法:激活节点
+    // 方法:显示或隐藏子导航
     // ------------------------------
-    Tree.prototype.activate = function ($node) {
+    SideNav.prototype.toggle = function ($subNavBtn) {
         var me = this.$,
-            $target = $node.closest('li'),
-            showEvent = $.Event('show');
+            $parent = $subNavBtn.parent(),
+            $subNav = $parent.find('> ul');
+        
+        var toggleEvent = $.Event('toggle');
 
-        // 触发show事件
-        me.trigger(showEvent, { $target: $target });
-        if (showEvent.isDefaultPrevented()) return;
+        me.trigger(toggleEvent, [$parent]);
+        if (toggleEvent.isDefaultPrevented()) return;
 
-        var $parentUl= $node.closest('ul'),
-            $active = $parentUl.find('> .active'),
-            $activeUl=$active.find('> ul'),
-            $branch = $target.find('> ul'),
-            startHeight = 0,
-            endHeight = 0;
+        $subNav.one('goend', function () {
+            $parent.toggleClass('xactive').siblings(0);
+            $subNav.css('height', '');
+        }).doGoend();
 
-        if ($parentUl.hasClass('twui-tree-branch')) $parentUl.css('height', '');
-
-        $activeUl.height($activeUl.height());
-
-        if ($node.attr('href')) {
-            if ($target.hasClass('active')) return;
-            $target.addClass('active');
+        if ($parent.hasClass('xactive')) {
+            $subNav.height($subNav[0].scrollHeight).height(0);
         } else {
-            $target.toggleClass('active');
+            $subNav.height($subNav[0].scrollHeight);
         }
-
-        $active.removeClass('active').find('ul').css('height', '');
-
-        $branch.css('height', '');
-        endHeight = $target.hasClass('active') ? $branch.height() : 0;
-        $branch.height(startHeight).height(endHeight);
     };
 
     // 事件：点击节点时调用激活节点方法
     // ------------------------------
-    $(document).on('click.twui.tree', '.jst-tree a', function () {
+    $(document).on('click.twui.sidenav', '.jst-sidenav .js-subnav-btn', function () {
         var $this = $(this),
-            $tree = $this.closest('.jst-tree');
+            $sidenav = $this.closest('.jst-sidenav');
 
-        $tree.twui('activate', '.jst-tree', $this);
+        $sidenav.twui('toggle', '.jst-sidenav', $this);
     });
 
     // 注册成twui模块
     // ------------------------------
-    twui.module(Tree);
+    twui.module(SideNav);
 }(jQuery);
 
 /* ------------------------------------------------------------
