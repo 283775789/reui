@@ -181,7 +181,8 @@
             bindType: $.support.transition.end,
             delegateType: $.support.transition.end,
             handle: function (e) {
-                if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+                if ($(e.target).is(this)) return
+                e.handleObj.handler.apply(this, arguments)
             }
         }
     });
@@ -509,13 +510,18 @@
         if (toggleEvent.isDefaultPrevented()) return;
 
         $subNav.one('goend', function () {
-            $parent.toggleClass('xactive').siblings(0);
+            $parent.toggleClass('active');
             $subNav.css('height', '');
         }).doGoend();
 
-        if ($parent.hasClass('xactive')) {
-            $subNav.height($subNav[0].scrollHeight).height(0);
+        var $active = $parent.parent().find(' > .active'),
+            $activeSubNav = $active.find('> ul');
+
+        if ($parent.hasClass('active')) {
+            $subNav.height($subNav.height()).height(0);
         } else {
+            $activeSubNav.height($activeSubNav.height()).height(0);
+            $active.removeClass('active');
             $subNav.height($subNav[0].scrollHeight);
         }
     };
