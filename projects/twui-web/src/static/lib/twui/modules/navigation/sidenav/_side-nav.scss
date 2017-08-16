@@ -80,7 +80,7 @@ $sidenav-icon-font-size:$font-size-xlarge !default;
         color: $weaken-text-color;
     }
 
-    li.xactive {
+    li.active {
         > a[href] {
             background: $sidenav-item-active-bg;
             color: $sidenav-item-hover-color;
@@ -136,7 +136,7 @@ $sidenav-nested-slector:" > li > .twui-sidenav-subnav";
     }
 }
 
-.twui-sidenav li.xactive {
+.twui-sidenav li.active {
     > .twui-sidenav-subnav {
         height:auto;
     }
