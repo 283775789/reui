@@ -10,7 +10,7 @@ var webui = {
             webui.dataset[key];
             callback(webui.dataset[key]);
         } else {
-            if (contentType === 'sidebar') {
+            if (contentType !== 'content') {
                 $.post(key, { type: 'ajx' }, function (data) {
                     webui.dataset[key] = data;
                     callback(data);
@@ -24,6 +24,16 @@ var webui = {
     },
     // 记录上次的路径
     lastPathname: undefined,
+    // 生成历史记录
+    setHistory: function (source, pathname) {
+        if (source != 'history') {
+            if (source === 'get') {
+                history.replaceState({ uid: pathname }, pathname, pathname);
+            } else {
+                history.pushState({ uid: pathname }, pathname, pathname);
+            }
+        }
+    },
     // 加载内容,pathname为资源文件路径
     loadContent: function (pathname, source) {
         var $sidebarBox = $('#sidebar-box');
@@ -33,6 +43,16 @@ var webui = {
             return;
         } else {
             webui.lastPathname = pathname;
+        }
+
+        // 路由项目页内容
+        if (pathname === '/web/project') {
+            webui.data(pathname + '.html', 'project', function (data) {
+                $('body').html(data);
+            });
+
+            webui.setHistory(source, pathname);
+            return;
         }
 
         // 获取侧边栏html
@@ -69,21 +89,13 @@ var webui = {
             });
         });
 
-        // 生成历史记录
-        if (source != 'history') {
-            if (source === 'get') {
-                history.replaceState({ uid: pathname }, pathname, pathname);
-            } else {
-                history.pushState({ uid: pathname }, pathname, pathname);
-            }
-        }
-
+        webui.setHistory(source, pathname);
         $('#nav').twui('activate');
         $sidebarBox.addClass('jst-urlnav').twui('activate');
     },
     // 初始化导航
     initNav: function () {
-        // 绑定侧边栏事件
+        // 绑定导航事件
         $(document).off('click.webui.nav').on('click.webui.nav', '#nav a', function (event) {
             var $this = $(this),
                 href = $this.attr('href');

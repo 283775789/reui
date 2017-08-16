@@ -24,6 +24,23 @@
             name = this.name,
             constructor = this.constructor;
 
+        // 使所有组件能将组件的data数据转变为json对象
+        if (typeof constructor.prototype.data !== 'function') {
+            constructor.prototype.data = function () {
+                var data = this.$.data(name);
+
+                // data首尾空格与尾部逗号
+                data = $.trim(data).replace(/\,$/gm, '');
+
+                // 转变为json格式
+                data = '{"' + data.replace(/(:|\,)/gm, '"$1"') + '"}';
+
+                // 将逻辑字符串"true"与数值字符串"123"等转变为对应的值类型
+                data = data.replace(/\"((\d+\.?\d*)|(true)|(false)\")/gm, '$1');
+
+            };
+        }
+
         $elements = $initElements ? $initElements : $(this.selector);
 
         $elements.each(function () {
